@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.cc3002.breakout.logic.Score;
+import com.cc3002.breakout.logic.level.Score;
 
 public class ScoreTest {
   Score testingLong;

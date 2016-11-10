@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.11" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <interface id="1" language="java" name="com.cc3002.breakout.logic.ILevel" project="breakout" 
-    file="/breakout/src/main/java/com/cc3002/breakout/logic/ILevel.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="1" language="java" name="com.cc3002.breakout.logic.level.ILevel" project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/logic/level/ILevel.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="137" width="156" x="261" y="394"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="2" language="java" name="com.cc3002.breakout.logic.IBrick" project="breakout" 
-    file="/breakout/src/main/java/com/cc3002/breakout/logic/IBrick.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="2" language="java" name="com.cc3002.breakout.logic.brick.IBrick" project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/logic/brick/IBrick.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="137" width="150" x="708" y="394"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -19,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="3" language="java" name="com.cc3002.breakout.logic.SoftBrick" project="breakout" 
-    file="/breakout/src/main/java/com/cc3002/breakout/logic/SoftBrick.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="com.cc3002.breakout.logic.brick.SoftBrick" project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/logic/brick/SoftBrick.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="191" width="150" x="708" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -28,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="com.cc3002.breakout.logic.StoneBrick" project="breakout" 
-    file="/breakout/src/main/java/com/cc3002/breakout/logic/StoneBrick.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="com.cc3002.breakout.logic.brick.StoneBrick" project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/logic/brick/StoneBrick.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="191" width="150" x="898" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="com.cc3002.breakout.logic.RealLevel" project="breakout" 
-    file="/breakout/src/main/java/com/cc3002/breakout/logic/RealLevel.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="com.cc3002.breakout.logic.level.RealLevel" project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/logic/level/RealLevel.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="227" width="230" x="438" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -46,8 +46,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="com.cc3002.breakout.logic.Score" project="breakout" 
-    file="/breakout/src/main/java/com/cc3002/breakout/logic/Score.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="com.cc3002.breakout.logic.level.Score" project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/logic/level/Score.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="404" y="700"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -55,8 +55,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="com.cc3002.breakout.logic.Player" project="breakout" 
-    file="/breakout/src/main/java/com/cc3002/breakout/logic/Player.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="com.cc3002.breakout.logic.level.Player" project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/logic/level/Player.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="173" width="159" x="41" y="394"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -77,61 +77,85 @@
   <association id="9">    
     <bendpoint x="551" y="622"/>    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="10" name="requiredPoints"/>      
-      <multiplicity id="11" minimum="0" maximum="1"/>    
+      <attribute id="10" name="requiredPoints">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="11" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="12">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="13" name="level"/>      
-      <multiplicity id="14" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="15">    
+  <realization id="12">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <association id="13">    
     <bendpoint x="245" y="531"/>    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="16" name="curScore"/>      
-      <multiplicity id="17" minimum="0" maximum="1"/>    
+      <attribute id="14" name="curScore">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="15" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="18">    
+  <realization id="16">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="2"/>  
   </realization>  
-  <association id="19">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="20" name="sc"/>      
-      <multiplicity id="21" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="22">    
+  <association id="17">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="23" name="curLevel"/>      
-      <multiplicity id="24" minimum="0" maximum="1"/>    
+      <attribute id="18" name="curLevel">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="19" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="25">    
+  <association id="20">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="21" name="sc">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="22" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="23">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="2"/>  
   </realization>  
-  <realization id="26">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
+  <association id="24">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="25" name="level">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="26" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="27">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="28" name="pl"/>      
-      <multiplicity id="29" minimum="0" maximum="1"/>    
+      <attribute id="28" name="pl">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="29" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  

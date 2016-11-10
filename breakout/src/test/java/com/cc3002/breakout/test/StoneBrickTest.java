@@ -6,8 +6,8 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
-import com.cc3002.breakout.logic.Printer;
-import com.cc3002.breakout.logic.StoneBrick;
+import com.cc3002.breakout.logic.brick.StoneBrick;
+import com.cc3002.breakout.logic.level.Printer;
 
 import org.junit.Before;
 import org.junit.Test;

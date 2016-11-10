@@ -1,4 +1,10 @@
-package com.cc3002.breakout.logic;
+package com.cc3002.breakout.logic.brick;
+
+import java.util.List;
+
+import com.cc3002.breakout.logic.level.Printer;
+import com.cc3002.breakout.logic.level.Score;
+import com.cc3002.breakout.logic.observer.GameObserver;
 /**
  * Representa un SoftBrick del juego,
  * tiene solo un hitpoint.
@@ -8,9 +14,13 @@ package com.cc3002.breakout.logic;
 
 public class  SoftBrick implements IBrick {
   int hitpoints;
-    
-  public SoftBrick() {
+  Score playerScore;
+  List<GameObserver>Observers;
+  
+  public SoftBrick(Score plScore, List<GameObserver>newObservers) {
     hitpoints = 1;
+    playerScore = plScore;
+    Observers = newObservers;
   }
 
  
@@ -39,17 +49,12 @@ public class  SoftBrick implements IBrick {
     if (hitpoints > 0) {
       hitpoints--;
     }
-  }
-  
-  /**
-   * Retorna el puntaje ganado por el jugador.
-   */
-  
-  public int getPoints() {
-    if ( hitpoints == 0 ) {
-      return 10;
-    } else {
-      return 0;
+    if (hitpoints == 0) {
+      playerScore.add(10);
+      for(GameObserver obs : Observers) {
+        obs.scoreSoftBrickUpdate();
+      }
     }
   }
+  
 }

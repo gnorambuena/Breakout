@@ -11,12 +11,12 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.cc3002.breakout.logic.IBrick;
-import com.cc3002.breakout.logic.ILevel;
-import com.cc3002.breakout.logic.RealLevel;
-import com.cc3002.breakout.logic.SoftBrick;
-import com.cc3002.breakout.logic.StoneBrick;
-import com.cc3002.breakout.logic.Score;
+import com.cc3002.breakout.logic.brick.IBrick;
+import com.cc3002.breakout.logic.brick.SoftBrick;
+import com.cc3002.breakout.logic.brick.StoneBrick;
+import com.cc3002.breakout.logic.level.ILevel;
+import com.cc3002.breakout.logic.level.RealLevel;
+import com.cc3002.breakout.logic.level.Score;
 
 public class RealLevelTest {
   ILevel lv1;

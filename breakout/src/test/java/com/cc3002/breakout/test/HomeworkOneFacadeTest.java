@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.cc3002.breakout.facade.HomeworkOneFacade;
-import com.cc3002.breakout.logic.ILevel;
+import com.cc3002.breakout.logic.level.ILevel;
 
 public class HomeworkOneFacadeTest {
   HomeworkOneFacade game1;

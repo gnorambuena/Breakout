@@ -1,8 +1,8 @@
 package com.cc3002.breakout.test;
 
-import com.cc3002.breakout.logic.Printer;
-import com.cc3002.breakout.logic.SoftBrick;
-import com.cc3002.breakout.logic.StoneBrick;
+import com.cc3002.breakout.logic.brick.SoftBrick;
+import com.cc3002.breakout.logic.brick.StoneBrick;
+import com.cc3002.breakout.logic.level.Printer;
 
 import static org.junit.Assert.*;
 

@@ -6,9 +6,8 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
-import com.cc3002.breakout.logic.Printer;
-import com.cc3002.breakout.logic.SoftBrick;
-
+import com.cc3002.breakout.logic.brick.SoftBrick;
+import com.cc3002.breakout.logic.level.Printer;
 
 import org.junit.Before;
 import org.junit.Test;

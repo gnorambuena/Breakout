@@ -1,4 +1,10 @@
-package com.cc3002.breakout.logic;
+package com.cc3002.breakout.logic.brick;
+
+import java.util.List;
+
+import com.cc3002.breakout.logic.level.Printer;
+import com.cc3002.breakout.logic.level.Score;
+import com.cc3002.breakout.logic.observer.GameObserver;
 /**
  * Representa un StoneBrick del juego,
  * tiene tres hitpoints.
@@ -8,9 +14,13 @@ package com.cc3002.breakout.logic;
 
 public class StoneBrick implements IBrick {
   int hitpoints;
+  Score playerScore;
+  List<GameObserver>Observers;
   
-  public StoneBrick() {
+  public StoneBrick(Score plScore,List<GameObserver>newObservers) {
     hitpoints = 3;
+    playerScore = plScore;
+    Observers = newObservers;
   }
 
   public int remainingHits() {
@@ -34,21 +44,18 @@ public class StoneBrick implements IBrick {
     if (hitpoints > 0) {
       hitpoints--;
     }
+    
+    if (hitpoints == 0) {
+      playerScore.add(50);
+      for(GameObserver obs : Observers) {
+        obs.scoreStoneBrickUpdate();
+      }
+    }
   }
 
   public String print(Printer printer) {
     return printer.printStoneBrick();
   }
 
-  /** Retorna el puntaje ganado por el jugador.
-   */
-  
-  public int getPoints() {
-    if ( hitpoints == 0 ) {
-      return 50;
-    } else {
-      return 0;
-    }
-  }
 }
 

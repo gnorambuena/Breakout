@@ -2,11 +2,11 @@ package com.cc3002.breakout.test;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 
-import com.cc3002.breakout.logic.Player;
-
 import org.junit.Before;
 
 import org.junit.Test;
+
+import com.cc3002.breakout.logic.level.Player;
 
 public class PlayerTest {
 

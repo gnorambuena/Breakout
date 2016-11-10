@@ -1,6 +1,9 @@
-package com.cc3002.breakout.logic;
+package com.cc3002.breakout.logic.level;
 
 import java.util.List;
+
+import com.cc3002.breakout.logic.brick.IBrick;
+import com.cc3002.breakout.logic.bonus.IBonus;;
 /**
  * Interface de la clase RealLevel.
  * @author gabriel
@@ -16,6 +19,6 @@ public interface ILevel {
   int getNumberOfBricks();
 
   int getRequiredPoints();
-  
-  public Score getEarnedScore();
+
+  void setBonuses(final List<IBonus> LBonus);
 }

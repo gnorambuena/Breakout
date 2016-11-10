@@ -1,4 +1,4 @@
-package com.cc3002.breakout.logic;
+package com.cc3002.breakout.logic.level;
 /**
  * Abstraccion del Score,
  * sirve para mantener el score del nivel

@@ -1,4 +1,6 @@
-package com.cc3002.breakout.logic;
+package com.cc3002.breakout.logic.level;
+
+import com.cc3002.breakout.logic.brick.IBrick;
 
 /**
  * Clase auxiliar que sirve para imprimir los IBricks.
