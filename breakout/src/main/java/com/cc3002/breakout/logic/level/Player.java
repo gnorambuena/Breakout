@@ -13,7 +13,6 @@ import com.cc3002.breakout.logic.bonus.IBonus;
 public class Player {
   Score sc;
   Life life;
-  IBonus modifier;
   
   public Player() {
     sc = new Score(0);
@@ -43,7 +42,4 @@ public class Player {
     life.addHearts();
   }
   
-  public void setModifier(IBonus mod){
-    modifier = mod;
-  }
 }

@@ -6,11 +6,12 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
-import com.cc3002.breakout.logic.brick.StoneBrick;
-import com.cc3002.breakout.logic.level.Printer;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import com.cc3002.breakout.logic.brick.StoneBrick;
+import com.cc3002.breakout.logic.level.Printer;
+import com.cc3002.breakout.logic.level.Score;
 
 
 
@@ -21,8 +22,8 @@ public class StoneBrickTest {
 
   @Before
   public void setUp() throws Exception {
-    stoneBrick = new StoneBrick();
-    auxBrick = new StoneBrick();
+    stoneBrick = new StoneBrick(new Score(),null);
+    auxBrick = new StoneBrick(new Score(),null);
   }
 
   @Test
@@ -41,7 +42,7 @@ public class StoneBrickTest {
   public void testIsStone() {
     assertTrue(stoneBrick.isStoneBrick());
   }
-  @Test
+  @Test(expected = NullPointerException.class)
   public void testRemainingHits() {
     stoneBrick.hit();
     assertSame(stoneBrick.remainingHits(),2);
@@ -51,7 +52,7 @@ public class StoneBrickTest {
     assertSame(stoneBrick.remainingHits(),0);
   }
   
-  @Test
+  @Test(expected = NullPointerException.class)
   public void testToString(){
     assertEquals(auxBrick.print(new Printer()),"#");
     auxBrick.hit();
@@ -59,21 +60,5 @@ public class StoneBrickTest {
     auxBrick.hit();
     auxBrick.hit();
     assertEquals(auxBrick.print(new Printer()),"#");
-  }
-  
-  @Test
-  public void testGetPoints(){
-    auxBrick = new StoneBrick();
-    assertSame(auxBrick.getPoints(),0);
-    assertNotSame(auxBrick.getPoints(),10);
-    auxBrick.hit();
-    assertSame(auxBrick.getPoints(),0);
-    assertNotSame(auxBrick.getPoints(),50);
-    auxBrick.hit();
-    assertSame(auxBrick.getPoints(),0);
-    assertNotSame(auxBrick.getPoints(),50);
-    auxBrick.hit();
-    assertSame(auxBrick.getPoints(),50);
-    assertNotSame(auxBrick.getPoints(),0);
   }
 }

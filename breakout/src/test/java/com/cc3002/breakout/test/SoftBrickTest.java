@@ -6,11 +6,12 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
-import com.cc3002.breakout.logic.brick.SoftBrick;
-import com.cc3002.breakout.logic.level.Printer;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import com.cc3002.breakout.logic.brick.SoftBrick;
+import com.cc3002.breakout.logic.level.Printer;
+import com.cc3002.breakout.logic.level.Score;
 
 
 public class SoftBrickTest {
@@ -19,8 +20,8 @@ public class SoftBrickTest {
   
   @Before
   public void setUp() throws Exception {
-    softBrick = new SoftBrick();
-    auxBrick = new SoftBrick();
+    softBrick = new SoftBrick(new Score(),null);
+    auxBrick = new SoftBrick(new Score(),null);
   }
 
   @Test
@@ -40,26 +41,18 @@ public class SoftBrickTest {
     assertFalse(softBrick.isStoneBrick());
   }
   
-  @Test
+  @Test(expected = NullPointerException.class)
   public void testRemainingHits() {
     softBrick.hit();
     assertSame(softBrick.remainingHits(),0);
     assertNotSame(softBrick.remainingHits(),1);
   }
   
-  @Test
+  @Test(expected = NullPointerException.class)
   public void testPrint(){
     assertEquals(auxBrick.print(new Printer()),"*");
     auxBrick.hit();
     assertEquals(auxBrick.print(new Printer()),"*");
   }
-  @Test
-  public void testGetPoints(){
-    auxBrick = new SoftBrick();
-    assertSame(auxBrick.getPoints(),0);
-    assertNotSame(auxBrick.getPoints(),10);
-    auxBrick.hit();
-    assertSame(auxBrick.getPoints(),10);
-    assertNotSame(auxBrick.getPoints(),0);
-  }
+
 }

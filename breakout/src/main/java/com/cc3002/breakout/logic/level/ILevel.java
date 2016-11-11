@@ -3,6 +3,7 @@ package com.cc3002.breakout.logic.level;
 import java.util.List;
 
 import com.cc3002.breakout.logic.brick.IBrick;
+import com.cc3002.breakout.logic.observer.GameObserver;
 import com.cc3002.breakout.logic.bonus.IBonus;;
 /**
  * Interface de la clase RealLevel.
@@ -21,4 +22,8 @@ public interface ILevel {
   int getRequiredPoints();
 
   void setBonuses(final List<IBonus> LBonus);
+  
+  public void setObservers(final List<GameObserver>newObservers);
+  
+  public List<GameObserver> getObservers();
 }

@@ -1,5 +1,6 @@
 package com.cc3002.breakout.test;
 
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
@@ -15,19 +16,22 @@ import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.brick.SoftBrick;
 import com.cc3002.breakout.logic.brick.StoneBrick;
 import com.cc3002.breakout.logic.level.ILevel;
+import com.cc3002.breakout.logic.level.Player;
 import com.cc3002.breakout.logic.level.RealLevel;
-import com.cc3002.breakout.logic.level.Score;
 
 public class RealLevelTest {
   ILevel lv1;
   ILevel lv2;
   List<IBrick> aux;
   long points;
+  Player pl;
   
   @Before
   public void setUp() throws Exception {
-    lv1 = new RealLevel("Level one",16,0.5f);
+    pl = new Player();
+    lv1 = new RealLevel("Level one",16,0.5f,pl);
     aux = new ArrayList<IBrick>();
+
     points = 0;
     for (int i = 0 ; i < lv1.getBricks().size() ; i++) {
       if (lv1.getBricks().get(i).isSoftBrick()) {
@@ -37,24 +41,25 @@ public class RealLevelTest {
       }
     }
     for (int i = 0 ; i < 16 ; i++) {
-      aux.add(new SoftBrick());
-      aux.add(new StoneBrick());
+      aux.add(new SoftBrick(pl.getScore(),lv1.getObservers()));
+      aux.add(new StoneBrick(pl.getScore(),lv1.getObservers()));
     }
-    lv2 = new RealLevel("Level two",aux);
+    lv2 = new RealLevel("Level two",aux,pl);
+    lv2.setObservers(lv1.getObservers());
   }
 
   @Test
   public void testILevelStringListOfIBrick() {
     assertSame(lv2,lv2);
     assertNotSame(lv1,lv2);
-    assertNotSame(lv2,new RealLevel("Testing Level",24,0.3f));
+    assertNotSame(lv2,new RealLevel("Testing Level",24,0.3f,pl));
   }
 
   @Test
   public void testILevelStringIntDouble() {
     assertSame(lv1,lv1);
     assertNotSame(lv1,lv2);
-    assertNotSame(lv1,new RealLevel("Testing Level",24,0.3f));
+    assertNotSame(lv1,new RealLevel("Testing Level",24,0.3f,pl));
   }
 
   @Test
@@ -77,7 +82,7 @@ public class RealLevelTest {
   public void testGetNumberOfBricks() {
     assertSame(lv1.getNumberOfBricks(),16);
     assertSame(lv2.getNumberOfBricks(),32);
-    assertSame(2*lv1.getNumberOfBricks(),lv2.getNumberOfBricks());
+    assertSame(2 * lv1.getNumberOfBricks(),lv2.getNumberOfBricks());
     assertNotSame(lv1.getNumberOfBricks(),5);
     assertNotSame(lv2.getNumberOfBricks(),5);
   }
@@ -94,11 +99,8 @@ public class RealLevelTest {
 
   @Test
   public void testSpawnBricks() {
-    assertEquals(RealLevel.spawnBricks(lv2),"*#*#*#*#*#*#*#*#"+System.lineSeparator()+"*#*#*#*#*#*#*#*#"+System.lineSeparator());
+    assertEquals(RealLevel.spawnBricks(lv2),"*#*#*#*#*#*#*#*#" + System.lineSeparator()
+        + "*#*#*#*#*#*#*#*#" + System.lineSeparator());
   }
   
-  @Test
-  public void testGetEarnedScore() {
-    assertNotEquals(lv1.getEarnedScore(),lv2.getEarnedScore());
-  }
 }

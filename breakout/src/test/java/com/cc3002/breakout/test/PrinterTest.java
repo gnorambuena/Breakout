@@ -1,13 +1,15 @@
 package com.cc3002.breakout.test;
 
-import com.cc3002.breakout.logic.brick.SoftBrick;
-import com.cc3002.breakout.logic.brick.StoneBrick;
-import com.cc3002.breakout.logic.level.Printer;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.cc3002.breakout.logic.brick.SoftBrick;
+import com.cc3002.breakout.logic.brick.StoneBrick;
+import com.cc3002.breakout.logic.level.Printer;
+import com.cc3002.breakout.logic.level.Score;
 
 public class PrinterTest {
   
@@ -17,8 +19,8 @@ public class PrinterTest {
   
   @Before
   public void setUp() throws Exception {
-    softbrick = new SoftBrick();
-    stonebrick = new StoneBrick();
+    softbrick = new SoftBrick(new Score(),null);
+    stonebrick = new StoneBrick(new Score(),null);
     printer = new Printer();
   }
 

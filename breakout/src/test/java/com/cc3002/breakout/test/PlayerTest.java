@@ -1,12 +1,19 @@
 package com.cc3002.breakout.test;
+
+
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Before;
-
 import org.junit.Test;
 
 import com.cc3002.breakout.logic.level.Player;
+import com.cc3002.breakout.logic.level.Score;
+
+
+
 
 public class PlayerTest {
 
@@ -40,17 +47,17 @@ public class PlayerTest {
   
   @Test
   public void testGetScore() {
-    assertSame(pl1.getScore(),0L);
-    assertNotSame(pl1.getScore(),100L);
+    assertSame(pl1.getScore().getPoints(),0L);
+    assertNotSame(pl1.getScore(),100l);
   }
   
   @Test
   public void testAddScore() {
     pl1.addScore(100);
-    assertSame(pl1.getScore(),100L);
+    assertSame(pl1.getScore().getPoints(),100L);
     pl1.addScore(-100);
-    assertSame(pl1.getScore(),0L);
-    assertNotSame(pl1.getScore(),10000L);
+    assertSame(pl1.getScore().getPoints(),0L);
+    assertNotSame(pl1.getScore().getPoints(),10000L);
   }
 
 }
