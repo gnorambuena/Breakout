@@ -43,12 +43,11 @@ public class StoneBrick implements IBrick {
   public void hit() {
     if (hitpoints > 0) {
       hitpoints--;
-    }
-    
-    if (hitpoints == 0) {
-      playerScore.add(50);
-      for(GameObserver obs : Observers) {
-        obs.scoreStoneBrickUpdate();
+      if (hitpoints == 0) {
+        playerScore.add(50);
+        for(GameObserver obs : Observers) {
+          obs.scoreStoneBrickUpdate();
+        }
       }
     }
   }

@@ -18,10 +18,6 @@ public class Score {
     points = pt;
   }
   
-  public void add(Score sc) {
-    points += sc.getPoints();
-  }
-  
   public void add(long pt) {
     points += pt;
   }

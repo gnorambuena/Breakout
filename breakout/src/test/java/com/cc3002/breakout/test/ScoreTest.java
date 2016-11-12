@@ -40,14 +40,6 @@ public class ScoreTest {
     assertNotSame(testing,testingLong);
   }
 
-  @Test
-  public void testAddScore() {
-    Score expected = new Score(100);
-    assertSame(testing.getPoints(),0L);
-    testing.add(expected);
-    assertSame(expected.getPoints(),testing.getPoints());
-    testing.add(-100);
-  }
 
   @Test
   public void testAddLong() {

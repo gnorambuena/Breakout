@@ -48,8 +48,6 @@ public class  SoftBrick implements IBrick {
   public void hit() {
     if (hitpoints > 0) {
       hitpoints--;
-    }
-    if (hitpoints == 0) {
       playerScore.add(10);
       for(GameObserver obs : Observers) {
         obs.scoreSoftBrickUpdate();

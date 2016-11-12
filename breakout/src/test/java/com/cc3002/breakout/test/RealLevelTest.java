@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.cc3002.breakout.logic.bonus.Bonus;
 import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.brick.SoftBrick;
 import com.cc3002.breakout.logic.brick.StoneBrick;
@@ -103,4 +105,14 @@ public class RealLevelTest {
         + "*#*#*#*#*#*#*#*#" + System.lineSeparator());
   }
   
+  @Test
+  public void testSetBonuses(){
+    boolean f = true;
+    try{
+      lv1.setBonuses(Bonus.genBonuses(10, 0.5, pl, lv1.getObservers()));
+    } catch(Exception e) {
+      f = false;
+    }
+    assertTrue(f);
+  }
 }
