@@ -1,15 +1,16 @@
 package com.cc3002.breakout.logic.level;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import com.cc3002.breakout.logic.bonus.IBonus;
 import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.brick.SoftBrick;
 import com.cc3002.breakout.logic.brick.StoneBrick;
 import com.cc3002.breakout.logic.observer.GameObserver;
 import com.cc3002.breakout.logic.observer.ScoreObserver;
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 /**
  * Representacion de un nivel del juego,
  * se encarga además de generar niveles.
@@ -22,8 +23,8 @@ public class RealLevel implements ILevel {
   List<IBrick> level;
   Score requiredPoints;
   Player player;
-  List<IBonus>bonuses;
-  List<GameObserver>Observers;
+  List<IBonus> bonuses;
+  List<GameObserver> observers;
   
   /**
    * Constructor del RealLevel.
@@ -37,7 +38,7 @@ public class RealLevel implements ILevel {
     level = bricks;
     requiredPoints = genScore();
     player = newPlayer;
-    Observers = null;
+    observers = null;
   }
   /**
    * Constructor del RealLevel
@@ -51,15 +52,16 @@ public class RealLevel implements ILevel {
   public RealLevel(String levelName, int num ,double probability, Player newPlayer) {
     name = levelName;
     requiredPoints = new Score();
-    Observers = new ArrayList<GameObserver>();
-    Observers.add(new ScoreObserver(System.out));
+    observers = new ArrayList<GameObserver>();
+    observers.add(new ScoreObserver(System.out));
     player = newPlayer;
     level = genNewLevel(probability,num);
   }
   
-  public void setObservers(final List<GameObserver>newObservers){
-    Observers = newObservers;
+  public void setObservers(final List<GameObserver> newObservers) {
+    observers = newObservers;
   }
+  
   private List<IBrick> genNewLevel(double probability, int numberOfBricks) {
     List<IBrick> newlevel = new ArrayList<IBrick>();
     Random rand = new Random();
@@ -70,10 +72,10 @@ public class RealLevel implements ILevel {
       
       if (chance < probability) {
         requiredPoints.add(10);
-        newlevel.add(new SoftBrick(player.getScore(),Observers));
+        newlevel.add(new SoftBrick(player.getScore(),observers));
       } else {
         requiredPoints.add(50);
-        newlevel.add(new StoneBrick(player.getScore(),Observers));
+        newlevel.add(new StoneBrick(player.getScore(),observers));
       }
     }
     return newlevel;
@@ -128,11 +130,13 @@ public class RealLevel implements ILevel {
     strB.append(System.lineSeparator());
     return strB.toString();
   }
-  public void setBonuses(final List<IBonus> LBonus) {
-     bonuses = LBonus;
+  
+  public void setBonuses(final List<IBonus> newBonus) {
+    bonuses = newBonus;
   }
+  
   public List<GameObserver> getObservers() {
-    return Observers;
+    return observers;
   }
   
 }

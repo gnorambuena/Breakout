@@ -1,6 +1,5 @@
 package com.cc3002.breakout.logic.level;
 
-import com.cc3002.breakout.logic.bonus.IBonus;
 
 /**
  * Abstraccion de un jugador,
@@ -35,10 +34,11 @@ public class Player {
     return sc;
   }
   
-  public long getTotalPoints(){
+  public long getTotalPoints() {
     return sc.getPoints();
   }
-  public void addHearts(){
+  
+  public void addHearts() {
     life.addHearts();
   }
   
