@@ -1,7 +1,10 @@
-/Users/gabriel/Documents/workspace/breakout/src/test/java/com/cc3002/breakout/test/SoftBrickTest.java
-/Users/gabriel/Documents/workspace/breakout/src/test/java/com/cc3002/breakout/test/PlayerTest.java
-/Users/gabriel/Documents/workspace/breakout/src/test/java/com/cc3002/breakout/test/ScoreTest.java
-/Users/gabriel/Documents/workspace/breakout/src/test/java/com/cc3002/breakout/test/RealLevelTest.java
-/Users/gabriel/Documents/workspace/breakout/src/test/java/com/cc3002/breakout/test/HomeworkOneFacadeTest.java
-/Users/gabriel/Documents/workspace/breakout/src/test/java/com/cc3002/breakout/test/PrinterTest.java
-/Users/gabriel/Documents/workspace/breakout/src/test/java/com/cc3002/breakout/test/StoneBrickTest.java
+/Users/gabriel/git/breakout/breakout/src/test/java/com/cc3002/breakout/test/ModifierBonusTest.java
+/Users/gabriel/git/breakout/breakout/src/test/java/com/cc3002/breakout/test/PrinterTest.java
+/Users/gabriel/git/breakout/breakout/src/test/java/com/cc3002/breakout/test/SoftBrickTest.java
+/Users/gabriel/git/breakout/breakout/src/test/java/com/cc3002/breakout/test/BonusTest.java
+/Users/gabriel/git/breakout/breakout/src/test/java/com/cc3002/breakout/test/HomeworkTwoFacadeTest.java
+/Users/gabriel/git/breakout/breakout/src/test/java/com/cc3002/breakout/test/PlayerTest.java
+/Users/gabriel/git/breakout/breakout/src/test/java/com/cc3002/breakout/test/RealLevelTest.java
+/Users/gabriel/git/breakout/breakout/src/test/java/com/cc3002/breakout/test/StoneBrickTest.java
+/Users/gabriel/git/breakout/breakout/src/test/java/com/cc3002/breakout/test/ObserverTest.java
+/Users/gabriel/git/breakout/breakout/src/test/java/com/cc3002/breakout/test/ScoreTest.java
