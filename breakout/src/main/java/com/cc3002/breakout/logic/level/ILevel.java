@@ -27,4 +27,6 @@ public interface ILevel {
   public void setObservers(final List<GameObserver> newObservers);
   
   public List<GameObserver> getObservers();
+  
+  public void setRequiredPoints(int newRequiredPoints);
 }

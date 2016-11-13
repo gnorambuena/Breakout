@@ -25,4 +25,12 @@ public class LossScoreModifier implements IBonus {
     }
   }
 
+  public boolean isExtraBonus() {
+    return false;
+  }
+
+  public boolean isDiscount() {
+    return true;
+  }
+
 }

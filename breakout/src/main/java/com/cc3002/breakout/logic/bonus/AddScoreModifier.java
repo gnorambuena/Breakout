@@ -25,4 +25,12 @@ public class AddScoreModifier implements IBonus {
     }
   }
 
+  public boolean isExtraBonus() {
+    return true;
+  }
+
+  public boolean isDiscount() {
+    return false;
+  }
+
 }

@@ -139,5 +139,10 @@ public class RealLevel implements ILevel {
     return observers;
   }
   
+  public void setRequiredPoints(int newRequiredPoints) {
+    requiredPoints = new Score(newRequiredPoints);
+    
+  }
+  
 }
 

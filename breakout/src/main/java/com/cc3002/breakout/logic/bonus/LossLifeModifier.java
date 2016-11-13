@@ -24,4 +24,12 @@ public class LossLifeModifier implements IBonus {
       observer.lifeDiscount();
     }
   }
+
+  public boolean isExtraBonus() {
+    return false;
+  }
+
+  public boolean isDiscount() {
+    return true;
+  }
 }
