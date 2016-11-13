@@ -1,6 +1,8 @@
 package com.cc3002.breakout.logic.observer;
 
+import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.level.GameConsole;
+import com.cc3002.breakout.logic.level.LevelHandler;
 
 /**
  * Observer para los bonuses.
@@ -9,6 +11,8 @@ import com.cc3002.breakout.logic.level.GameConsole;
  */
 public class BonusObserver extends GameObserver {
 
+  BonusHandler bonusHandler;
+  
   public BonusObserver(GameConsole gameConsole) {
     super(gameConsole);
   }
@@ -31,7 +35,7 @@ public class BonusObserver extends GameObserver {
 
   /**
    * Este observer no deberia responder nada a este mensaje.
-   */
+   */ 
   @Override
   public void scoreSoftBrickUpdate() {}
 
@@ -47,4 +51,26 @@ public class BonusObserver extends GameObserver {
    */
   @Override
   public void levelUpdate(String name) {}
+
+  /**
+   * Este observer no deberia responder nada a este mensaje.
+   */
+  @Override
+  public void levelAutoSwitch() {}
+
+  /**
+   * Este observer no deberia responder nada a este mensaje.
+   */
+  @Override
+  public void setLevelHandler(LevelHandler newLevelHandler) {}
+
+  @Override
+  public void setBonusHandler(BonusHandler newBonusHandler) {
+    bonusHandler = newBonusHandler; 
+  }
+
+  @Override
+  public void bonusAutoSwitch() {
+    bonusHandler.autoSwitch();
+  }
 }

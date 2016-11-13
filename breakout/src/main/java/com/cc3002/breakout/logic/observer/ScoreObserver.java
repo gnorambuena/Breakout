@@ -1,6 +1,8 @@
 package com.cc3002.breakout.logic.observer;
 
+import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.level.GameConsole;
+import com.cc3002.breakout.logic.level.LevelHandler;
 
 /**
  * Observer para el Score.
@@ -53,4 +55,32 @@ public class ScoreObserver extends GameObserver {
    */
   @Override
   public void lifeBonus() {}
+
+  /**
+   * Este observer no deberia responder nada a este mensaje.
+   */
+  @Override
+  public void levelAutoSwitch() {}
+  
+
+  /**
+   * Este observer no deberia responder nada a este mensaje.
+   */
+  @Override
+  public void setLevelHandler(LevelHandler newLevelHandler) {}
+  
+
+  /**
+   * Este observer no deberia responder nada a este mensaje.
+   */
+  @Override
+  public void setBonusHandler(BonusHandler newBonusHandler) {}
+  
+
+  /**
+   * Este observer no deberia responder nada a este mensaje.
+   */
+  @Override
+  public void bonusAutoSwitch() {}
+
 }

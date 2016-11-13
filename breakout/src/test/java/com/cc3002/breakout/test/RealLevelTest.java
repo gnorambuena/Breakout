@@ -5,13 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.brick.SoftBrick;
@@ -21,6 +15,12 @@ import com.cc3002.breakout.logic.level.ILevel;
 import com.cc3002.breakout.logic.level.Player;
 import com.cc3002.breakout.logic.level.RealLevel;
 
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class RealLevelTest {
   ILevel lv1;
   ILevel lv2;
@@ -29,6 +29,10 @@ public class RealLevelTest {
   Player pl;
   GameConsole gameConsole;
   
+  /**
+   * Setting up para testear un RealLevel.
+   * @throws Exception Tira una Exception cuando falla al crear el RealLevel.
+   */
   @Before
   public void setUp() throws Exception {
     pl = new Player();

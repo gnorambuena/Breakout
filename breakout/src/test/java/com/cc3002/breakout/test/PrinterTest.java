@@ -3,13 +3,13 @@ package com.cc3002.breakout.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.cc3002.breakout.logic.brick.SoftBrick;
 import com.cc3002.breakout.logic.brick.StoneBrick;
 import com.cc3002.breakout.logic.level.Printer;
 import com.cc3002.breakout.logic.level.Score;
+
+import org.junit.Before;
+import org.junit.Test;
 
 public class PrinterTest {
   
@@ -17,6 +17,10 @@ public class PrinterTest {
   StoneBrick stonebrick;
   Printer printer;
   
+  /**
+   * Setting up para el test del Printer.
+   * @throws Exception tira una exception al fallar la creacion del Printer.
+   */
   @Before
   public void setUp() throws Exception {
     softbrick = new SoftBrick(new Score(),null);

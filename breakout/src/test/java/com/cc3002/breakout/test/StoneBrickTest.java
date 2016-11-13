@@ -6,14 +6,12 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.cc3002.breakout.logic.brick.StoneBrick;
 import com.cc3002.breakout.logic.level.Printer;
 import com.cc3002.breakout.logic.level.Score;
 
-
+import org.junit.Before;
+import org.junit.Test;
 
 public class StoneBrickTest {
 
@@ -42,6 +40,7 @@ public class StoneBrickTest {
   public void testIsStone() {
     assertTrue(stoneBrick.isStoneBrick());
   }
+  
   @Test(expected = NullPointerException.class)
   public void testRemainingHits() {
     stoneBrick.hit();
@@ -53,7 +52,7 @@ public class StoneBrickTest {
   }
   
   @Test(expected = NullPointerException.class)
-  public void testToString(){
+  public void testToString() {
     assertEquals(auxBrick.print(new Printer()),"#");
     auxBrick.hit();
     assertEquals(auxBrick.print(new Printer()),"#");

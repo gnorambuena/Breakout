@@ -1,6 +1,5 @@
 package com.cc3002.breakout.logic.level;
 
-import com.cc3002.breakout.logic.bonus.IBonus;
 import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.brick.SoftBrick;
 import com.cc3002.breakout.logic.brick.StoneBrick;
@@ -23,7 +22,6 @@ public class RealLevel extends GameLevel {
   List<IBrick> level;
   Score requiredPoints;
   Player player;
-  List<IBonus> bonuses;
   List<GameObserver> observers;
   GameConsole gameConsole;
   
@@ -40,6 +38,7 @@ public class RealLevel extends GameLevel {
     level = bricks;
     requiredPoints = genScore();
     player = newPlayer;
+    player.getScore().setRequiredPoints(requiredPoints.getPoints());
     observers = null;
     gameConsole = newGameConsole;
   }
@@ -55,19 +54,33 @@ public class RealLevel extends GameLevel {
   public RealLevel(String levelName, int num ,double probability,
       Player newPlayer, GameConsole newGameConsole) {
     name = levelName;
-    requiredPoints = new Score();
     observers = new ArrayList<GameObserver>();
     gameConsole = newGameConsole;
     observers.add(new ScoreObserver(newGameConsole));
     player = newPlayer;
     level = genNewLevel(probability,num);
+    requiredPoints = genScore();
+    player.getScore().setRequiredPoints(requiredPoints.getPoints());
   }
   
   public void setObservers(final List<GameObserver> newObservers) {
     observers = newObservers;
+    player.setObservers(newObservers);
   }
   
+  public void setRequiredPoints() {
+    player.getScore().setCurrentPoints(0);
+    player.getScore().setRequiredPoints(getRequiredPoints());
+  }
+  
+  /**
+   * Metodo privado que se encarga de generar un level random.
+   * @param probability Probabilidad de ocurrencia de un SoftBrick.
+   * @param numberOfBricks Numero de Bricks del nivel.
+   * @return La lista de IBricks con los bricks generados.
+   */
   private List<IBrick> genNewLevel(double probability, int numberOfBricks) {
+    requiredPoints = new Score();
     List<IBrick> newlevel = new ArrayList<IBrick>();
     Random rand = new Random();
     
@@ -118,9 +131,9 @@ public class RealLevel extends GameLevel {
     return observers;
   }
   
-  public void setRequiredPoints(int newRequiredPoints) {
+  /*public void setRequiredPoints(int newRequiredPoints) {
     requiredPoints = new Score(newRequiredPoints);
-  }
+  }*/
   
   /**
    * RealLevel no ejecuta nada con este mensaje.
@@ -139,6 +152,11 @@ public class RealLevel extends GameLevel {
    */
   @Override
   public void autoSwitchToNextLevel() {}
+  
+  @Override
+  public Player getPlayer() {
+    return player;
+  }
   
 }
 

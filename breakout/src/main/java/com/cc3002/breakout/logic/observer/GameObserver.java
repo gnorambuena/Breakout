@@ -1,7 +1,8 @@
 package com.cc3002.breakout.logic.observer;
 
-
+import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.level.GameConsole;
+import com.cc3002.breakout.logic.level.LevelHandler;
 
 /**
  * Clase abstracta para todos los Observer del juego.
@@ -29,5 +30,12 @@ public abstract class GameObserver {
   public abstract void lifeDiscount();
   
   public abstract void lifeBonus();
+  
+  public abstract void levelAutoSwitch();
+  
+  public abstract void setLevelHandler(final LevelHandler newLevelHandler);
  
+  public abstract void setBonusHandler(final BonusHandler newBonusHandler);
+
+  public abstract void bonusAutoSwitch();
 }

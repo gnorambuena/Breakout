@@ -1,27 +1,33 @@
 package com.cc3002.breakout.test;
 
-
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+
+import com.cc3002.breakout.logic.level.Player;
+import com.cc3002.breakout.logic.observer.GameObserver;
+import com.cc3002.breakout.logic.observer.NullObserver;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.cc3002.breakout.logic.level.Player;
-import com.cc3002.breakout.logic.level.Score;
-
-
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class PlayerTest {
 
   Player pl1;
+  List<GameObserver> observers;
   
+  /**Setting up para el test del Player.
+   * @throws Exception tira una exception al fallar al crear un nuevo Player.
+   */
   @Before
   public void setUp() throws Exception {
     pl1 = new Player();
+    observers = new ArrayList<GameObserver>();
+    observers.add(new NullObserver());
+    pl1.setObservers(observers);
   }
 
   @Test
@@ -48,7 +54,7 @@ public class PlayerTest {
   @Test
   public void testGetScore() {
     assertSame(pl1.getScore().getPoints(),0L);
-    assertNotSame(pl1.getScore(),100l);
+    assertNotSame(pl1.getScore(),100L);
   }
   
   @Test

@@ -25,7 +25,7 @@ public interface ILevel {
   
   public List<GameObserver> getObservers();
   
-  public void setRequiredPoints(int newRequiredPoints);
+  public void setRequiredPoints();
   
   public void setNextLevel(ILevel newLevel);
 
@@ -38,4 +38,6 @@ public interface ILevel {
   void autoSwitchToNextLevel();
 
   boolean hasCurrentLevel();
+  
+  public Player getPlayer();
 }

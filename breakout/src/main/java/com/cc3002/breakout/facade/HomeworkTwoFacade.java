@@ -77,10 +77,21 @@ public class HomeworkTwoFacade {
 
   private void genGameObservers() {
     observers = new ArrayList<GameObserver>();
+    observers.add(new ScoreObserver(gameConsole));
     observers.add(new BonusObserver(gameConsole));
     observers.add(new LevelObserver(gameConsole));
-    observers.add(new ScoreObserver(gameConsole));
-    
+  }
+  
+  public List<GameObserver> getGameObservers() {
+    return observers;
+  }
+  
+  public Player getPlayer() {
+    return pl;
+  }
+  
+  public GameConsole getGameConsole() {
+    return gameConsole;
   }
   
   public long earnedScore() {
@@ -104,9 +115,13 @@ public class HomeworkTwoFacade {
   }
 
   public int getRequiredPoints() {
-    return levelHandler.getRequiredPoints();
+    return (int)levelHandler.getRequiredPoints();
   }
-
+  
+  public BonusHandler getBonusHandler() {
+    return bonusHandler;
+  }
+  
   public boolean hasNextLevel() {
     return levelHandler.hasNextLevel();
   }
@@ -129,6 +144,7 @@ public class HomeworkTwoFacade {
    * @param newLevel nivel al que se seteara el juego.
    */
   public void setCurrentLevel(final ILevel newLevel) {
+    levelHandler.setObservers(observers);
     levelHandler.setCurrentLevel(newLevel);
   }
   
@@ -147,6 +163,10 @@ public class HomeworkTwoFacade {
   public void setNextLevel() {
     levelHandler.setNextLevel(
         newLevelWithSoftAndStoneBricks("Another Level",number,probability * 1.1));
+  }
+  
+  public void setNextLevel(final ILevel newLevel) {
+    levelHandler.setNextLevel(newLevel);
   }
   
   public List<IBonus> newBonuses(final int number, final double probability) {

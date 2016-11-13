@@ -1,6 +1,8 @@
 package com.cc3002.breakout.logic.observer;
 
+import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.level.GameConsole;
+import com.cc3002.breakout.logic.level.LevelHandler;
 
 /**
  * Observer para los ILevel.
@@ -9,6 +11,7 @@ import com.cc3002.breakout.logic.level.GameConsole;
  */
 public class LevelObserver extends GameObserver {
 
+  LevelHandler levelHandler;
   
   public LevelObserver(GameConsole gameConsole) {
     super(gameConsole);
@@ -18,7 +21,10 @@ public class LevelObserver extends GameObserver {
   public void levelUpdate(String name) {
     gameConsole.print("Playing Level " + name + ".");
   }
-
+  
+  public void setLevelHandler(final LevelHandler newLevelHandler) {
+    levelHandler = newLevelHandler;
+  }
 
   /**
    * Este observer no deberia responder nada a este mensaje.
@@ -56,4 +62,21 @@ public class LevelObserver extends GameObserver {
    */
   @Override
   public void lifeBonus() {}
+
+  @Override
+  public void levelAutoSwitch() {
+    levelHandler.autoSwitchToNextLevel();
+  }
+
+  /**
+   * Este observer no deberia responder nada a este mensaje.
+   */
+  @Override
+  public void setBonusHandler(BonusHandler newBonusHandler) {}
+
+  /**
+   * Este observer no deberia responder nada a este mensaje.
+   */
+  @Override
+  public void bonusAutoSwitch() {}
 }

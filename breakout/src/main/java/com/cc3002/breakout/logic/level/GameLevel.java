@@ -34,7 +34,7 @@ public abstract class GameLevel implements ILevel {
     return null;
   }
 
-  public abstract void setRequiredPoints(int newRequiredPoints);
+  public abstract void setRequiredPoints();
 
   public abstract void setNextLevel(ILevel newLevel);
 
@@ -54,4 +54,5 @@ public abstract class GameLevel implements ILevel {
     return false;
   }
 
+  public abstract Player getPlayer();
 }

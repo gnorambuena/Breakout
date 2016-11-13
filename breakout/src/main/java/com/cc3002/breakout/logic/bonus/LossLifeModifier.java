@@ -37,4 +37,8 @@ public class LossLifeModifier implements IBonus {
   public boolean isDiscount() {
     return true;
   }
+  
+  public List<GameObserver> getObservers() {
+    return observers;
+  }
 }

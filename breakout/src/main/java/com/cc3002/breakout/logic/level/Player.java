@@ -1,5 +1,8 @@
 package com.cc3002.breakout.logic.level;
 
+import com.cc3002.breakout.logic.observer.GameObserver;
+
+import java.util.List;
 
 /**
  * Abstraccion de un jugador,
@@ -40,6 +43,10 @@ public class Player {
   
   public void addHearts() {
     life.addHearts();
+  }
+
+  public void setObservers(List<GameObserver> newObservers) {
+    sc.setObservers(newObservers);
   }
   
 }

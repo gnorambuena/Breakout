@@ -13,10 +13,18 @@ import java.util.List;
 public class LevelHandler extends GameLevel {
   ILevel currentLevel;
   ILevel nextLevel;
+  Score totalScore;
+  List<GameObserver> observers;
   
+  /**
+   * Constructor del Objeto que maneja los niveles.
+   * @param newLevel Nivel que debe manejar como currentLevel.
+   */
   public LevelHandler(ILevel newLevel) {
     currentLevel = newLevel;
+    observers = null;
     nextLevel = null;
+    totalScore = new Score();
   }
   
   /**
@@ -25,8 +33,15 @@ public class LevelHandler extends GameLevel {
   @Override
   public void setCurrentLevel(final ILevel newCurrentLevel) {
     currentLevel = newCurrentLevel;
-    for (GameObserver observer: currentLevel.getObservers()) {
-      observer.levelUpdate(currentLevel.getLevelName());
+    if (currentLevel != null) {
+      currentLevel.setObservers(observers);
+      Player player = getPlayer();
+      totalScore.add(player.getTotalPoints());
+      currentLevel.setRequiredPoints();
+      for (GameObserver observer: currentLevel.getObservers()) {
+        observer.levelUpdate(currentLevel.getLevelName());
+        observer.setLevelHandler(this);
+      }
     }
   }
   
@@ -46,16 +61,23 @@ public class LevelHandler extends GameLevel {
     return currentLevel.getRequiredPoints();
   }
 
+  /**
+   * Setea los Observers para el nivel actual.
+   * 
+   */
   public void setObservers(List<GameObserver> newObservers) {
-    currentLevel.setObservers(newObservers);
+    observers = newObservers;
+    if (currentLevel != null) {
+      currentLevel.setObservers(newObservers);
+    }
   }
 
   public List<GameObserver> getObservers() {
     return currentLevel.getObservers();
   }
 
-  public void setRequiredPoints(int newRequiredPoints) {
-    currentLevel.setRequiredPoints(newRequiredPoints);
+  public void setRequiredPoints() {
+    currentLevel.setRequiredPoints();
   }
 
   public void setNextLevel(ILevel newLevel) {
@@ -98,5 +120,10 @@ public class LevelHandler extends GameLevel {
 
   public boolean hasCurrentLevel() {
     return currentLevel != null;
+  }
+
+  @Override
+  public Player getPlayer() {
+    return currentLevel.getPlayer();
   }
 }

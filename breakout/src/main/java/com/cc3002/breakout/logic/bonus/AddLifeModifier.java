@@ -38,4 +38,8 @@ public class AddLifeModifier implements IBonus {
     return false;
   }
 
+  public List<GameObserver> getObservers() {
+    return observers;
+  }
+
 }

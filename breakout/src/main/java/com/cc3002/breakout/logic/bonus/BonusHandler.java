@@ -15,6 +15,7 @@ import java.util.Random;
 public class BonusHandler {
   
   List<IBonus> bonuses;
+  List<GameObserver> observers;
   int currentBonus;
   
   public BonusHandler() {
@@ -22,13 +23,38 @@ public class BonusHandler {
     currentBonus = 0;
   }
   
+  /**
+   * Setea los bonuses para este Handler.
+   * @param newBonuses Los bonuses a setear.
+   */
   public void setBonuses(final List<IBonus> newBonuses) {
     bonuses = newBonuses;
+    if (bonuses != null) {
+      setObservers(bonuses.get(0).getObservers());
+    }
+    currentBonus = 0;
   }
   
+  /**
+   * Setea los observers para cada nivel.
+   * @param newObservers Los Observers a setear.
+   */
+  public void setObservers(List<GameObserver> newObservers) {
+    observers = newObservers;
+    for (GameObserver observer : observers) {
+      observer.setBonusHandler(this);
+    }
+  }
+  
+  /**
+   * Metodo que se ejecuta cuando se quiere usar un modificador,
+   * solo funciona si no quedan modificadores por accionar.
+   */
   public void reached() {
-    bonuses.get(currentBonus).reached();
-    currentBonus++;
+    if (currentBonus < bonuses.size()) {
+      currentBonus++;
+      bonuses.get(currentBonus - 1).reached();
+    }
   }
   
   /**
@@ -63,5 +89,14 @@ public class BonusHandler {
     }
     
     return ans;
+  }
+
+  /**
+   * Acciona los bonuses que aun no se han usado.
+   */
+  public void autoSwitch() {
+    for ( ; currentBonus < bonuses.size() ;) {
+      reached();
+    }
   }
 }

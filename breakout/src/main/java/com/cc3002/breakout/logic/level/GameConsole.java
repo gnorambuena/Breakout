@@ -11,7 +11,7 @@ public class GameConsole {
   PrintStream stream;
   
   public GameConsole() {
-    stream = null;
+    stream = System.out;
   }
   
   public void setStream(PrintStream newPrintStream) {

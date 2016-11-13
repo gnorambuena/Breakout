@@ -4,19 +4,33 @@ package com.cc3002.breakout.test;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 
+import com.cc3002.breakout.logic.level.Score;
+import com.cc3002.breakout.logic.observer.GameObserver;
+import com.cc3002.breakout.logic.observer.NullObserver;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import com.cc3002.breakout.logic.level.Score;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ScoreTest {
   Score testingLong;
   Score testing;
+  List<GameObserver> observers;
 
+  /**
+   * Setting up para el test de la clase Score.
+   * @throws Exception Tira una exception al fallar la creacion de un Score.
+   */
   @Before
   public void setUp() throws Exception {
     testingLong = new Score(100);
     testing = new Score();
+    observers = new ArrayList<GameObserver>();
+    observers.add(new NullObserver());
+    testingLong.setObservers(observers);
+    testing.setObservers(observers);
   }
   
   @Test

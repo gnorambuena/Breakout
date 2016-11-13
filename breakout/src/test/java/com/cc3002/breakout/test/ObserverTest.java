@@ -2,12 +2,6 @@ package com.cc3002.breakout.test;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import com.cc3002.breakout.facade.HomeworkTwoFacade;
 import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.bonus.IBonus;
@@ -21,71 +15,81 @@ import com.cc3002.breakout.logic.observer.GameObserver;
 import com.cc3002.breakout.logic.observer.LevelObserver;
 import com.cc3002.breakout.logic.observer.ScoreObserver;
 
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class ObserverTest {
   
   Player pl;
-  List<GameObserver>Observers;
+  List<GameObserver> observers;
   GameConsole gameConsole;
   BonusHandler bonusHandler;
   
+  /**
+   * Setting up para los test de los distintos Observer.
+   * @throws Exception Tira una exception al fallar la creacion de los Observer.
+   */
   @Before
   public void setUp() throws Exception {
     pl = new Player();
+    observers = new ArrayList<GameObserver>();
     bonusHandler = new BonusHandler();
     gameConsole = new GameConsole();
     gameConsole.setStream(System.out);
-    GameObserver ScOb = new ScoreObserver(gameConsole);
-    GameObserver BnOb = new BonusObserver(gameConsole);
-    GameObserver LvOb = new LevelObserver(gameConsole);
-    Observers = new ArrayList<GameObserver>();
-    Observers.add(ScOb);
-    Observers.add(LvOb);
-    Observers.add(BnOb);
+    GameObserver firstObserver = new ScoreObserver(gameConsole);
+    GameObserver secondObserver = new BonusObserver(gameConsole);
+    GameObserver thirdObserver = new LevelObserver(gameConsole);
+    observers.add(firstObserver);
+    observers.add(secondObserver);
+    observers.add(thirdObserver);
   }
 
   @Test
   public void testScoreObserver() {
     ILevel lvl = new RealLevel("Level one",32,0.4,pl,gameConsole);
-    lvl.setObservers(Observers);
-    List<IBrick>bricks = lvl.getBricks();
-    boolean f = true;
-    try{
-      for(IBrick brick : bricks) {
+    lvl.setObservers(observers);
+    List<IBrick> bricks = lvl.getBricks();
+    boolean flag = true;
+    try {
+      for (IBrick brick : bricks) {
         brick.hit();
         brick.hit();
         brick.hit();
       }
-    } catch(Exception e){
-      f = false;
+    } catch (Exception exception) {
+      flag = false;
     }
-    assertTrue(f);
+    assertTrue(flag);
   }
 
   @Test
-  public void testLvlObserver(){
+  public void testLvlObserver() {
     ILevel lvl1 = new RealLevel("Level one",32,0.4,pl,gameConsole);
     ILevel lvl2 = new RealLevel("Level two",32,0.5,pl,gameConsole);
-    lvl1.setObservers(Observers);
+    lvl1.setObservers(observers);
     HomeworkTwoFacade aux = new HomeworkTwoFacade();
-    boolean f = true;
-    try{
+    boolean flag = true;
+    try {
       aux.setCurrentLevel(lvl1);
-    } catch (Exception e){
-      f = false;
+    } catch (Exception exception) {
+      flag = false;
     }
-    try{
+    try {
       aux.setCurrentLevel(lvl2);
-    } catch (Exception e){
-      f = false;
+    } catch (Exception exception) {
+      flag = false;
     }
-    assertTrue(f);
+    assertTrue(flag);
   }
   
   @Test
-  public void testBonusObserver(){
-    List<GameObserver> Observer = new ArrayList<GameObserver>();
-    Observer.add(new BonusObserver(gameConsole));
-    List<IBonus>bonuses = BonusHandler.genBonuses(10, 0.4, pl,Observer);
+  public void testBonusObserver() {
+    List<GameObserver> auxObservers = new ArrayList<GameObserver>();
+    auxObservers.add(new BonusObserver(gameConsole));
+    List<IBonus> bonuses = BonusHandler.genBonuses(10, 0.4, pl,auxObservers);
     ILevel lvl1 = new RealLevel("Level one",32,0.4,pl,gameConsole);
     bonusHandler.setBonuses(bonuses);
     boolean flag = true;

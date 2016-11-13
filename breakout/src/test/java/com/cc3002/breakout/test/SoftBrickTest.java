@@ -6,13 +6,12 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.cc3002.breakout.logic.brick.SoftBrick;
 import com.cc3002.breakout.logic.level.Printer;
 import com.cc3002.breakout.logic.level.Score;
 
+import org.junit.Before;
+import org.junit.Test;
 
 public class SoftBrickTest {
   private SoftBrick softBrick;
@@ -49,7 +48,7 @@ public class SoftBrickTest {
   }
   
   @Test(expected = NullPointerException.class)
-  public void testPrint(){
+  public void testPrint() {
     assertEquals(auxBrick.print(new Printer()),"*");
     auxBrick.hit();
     assertEquals(auxBrick.print(new Printer()),"*");

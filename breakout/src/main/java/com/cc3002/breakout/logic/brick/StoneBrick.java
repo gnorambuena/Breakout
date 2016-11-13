@@ -51,10 +51,10 @@ public class StoneBrick implements IBrick {
     if (hitpoints > 0) {
       hitpoints--;
       if (isDestroyed()) {
-        playerScore.add(50);
         for (GameObserver obs : observers) {
           obs.scoreStoneBrickUpdate();
         }
+        playerScore.add(50);
       }
     }
   }
