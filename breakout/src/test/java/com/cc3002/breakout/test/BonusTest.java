@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.cc3002.breakout.logic.bonus.Bonus;
+import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.level.GameConsole;
 import com.cc3002.breakout.logic.level.Player;
 import com.cc3002.breakout.logic.observer.BonusObserver;
@@ -30,7 +30,7 @@ public class BonusTest {
     try{
       List<GameObserver> Observer = new ArrayList<GameObserver>();
       Observer.add(new BonusObserver(gameConsole));
-      Bonus.genBonuses(32, 0.5, new Player(),Observer);
+      BonusHandler.genBonuses(32, 0.5, new Player(),Observer);
     } catch (Exception e) {
       f =false;
     }

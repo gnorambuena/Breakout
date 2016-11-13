@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.cc3002.breakout.facade.HomeworkTwoFacade;
-import com.cc3002.breakout.logic.bonus.Bonus;
+import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.bonus.IBonus;
 import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.level.GameConsole;
@@ -26,10 +26,12 @@ public class ObserverTest {
   Player pl;
   List<GameObserver>Observers;
   GameConsole gameConsole;
+  BonusHandler bonusHandler;
   
   @Before
   public void setUp() throws Exception {
     pl = new Player();
+    bonusHandler = new BonusHandler();
     gameConsole = new GameConsole();
     gameConsole.setStream(System.out);
     GameObserver ScOb = new ScoreObserver(gameConsole);
@@ -83,9 +85,17 @@ public class ObserverTest {
   public void testBonusObserver(){
     List<GameObserver> Observer = new ArrayList<GameObserver>();
     Observer.add(new BonusObserver(gameConsole));
-    List<IBonus>bonuses = Bonus.genBonuses(10, 0.4, pl,Observer);
+    List<IBonus>bonuses = BonusHandler.genBonuses(10, 0.4, pl,Observer);
     ILevel lvl1 = new RealLevel("Level one",32,0.4,pl,gameConsole);
-    lvl1.setBonuses(bonuses);
-    
+    bonusHandler.setBonuses(bonuses);
+    boolean flag = true;
+    try {
+      for (int i = 0 ; i < 10 ; i++) {
+        bonusHandler.reached();
+      }
+    } catch (Exception exception) {
+      flag = false;
+    }
+    assertTrue(flag);
   }
 }

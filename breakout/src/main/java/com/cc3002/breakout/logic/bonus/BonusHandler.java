@@ -7,7 +7,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public abstract class Bonus {
+public class BonusHandler {
+  
+  List<IBonus> bonuses;
+  int currentBonus;
+  
+  public BonusHandler() {
+    bonuses = new ArrayList<IBonus>();
+    currentBonus = 0;
+  }
+  
+  public void setBonuses(final List<IBonus> newBonuses) {
+    bonuses = newBonuses;
+  }
+  
+  public void reached() {
+    bonuses.get(currentBonus).reached();
+    currentBonus++;
+  }
   
   /**
    * Metodo estatico que genera una lista de number elementos con probability

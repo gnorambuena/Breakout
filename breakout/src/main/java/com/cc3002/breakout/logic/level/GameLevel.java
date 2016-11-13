@@ -25,8 +25,6 @@ public abstract class GameLevel implements ILevel {
     return 0;
   }
 
-  public abstract void setBonuses(List<IBonus> newBonus);
-
   public abstract void setObservers(List<GameObserver> newObservers);
 
   public List<GameObserver> getObservers() {

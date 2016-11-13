@@ -1,6 +1,5 @@
 package com.cc3002.breakout.logic.level;
 
-import com.cc3002.breakout.logic.bonus.IBonus;
 import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.observer.GameObserver;
 
@@ -21,8 +20,6 @@ public interface ILevel {
   int getNumberOfBricks();
 
   int getRequiredPoints();
-
-  void setBonuses(final List<IBonus> newBonus);
   
   public void setObservers(final List<GameObserver> newObservers);
   

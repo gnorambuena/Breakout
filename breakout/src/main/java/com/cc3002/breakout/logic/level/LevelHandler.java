@@ -42,10 +42,6 @@ public class LevelHandler extends GameLevel {
     return currentLevel.getRequiredPoints();
   }
 
-  public void setBonuses(List<IBonus> newBonus) {
-    currentLevel.setBonuses(newBonus);
-  }
-
   public void setObservers(List<GameObserver> newObservers) {
     currentLevel.setObservers(newObservers);
   }

@@ -114,10 +114,6 @@ public class RealLevel extends GameLevel {
     return 7 * (int)requiredPoints.getPoints() / 10;
   }
   
-  public void setBonuses(final List<IBonus> newBonus) {
-    bonuses = newBonus;
-  }
-  
   public List<GameObserver> getObservers() {
     return observers;
   }

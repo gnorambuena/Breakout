@@ -2,7 +2,7 @@ package com.cc3002.breakout.facade;
 
 import com.cc3002.breakout.logic.bonus.AddLifeModifier;
 import com.cc3002.breakout.logic.bonus.AddScoreModifier;
-import com.cc3002.breakout.logic.bonus.Bonus;
+import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.bonus.IBonus;
 import com.cc3002.breakout.logic.bonus.LossLifeModifier;
 import com.cc3002.breakout.logic.bonus.LossScoreModifier;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Facade de la tarea 1.
+ * Facade de la tarea 2.
  * @author Gabriel Norambuena.
  *
  */
@@ -36,6 +36,7 @@ public class HomeworkTwoFacade {
   int number;
   List<GameObserver> observers;
   GameConsole gameConsole;
+  BonusHandler bonusHandler;
   
   /**
    * Constructor vacío del Facade,
@@ -45,6 +46,7 @@ public class HomeworkTwoFacade {
    */
   
   public HomeworkTwoFacade() {
+    bonusHandler = new BonusHandler();
     levelHandler = new LevelHandler(null);
     pl = new Player();
     curScore = new Score();
@@ -63,6 +65,7 @@ public class HomeworkTwoFacade {
    */
   
   public HomeworkTwoFacade(String name, int num, double prob) {
+    bonusHandler = new BonusHandler();
     pl = new Player();
     levelHandler = new LevelHandler(newLevelWithSoftAndStoneBricks(name, num, prob));
     number = num;
@@ -147,11 +150,11 @@ public class HomeworkTwoFacade {
   }
   
   public List<IBonus> newBonuses(final int number, final double probability) {
-    return Bonus.genBonuses(number,probability,pl,levelHandler.getObservers());
+    return BonusHandler.genBonuses(number,probability,pl,levelHandler.getObservers());
   }
   
   public void registerBonuses(final List<IBonus> bonuses) {
-    levelHandler.setBonuses(bonuses);
+    bonusHandler.setBonuses(bonuses);
   }
   
   public void setGameConsoleOutput(final PrintStream printStream) {

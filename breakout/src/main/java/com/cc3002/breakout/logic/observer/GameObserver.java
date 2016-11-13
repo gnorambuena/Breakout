@@ -1,5 +1,8 @@
 package com.cc3002.breakout.logic.observer;
 
+import java.util.List;
+
+import com.cc3002.breakout.logic.bonus.IBonus;
 import com.cc3002.breakout.logic.level.GameConsole;
 
 public abstract class GameObserver {
