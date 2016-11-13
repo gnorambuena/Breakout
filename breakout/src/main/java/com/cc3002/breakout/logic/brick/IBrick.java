@@ -21,4 +21,6 @@ public interface IBrick {
   int remainingHits();
   
   public String print(Printer printer);
+  
+  public boolean isDestroyed();
 }

@@ -50,7 +50,7 @@ public class StoneBrick implements IBrick {
   public void hit() {
     if (hitpoints > 0) {
       hitpoints--;
-      if (hitpoints == 0) {
+      if (isDestroyed()) {
         playerScore.add(50);
         for (GameObserver obs : observers) {
           obs.scoreStoneBrickUpdate();
@@ -63,5 +63,9 @@ public class StoneBrick implements IBrick {
     return printer.printStoneBrick();
   }
 
+
+  public boolean isDestroyed() {
+    return hitpoints == 0;
+  }
 }
 

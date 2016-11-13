@@ -61,5 +61,9 @@ public class  SoftBrick implements IBrick {
       }
     }
   }
+
+  public boolean isDestroyed() {
+    return hitpoints == 0;
+  }
   
 }
