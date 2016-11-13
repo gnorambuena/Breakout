@@ -4,6 +4,11 @@ import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.level.GameConsole;
 import com.cc3002.breakout.logic.level.LevelHandler;
 
+/**
+ * Observador nulo para debuguear.
+ * @author gabriel
+ *
+ */
 public class NullObserver extends GameObserver {
 
   public NullObserver(GameConsole newGameConsole) {
@@ -15,36 +20,58 @@ public class NullObserver extends GameObserver {
   }
   
   @Override
-  public void scoreSoftBrickUpdate() {}
+  public void scoreSoftBrickUpdate() {
+    //Filler comment.
+  }
 
   @Override
-  public void scoreStoneBrickUpdate() {}
+  public void scoreStoneBrickUpdate() {
+    //Filler comment.
+  }
 
   @Override
-  public void levelUpdate(String name) {}
+  public void levelUpdate(String name) {
+    //Filler comment.
+  }
 
   @Override
-  public void scoreDiscount() {}
+  public void scoreDiscount() {
+    //Filler comment.
+  }
 
   @Override
-  public void scoreBonus() {}
+  public void scoreBonus() {
+    //Filler comment.
+  }
 
   @Override
-  public void lifeDiscount() {}
+  public void lifeDiscount() {
+    //Filler comment.
+  }
 
   @Override
-  public void lifeBonus() {}
+  public void lifeBonus() {
+    //Filler comment.
+  }
 
   @Override
-  public void levelAutoSwitch() {}
+  public void levelAutoSwitch() {
+    //Filler comment.
+  }
 
   @Override
-  public void setLevelHandler(LevelHandler newLevelHandler) {}
+  public void setLevelHandler(LevelHandler newLevelHandler) {
+    //Filler comment.
+  }
 
   @Override
-  public void setBonusHandler(BonusHandler newBonusHandler) {}
+  public void setBonusHandler(BonusHandler newBonusHandler) {
+    //Filler comment.
+  }
 
   @Override
-  public void bonusAutoSwitch() {}
+  public void bonusAutoSwitch() {
+    //Filler comment.
+  }
 
 }

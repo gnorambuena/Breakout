@@ -79,7 +79,11 @@ public class LevelHandler extends GameLevel {
   public void setRequiredPoints() {
     currentLevel.setRequiredPoints();
   }
-
+  
+  public void setRequiredPoints(int newPoints) {
+    currentLevel.setRequiredPoints(newPoints);
+  }
+  
   public void setNextLevel(ILevel newLevel) {
     nextLevel = newLevel;
   }
@@ -126,4 +130,9 @@ public class LevelHandler extends GameLevel {
   public Player getPlayer() {
     return currentLevel.getPlayer();
   }
+
+  public long getTotalPoints() {
+    return totalScore.getPoints();
+  }
+
 }

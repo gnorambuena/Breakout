@@ -27,6 +27,8 @@ public interface ILevel {
   
   public void setRequiredPoints();
   
+  public void setRequiredPoints(int newPoints);
+  
   public void setNextLevel(ILevel newLevel);
 
   ILevel getCurrentLevel();

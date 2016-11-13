@@ -23,6 +23,7 @@ public class Score {
   
   public Score(long pt) {
     points = pt;
+    requiredPoints = 100000000L;
   }
   
   public void setObservers(List<GameObserver> newGameObserver) {

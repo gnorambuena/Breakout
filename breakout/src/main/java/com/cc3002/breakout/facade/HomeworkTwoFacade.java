@@ -29,7 +29,7 @@ import java.util.List;
  */
 
 public class HomeworkTwoFacade {
-  ILevel levelHandler;
+  LevelHandler levelHandler;
   Score curScore;
   Player pl;
   double probability;
@@ -54,7 +54,8 @@ public class HomeworkTwoFacade {
     number = 32;
     gameConsole = new GameConsole();
     genGameObservers();
-   
+    pl.getScore().setObservers(observers);
+    bonusHandler.setObservers(observers);
   }
   
   /**
@@ -95,7 +96,7 @@ public class HomeworkTwoFacade {
   }
   
   public long earnedScore() {
-    return pl.getTotalPoints();
+    return pl.getTotalPoints() + levelHandler.getTotalPoints();
   }
 
   public List<IBrick> getBricks() {
@@ -190,19 +191,19 @@ public class HomeworkTwoFacade {
   }
   
   public IBonus newExtraScore() {
-    return new AddScoreModifier(pl,levelHandler.getObservers());
+    return new AddScoreModifier(pl,observers);
   }
   
   public IBonus newExtraHeart() {
-    return new AddLifeModifier(pl,levelHandler.getObservers());
+    return new AddLifeModifier(pl,observers);
   }
   
   public IBonus newScoreDiscount() {
-    return new LossScoreModifier(pl,levelHandler.getObservers());
+    return new LossScoreModifier(pl,observers);
   }
   
   public IBonus newHeartDiscount() {
-    return new LossLifeModifier(pl,levelHandler.getObservers());
+    return new LossLifeModifier(pl,observers);
   }
   
   

@@ -19,7 +19,7 @@ public class LevelObserver extends GameObserver {
 
   @Override
   public void levelUpdate(String name) {
-    gameConsole.print("Playing Level " + name + ".");
+    gameConsole.print("Playing Level " + name + "." + System.lineSeparator());
   }
   
   public void setLevelHandler(final LevelHandler newLevelHandler) {
@@ -30,38 +30,50 @@ public class LevelObserver extends GameObserver {
    * Este observer no deberia responder nada a este mensaje.
    */
   @Override
-  public void scoreSoftBrickUpdate() {}
+  public void scoreSoftBrickUpdate() {
+    //Filler comment.
+  }
 
 
   /**
    * Este observer no deberia responder nada a este mensaje.
    */
   @Override
-  public void scoreStoneBrickUpdate() {}
+  public void scoreStoneBrickUpdate() {
+    //Filler comment.
+  }
 
   /**
    * Este observer no deberia responder nada a este mensaje.
    */
   @Override
-  public void scoreDiscount() {}
+  public void scoreDiscount() {
+    //Filler comment.
+  }
 
   /**
    * Este observer no deberia responder nada a este mensaje.
    */
   @Override
-  public void scoreBonus() {}
+  public void scoreBonus() {
+    //Filler comment.
+  }
 
   /**
    * Este observer no deberia responder nada a este mensaje.
    */
   @Override
-  public void lifeDiscount() {}
+  public void lifeDiscount() {
+    //Filler comment.
+  }
 
   /**
    * Este observer no deberia responder nada a este mensaje.
    */
   @Override
-  public void lifeBonus() {}
+  public void lifeBonus() {
+    //Filler comment.
+  }
 
   @Override
   public void levelAutoSwitch() {
@@ -72,11 +84,15 @@ public class LevelObserver extends GameObserver {
    * Este observer no deberia responder nada a este mensaje.
    */
   @Override
-  public void setBonusHandler(BonusHandler newBonusHandler) {}
+  public void setBonusHandler(BonusHandler newBonusHandler) {
+    //Filler comment.
+  }
 
   /**
    * Este observer no deberia responder nada a este mensaje.
    */
   @Override
-  public void bonusAutoSwitch() {}
+  public void bonusAutoSwitch() {
+    //Filler comment.
+  }
 }

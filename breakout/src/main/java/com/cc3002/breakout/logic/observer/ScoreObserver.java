@@ -17,70 +17,90 @@ public class ScoreObserver extends GameObserver {
   
   @Override
   public void scoreSoftBrickUpdate() {
-    gameConsole.print("Soft brick destroyed and gained 10 points.");
+    gameConsole.print("Soft brick destroyed and gained 10 points." + System.lineSeparator());
   }
   
   @Override
   public void scoreStoneBrickUpdate() {
-    gameConsole.print("Stone brick destroyed and gained 50 points.");
+    gameConsole.print("Stone brick destroyed and gained 50 points." + System.lineSeparator());
   }
 
 
   /**
    * Este observer no deberia responder nada a este mensaje.
+   * @param name Nombre para ser updated.
    */
   @Override
-  public void levelUpdate(String name) {}
+  public void levelUpdate(String name) {
+    //Filler comment.
+  }
 
   /**
    * Este observer no deberia responder nada a este mensaje.
    */
   @Override
-  public void scoreDiscount() {}
+  public void scoreDiscount() {
+  //Filler comment.
+  }
 
   /**
    * Este observer no deberia responder nada a este mensaje.
    */
   @Override
-  public void scoreBonus() {}
+  public void scoreBonus() {
+  //Filler comment.
+  }
 
   /**
    * Este observer no deberia responder nada a este mensaje.
    */
   @Override
-  public void lifeDiscount() {}
+  public void lifeDiscount() {
+  //Filler comment.
+  }
 
   /**
    * Este observer no deberia responder nada a este mensaje.
    */
   @Override
-  public void lifeBonus() {}
+  public void lifeBonus() {
+  //Filler comment.
+  }
 
   /**
    * Este observer no deberia responder nada a este mensaje.
    */
   @Override
-  public void levelAutoSwitch() {}
+  public void levelAutoSwitch() {
+  //Filler comment.
+  }
+  
+
+  /**
+   * Este observer no deberia responder nada a este mensaje.
+   * @o
+   */
+  @Override
+  public void setLevelHandler(LevelHandler newLevelHandler) {
+  //Filler comment.
+  }
   
 
   /**
    * Este observer no deberia responder nada a este mensaje.
    */
   @Override
-  public void setLevelHandler(LevelHandler newLevelHandler) {}
+  public void setBonusHandler(BonusHandler newBonusHandler) {
+  //Filler comment.
+  }
   
 
   /**
    * Este observer no deberia responder nada a este mensaje.
    */
   @Override
-  public void setBonusHandler(BonusHandler newBonusHandler) {}
-  
-
-  /**
-   * Este observer no deberia responder nada a este mensaje.
-   */
-  @Override
-  public void bonusAutoSwitch() {}
+  public void bonusAutoSwitch() {
+  //Filler comment.
+  }
 
 }

@@ -18,51 +18,61 @@ public class BonusObserver extends GameObserver {
   }
 
   public void scoreDiscount() {
-    gameConsole.print("Score discount emitted.");
+    gameConsole.print("Score discount emitted." + System.lineSeparator());
   }
   
   public void scoreBonus() {
-    gameConsole.print("Extra score bonus emitted.");
+    gameConsole.print("Extra score bonus emitted." + System.lineSeparator());
   }
   
   public void lifeDiscount() {
-    gameConsole.print("Heart discount emitted.");
+    gameConsole.print("Heart discount emitted." + System.lineSeparator());
   }
   
   public void lifeBonus() {
-    gameConsole.print("Extra heart bonus emitted.");
+    gameConsole.print("Extra heart bonus emitted." + System.lineSeparator());
   }
 
   /**
    * Este observer no deberia responder nada a este mensaje.
+   * 
+   */
+  public void scoreSoftBrickUpdate() {
+     //Filler comment.
+  }
+
+  /**
+   * Este observer no deberia responder nada a este mensaje.
+   * 
    */ 
-  @Override
-  public void scoreSoftBrickUpdate() {}
-
-  /**
-   * Este observer no deberia responder nada a este mensaje.
-   */
-  @Override
-  public void scoreStoneBrickUpdate() {}
+  public void scoreStoneBrickUpdate() {
+     //Filler comment.
+  }
 
 
   /**
    * Este observer no deberia responder nada a este mensaje.
-   */
-  @Override
-  public void levelUpdate(String name) {}
+   * 
+   */ 
+  public void levelUpdate(String name) {
+     //Filler comment.
+  }
 
   /**
    * Este observer no deberia responder nada a este mensaje.
+   * 
    */
-  @Override
-  public void levelAutoSwitch() {}
+  public void levelAutoSwitch() {
+     //Filler comment.
+  }
 
   /**
    * Este observer no deberia responder nada a este mensaje.
+   * 
    */
-  @Override
-  public void setLevelHandler(LevelHandler newLevelHandler) {}
+  public void setLevelHandler(LevelHandler newLevelHandler) {
+     //Filler comment.
+  }
 
   @Override
   public void setBonusHandler(BonusHandler newBonusHandler) {

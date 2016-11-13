@@ -19,6 +19,6 @@ public class GameConsole {
   }
   
   public void print(String text) {
-    stream.println(text);
+    stream.print(text);
   }
 }

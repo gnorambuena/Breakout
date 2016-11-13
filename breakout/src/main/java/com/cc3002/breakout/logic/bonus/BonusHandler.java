@@ -4,6 +4,7 @@ import com.cc3002.breakout.logic.level.Player;
 import com.cc3002.breakout.logic.observer.GameObserver;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -29,9 +30,6 @@ public class BonusHandler {
    */
   public void setBonuses(final List<IBonus> newBonuses) {
     bonuses = newBonuses;
-    if (bonuses != null) {
-      setObservers(bonuses.get(0).getObservers());
-    }
     currentBonus = 0;
   }
   
@@ -70,24 +68,24 @@ public class BonusHandler {
       Player player, List<GameObserver> observers) {
     List<IBonus> ans = new ArrayList<IBonus>();
     Random rand = new Random();
-    
-    for (int i = 0 ; i < number ; i++) {
+    int numberOfBonuses = (int)(number * probability);
+    for (int i = 0 ; i < numberOfBonuses ; i++) {
       float chance = rand.nextFloat();
-      if (chance < probability) {
-        if (chance < probability / 2.0) {
-          ans.add(new AddLifeModifier(player,observers));
-        } else {
-          ans.add(new AddScoreModifier(player,observers));
-        }
+      if (chance < 0.5) {
+        ans.add(new AddLifeModifier(player,observers));
       } else {
-        if (chance < (1.0 + probability) / 2.0) {
-          ans.add(new LossLifeModifier(player,observers));
-        } else {
-          ans.add(new LossScoreModifier(player,observers));
-        }
+        ans.add(new AddScoreModifier(player,observers));
       }
     }
-    
+    for (int i = numberOfBonuses ; i < number ; i++) {
+      float chance = rand.nextFloat();
+      if (chance < 0.5) {
+        ans.add(new LossLifeModifier(player,observers));
+      } else {
+        ans.add(new LossScoreModifier(player,observers));
+      }
+    }
+    Collections.shuffle(ans);
     return ans;
   }
 
@@ -95,7 +93,7 @@ public class BonusHandler {
    * Acciona los bonuses que aun no se han usado.
    */
   public void autoSwitch() {
-    for ( ; currentBonus < bonuses.size() ;) {
+    while (currentBonus < bonuses.size()) {
       reached();
     }
   }

@@ -17,7 +17,7 @@ public class Player {
   Life life;
   
   public Player() {
-    sc = new Score(0);
+    sc = new Score();
     life = new Life();
   }
   

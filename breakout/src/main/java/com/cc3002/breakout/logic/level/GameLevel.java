@@ -12,47 +12,31 @@ import java.util.List;
  */
 public abstract class GameLevel implements ILevel {
 
-  public String getLevelName() {
-    return null;
-  }
+  public abstract String getLevelName();
 
-  public List<IBrick> getBricks() {
-    return null;
-  }
+  public abstract List<IBrick> getBricks();
 
-  public int getNumberOfBricks() {
-    return 0;
-  }
+  public abstract int getNumberOfBricks();
 
-  public int getRequiredPoints() {
-    return 0;
-  }
+  public abstract int getRequiredPoints();
 
   public abstract void setObservers(List<GameObserver> newObservers);
 
-  public List<GameObserver> getObservers() {
-    return null;
-  }
+  public abstract List<GameObserver> getObservers();
 
   public abstract void setRequiredPoints();
 
   public abstract void setNextLevel(ILevel newLevel);
 
-  public ILevel getCurrentLevel() {
-    return null;
-  }
+  public abstract ILevel getCurrentLevel();
 
-  public boolean hasNextLevel() {
-    return false;
-  }
+  public abstract boolean hasNextLevel();
 
   public abstract void setCurrentLevel(ILevel newLevel);
 
   public abstract void autoSwitchToNextLevel();
 
-  public boolean hasCurrentLevel() {
-    return false;
-  }
+  public abstract boolean hasCurrentLevel();
 
   public abstract Player getPlayer();
 }

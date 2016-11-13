@@ -10,13 +10,13 @@ import com.cc3002.breakout.logic.observer.ScoreObserver;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 /**
  * Representacion de un nivel del juego,
  * se encarga además de generar niveles.
  * @author gabriel
  *
  */
-
 public class RealLevel extends GameLevel {
   String name;
   List<IBrick> level;
@@ -42,6 +42,7 @@ public class RealLevel extends GameLevel {
     observers = null;
     gameConsole = newGameConsole;
   }
+  
   /**
    * Constructor del RealLevel
    * Genera al azar con probability de generar
@@ -71,6 +72,11 @@ public class RealLevel extends GameLevel {
   public void setRequiredPoints() {
     player.getScore().setCurrentPoints(0);
     player.getScore().setRequiredPoints(getRequiredPoints());
+  }
+  
+  public void setRequiredPoints(int newPoints) {
+    player.getScore().setRequiredPoints(newPoints);
+    requiredPoints.setCurrentPoints(newPoints);
   }
   
   /**
@@ -131,31 +137,54 @@ public class RealLevel extends GameLevel {
     return observers;
   }
   
-  /*public void setRequiredPoints(int newRequiredPoints) {
-    requiredPoints = new Score(newRequiredPoints);
-  }*/
-  
   /**
    * RealLevel no ejecuta nada con este mensaje.
+   * @param newLevel El level a setear.
    */
   @Override
-  public void setNextLevel(ILevel newLevel) {}
+  public void setNextLevel(ILevel newLevel) {
+    //Filler comment.
+  }
 
   /**
    * RealLevel no ejecuta nada con este mensaje.
+   * @param newLevel El level a setear.
    */
   @Override
-  public void setCurrentLevel(ILevel newLevel) {}
+  public void setCurrentLevel(ILevel newLevel) {
+    //Filler comment.
+  }
 
   /**
    * RealLevel no ejecuta nada con este mensaje.
+   * 
    */
   @Override
-  public void autoSwitchToNextLevel() {}
+  public void autoSwitchToNextLevel() {
+    //Filler comment. 
+  }
   
   @Override
   public Player getPlayer() {
     return player;
+  }
+
+  @Override
+  public ILevel getCurrentLevel() {
+    //Filler comment.
+    return null;
+  }
+
+  @Override
+  public boolean hasNextLevel() {
+    //Filler comment.
+    return false;
+  }
+
+  @Override
+  public boolean hasCurrentLevel() {
+    //Filler comment.
+    return false;
   }
   
 }
