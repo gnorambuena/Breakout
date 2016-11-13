@@ -1,12 +1,15 @@
 package com.cc3002.breakout.logic.level;
 
-import com.cc3002.breakout.logic.bonus.IBonus;
 import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.observer.GameObserver;
 
 import java.util.List;
 
-
+/**
+ * Clase abstracta que sirve de superclass para RealLevel y LevelHandler.
+ * @author gabriel
+ *
+ */
 public abstract class GameLevel implements ILevel {
 
   public String getLevelName() {

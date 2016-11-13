@@ -122,12 +122,21 @@ public class RealLevel extends GameLevel {
     requiredPoints = new Score(newRequiredPoints);
   }
   
+  /**
+   * RealLevel no ejecuta nada con este mensaje.
+   */
   @Override
   public void setNextLevel(ILevel newLevel) {}
-  
+
+  /**
+   * RealLevel no ejecuta nada con este mensaje.
+   */
   @Override
   public void setCurrentLevel(ILevel newLevel) {}
-  
+
+  /**
+   * RealLevel no ejecuta nada con este mensaje.
+   */
   @Override
   public void autoSwitchToNextLevel() {}
   

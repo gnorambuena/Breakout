@@ -5,6 +5,11 @@ import com.cc3002.breakout.logic.observer.GameObserver;
 
 import java.util.List;
 
+/**
+ * Modificador que agrega 5 en Score.
+ * @author gabriel
+ *
+ */
 public class AddScoreModifier implements IBonus {
   
   Player player;

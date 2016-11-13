@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Esta clase se encarga de manejar los bonuses del level.
+ * @author gabriel
+ *
+ */
 public class BonusHandler {
   
   List<IBonus> bonuses;

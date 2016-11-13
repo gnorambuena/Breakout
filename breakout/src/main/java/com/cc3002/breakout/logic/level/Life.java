@@ -1,5 +1,10 @@
 package com.cc3002.breakout.logic.level;
 
+/**
+ * Esta clase representa las vidas que tiene el player.
+ * @author gabriel
+ *
+ */
 public class Life {
   private int hearts;
   

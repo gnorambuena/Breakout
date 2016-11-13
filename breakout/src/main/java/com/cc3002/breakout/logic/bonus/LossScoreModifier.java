@@ -5,6 +5,11 @@ import com.cc3002.breakout.logic.observer.GameObserver;
 
 import java.util.List;
 
+/**
+ * Modificador que quita 3 puntos al Score.
+ * @author gabriel
+ *
+ */
 public class LossScoreModifier implements IBonus {
   
   Player player;

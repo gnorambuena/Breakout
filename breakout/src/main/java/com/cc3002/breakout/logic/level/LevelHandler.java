@@ -1,11 +1,15 @@
 package com.cc3002.breakout.logic.level;
 
-import com.cc3002.breakout.logic.bonus.IBonus;
 import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.observer.GameObserver;
 
 import java.util.List;
 
+/**
+ * Esta clase se encarga de manejar el cambio de niveles del juego.
+ * @author gabriel
+ *
+ */
 public class LevelHandler extends GameLevel {
   ILevel currentLevel;
   ILevel nextLevel;

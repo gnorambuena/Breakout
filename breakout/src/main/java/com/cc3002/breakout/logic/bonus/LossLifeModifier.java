@@ -6,6 +6,11 @@ import com.cc3002.breakout.logic.observer.GameObserver;
 
 import java.util.List;
 
+/**
+ * Modificador que quita una vida al Player.
+ * @author gabriel
+ *
+ */
 public class LossLifeModifier implements IBonus {
   Player player;
   List<GameObserver> observers;

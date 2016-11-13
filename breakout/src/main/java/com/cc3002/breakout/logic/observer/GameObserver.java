@@ -1,10 +1,13 @@
 package com.cc3002.breakout.logic.observer;
 
-import java.util.List;
 
-import com.cc3002.breakout.logic.bonus.IBonus;
 import com.cc3002.breakout.logic.level.GameConsole;
 
+/**
+ * Clase abstracta para todos los Observer del juego.
+ * @author gabriel
+ *
+ */
 public abstract class GameObserver {
   
   GameConsole gameConsole;

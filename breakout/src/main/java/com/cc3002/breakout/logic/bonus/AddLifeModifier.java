@@ -5,6 +5,11 @@ import com.cc3002.breakout.logic.observer.GameObserver;
 
 import java.util.List;
 
+/**
+ * Modificador que aumenta en uno el numero de vidas.
+ * @author gabriel
+ *
+ */
 public class AddLifeModifier implements IBonus {
 
   Player player;
