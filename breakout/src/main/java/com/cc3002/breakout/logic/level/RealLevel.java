@@ -18,13 +18,14 @@ import java.util.Random;
  *
  */
 
-public class RealLevel implements ILevel {
+public class RealLevel extends GameLevel {
   String name;
   List<IBrick> level;
   Score requiredPoints;
   Player player;
   List<IBonus> bonuses;
   List<GameObserver> observers;
+  ILevel nextLvl;
   
   /**
    * Constructor del RealLevel.
@@ -39,6 +40,7 @@ public class RealLevel implements ILevel {
     requiredPoints = genScore();
     player = newPlayer;
     observers = null;
+    nextLvl = null;
   }
   /**
    * Constructor del RealLevel
@@ -56,6 +58,7 @@ public class RealLevel implements ILevel {
     observers.add(new ScoreObserver(System.out));
     player = newPlayer;
     level = genNewLevel(probability,num);
+    nextLvl = null;
   }
   
   public void setObservers(final List<GameObserver> newObservers) {
@@ -105,30 +108,8 @@ public class RealLevel implements ILevel {
     return level.size();
   }
   
-  
   public int getRequiredPoints() {
     return 7 * (int)requiredPoints.getPoints() / 10;
-  }
-  /** Función estática que transforma un Objeto ILevel,
-   * en un String para mostrar por consola de texto.
-   * 
-   * @param rlevel El nivel que se quiere retornar como String.
-   * @return El nivel construido como String.
-   */
-  
-  public static String spawnBricks(final ILevel rlevel) {
-    List<IBrick> level = rlevel.getBricks();
-    StringBuilder strB = new StringBuilder();
-    Printer printer = new Printer();
-    for (int i = 0 ; i < level.size() ; i++) {
-      if (i % 16 == 0 && i != 0) {
-        strB.append(System.lineSeparator());
-      }
-      IBrick brick = level.get(i);
-      strB.append(printer.print(brick));
-    }
-    strB.append(System.lineSeparator());
-    return strB.toString();
   }
   
   public void setBonuses(final List<IBonus> newBonus) {
@@ -141,7 +122,6 @@ public class RealLevel implements ILevel {
   
   public void setRequiredPoints(int newRequiredPoints) {
     requiredPoints = new Score(newRequiredPoints);
-    
   }
   
 }

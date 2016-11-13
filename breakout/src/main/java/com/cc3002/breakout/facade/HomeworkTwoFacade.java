@@ -8,6 +8,7 @@ import com.cc3002.breakout.logic.bonus.LossLifeModifier;
 import com.cc3002.breakout.logic.bonus.LossScoreModifier;
 import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.level.ILevel;
+import com.cc3002.breakout.logic.level.LevelHandler;
 import com.cc3002.breakout.logic.level.Player;
 import com.cc3002.breakout.logic.level.RealLevel;
 import com.cc3002.breakout.logic.level.Score;
@@ -27,8 +28,7 @@ import java.util.List;
  */
 
 public class HomeworkTwoFacade {
-  ILevel curLevel;
-  ILevel nextLevel;
+  ILevel levelHandler;
   Score curScore;
   Player pl;
   double probability;
@@ -44,8 +44,7 @@ public class HomeworkTwoFacade {
    */
   
   public HomeworkTwoFacade() {
-    curLevel = null;
-    nextLevel = null;
+    levelHandler = new LevelHandler(null);
     pl = new Player();
     curScore = new Score();
     probability = 0.2;
@@ -64,9 +63,8 @@ public class HomeworkTwoFacade {
   
   public HomeworkTwoFacade(String name, int num, double prob) {
     pl = new Player();
-    curLevel = newLevelWithSoftAndStoneBricks(name, num, prob);
+    levelHandler = new LevelHandler(newLevelWithSoftAndStoneBricks(name, num, prob));
     number = num;
-    nextLevel = null;
     curScore = new Score();
     probability = prob;
     stream = System.out;
@@ -86,15 +84,15 @@ public class HomeworkTwoFacade {
   }
 
   public List<IBrick> getBricks() {
-    return curLevel.getBricks();
+    return levelHandler.getBricks();
   }
 
   public ILevel getCurrentLevel() {
-    return curLevel;
+    return levelHandler.getCurrentLevel();
   }
 
   public String getLevelName() {
-    return curLevel.getLevelName();
+    return levelHandler.getLevelName();
   }
 
   public int getNumberOfHearts() {
@@ -102,11 +100,11 @@ public class HomeworkTwoFacade {
   }
 
   public int getRequiredPoints() {
-    return curLevel.getRequiredPoints();
+    return levelHandler.getRequiredPoints();
   }
 
   public boolean hasNextLevel() {
-    return false;
+    return levelHandler.hasNextLevel();
   }
 
   public int lossOfHeart() {
@@ -119,7 +117,7 @@ public class HomeworkTwoFacade {
   }
 
   public long numberOfBricks() {
-    return curLevel.getNumberOfBricks();
+    return levelHandler.getNumberOfBricks();
   }
 
   /**
@@ -127,10 +125,7 @@ public class HomeworkTwoFacade {
    * @param newLevel nivel al que se seteara el juego.
    */
   public void setCurrentLevel(final ILevel newLevel) {
-    curLevel = newLevel;
-    for (GameObserver observer: observers) {
-      observer.levelUpdate(curLevel.getLevelName());
-    }
+    levelHandler.setCurrentLevel(newLevel);
   }
   
   /**
@@ -142,47 +137,47 @@ public class HomeworkTwoFacade {
    */
   
   public String spawnBricks(final ILevel rlevel) {
-    return RealLevel.spawnBricks(rlevel);
+    return LevelHandler.spawnBricks(rlevel);
   }
   
   public void setNextLevel() {
-    probability *= 1.1;
-    nextLevel = newLevelWithSoftAndStoneBricks("Another Level",number,probability);
+    levelHandler.setNextLevel(
+        newLevelWithSoftAndStoneBricks("Another Level",number,probability * 1.1));
   }
   
   public List<IBonus> newBonuses(final int number, final double probability) {
-    return Bonus.genBonuses(number,probability,pl,curLevel.getObservers());
+    return Bonus.genBonuses(number,probability,pl,levelHandler.getObservers());
   }
   
   public void registerBonuses(final List<IBonus> bonuses) {
-    curLevel.setBonuses(bonuses);
+    levelHandler.setBonuses(bonuses);
   }
   
   public void setGameConsoleOutput(final PrintStream printStream){}
   
   public void autoSwitchToNextLevel() {
-    setCurrentLevel(nextLevel);
-    nextLevel = null;
+    levelHandler.autoSwitchToNextLevel();
   }
   
   public boolean hasCurrentLevel() {
-    return curLevel != null;
+    return levelHandler.hasCurrentLevel();
   }
   
   public IBonus newExtraScore() {
-    return new AddScoreModifier(pl,curLevel.getObservers());
+    return new AddScoreModifier(pl,levelHandler.getObservers());
   }
   
   public IBonus newExtraHeart() {
-    return new AddLifeModifier(pl,curLevel.getObservers());
+    return new AddLifeModifier(pl,levelHandler.getObservers());
   }
   
   public IBonus newScoreDiscount() {
-    return new LossScoreModifier(pl,curLevel.getObservers());
+    return new LossScoreModifier(pl,levelHandler.getObservers());
   }
   
   public IBonus newHeartDiscount() {
-    return new LossLifeModifier(pl,curLevel.getObservers());
+    return new LossLifeModifier(pl,levelHandler.getObservers());
   }
+  
   
 }
