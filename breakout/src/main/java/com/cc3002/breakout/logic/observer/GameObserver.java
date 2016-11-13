@@ -1,31 +1,27 @@
 package com.cc3002.breakout.logic.observer;
 
-import java.io.PrintStream;
-
+import com.cc3002.breakout.logic.level.GameConsole;
 
 public abstract class GameObserver {
   
-  PrintStream stream;
+  GameConsole gameConsole;
   
-  public GameObserver(PrintStream st) {
-    stream = st;
+  public GameObserver(GameConsole newGameConsole) {
+    gameConsole = newGameConsole;
   }
   
-  public void scoreSoftBrickUpdate(){}
+  public abstract void scoreSoftBrickUpdate();
   
-  public void scoreStoneBrickUpdate(){}
+  public abstract void scoreStoneBrickUpdate();
   
-  public void levelUpdate(String name){}
+  public abstract void levelUpdate(String name);
   
-  public void scoreDiscount(){}
+  public abstract void scoreDiscount();
   
-  public void scoreBonus(){}
+  public abstract void scoreBonus();
   
-  public void lifeDiscount(){}
+  public abstract void lifeDiscount();
   
-  public void lifeBonus(){}
-  
-  public void setStream(PrintStream st) {
-    stream = st;
-  }
+  public abstract void lifeBonus();
+ 
 }

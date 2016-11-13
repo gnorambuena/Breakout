@@ -7,6 +7,7 @@ import com.cc3002.breakout.logic.bonus.IBonus;
 import com.cc3002.breakout.logic.bonus.LossLifeModifier;
 import com.cc3002.breakout.logic.bonus.LossScoreModifier;
 import com.cc3002.breakout.logic.brick.IBrick;
+import com.cc3002.breakout.logic.level.GameConsole;
 import com.cc3002.breakout.logic.level.ILevel;
 import com.cc3002.breakout.logic.level.LevelHandler;
 import com.cc3002.breakout.logic.level.Player;
@@ -34,7 +35,7 @@ public class HomeworkTwoFacade {
   double probability;
   int number;
   List<GameObserver> observers;
-  PrintStream stream;
+  GameConsole gameConsole;
   
   /**
    * Constructor vacío del Facade,
@@ -49,7 +50,7 @@ public class HomeworkTwoFacade {
     curScore = new Score();
     probability = 0.2;
     number = 32;
-    stream = System.out;
+    gameConsole = new GameConsole();
     genGameObservers();
    
   }
@@ -67,15 +68,15 @@ public class HomeworkTwoFacade {
     number = num;
     curScore = new Score();
     probability = prob;
-    stream = System.out;
+    gameConsole = new GameConsole();
     genGameObservers();
   }
 
   private void genGameObservers() {
     observers = new ArrayList<GameObserver>();
-    observers.add(new BonusObserver(stream));
-    observers.add(new LevelObserver(stream));
-    observers.add(new ScoreObserver(stream));
+    observers.add(new BonusObserver(gameConsole));
+    observers.add(new LevelObserver(gameConsole));
+    observers.add(new ScoreObserver(gameConsole));
     
   }
   
@@ -113,7 +114,7 @@ public class HomeworkTwoFacade {
   }
 
   public ILevel newLevelWithSoftAndStoneBricks(String levelName, int number, double probability) {
-    return new RealLevel(levelName, number, probability,pl);
+    return new RealLevel(levelName, number, probability,pl,gameConsole);
   }
 
   public long numberOfBricks() {
@@ -153,7 +154,9 @@ public class HomeworkTwoFacade {
     levelHandler.setBonuses(bonuses);
   }
   
-  public void setGameConsoleOutput(final PrintStream printStream){}
+  public void setGameConsoleOutput(final PrintStream printStream) {
+    gameConsole.setStream(printStream);
+  }
   
   public void autoSwitchToNextLevel() {
     levelHandler.autoSwitchToNextLevel();

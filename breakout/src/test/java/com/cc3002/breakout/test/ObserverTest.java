@@ -12,6 +12,7 @@ import com.cc3002.breakout.facade.HomeworkTwoFacade;
 import com.cc3002.breakout.logic.bonus.Bonus;
 import com.cc3002.breakout.logic.bonus.IBonus;
 import com.cc3002.breakout.logic.brick.IBrick;
+import com.cc3002.breakout.logic.level.GameConsole;
 import com.cc3002.breakout.logic.level.ILevel;
 import com.cc3002.breakout.logic.level.Player;
 import com.cc3002.breakout.logic.level.RealLevel;
@@ -24,13 +25,16 @@ public class ObserverTest {
   
   Player pl;
   List<GameObserver>Observers;
+  GameConsole gameConsole;
   
   @Before
   public void setUp() throws Exception {
     pl = new Player();
-    GameObserver ScOb = new ScoreObserver(System.out);
-    GameObserver BnOb = new BonusObserver(System.out);
-    GameObserver LvOb = new LevelObserver(System.out);
+    gameConsole = new GameConsole();
+    gameConsole.setStream(System.out);
+    GameObserver ScOb = new ScoreObserver(gameConsole);
+    GameObserver BnOb = new BonusObserver(gameConsole);
+    GameObserver LvOb = new LevelObserver(gameConsole);
     Observers = new ArrayList<GameObserver>();
     Observers.add(ScOb);
     Observers.add(LvOb);
@@ -39,7 +43,7 @@ public class ObserverTest {
 
   @Test
   public void testScoreObserver() {
-    ILevel lvl = new RealLevel("Level one",32,0.4,pl);
+    ILevel lvl = new RealLevel("Level one",32,0.4,pl,gameConsole);
     lvl.setObservers(Observers);
     List<IBrick>bricks = lvl.getBricks();
     boolean f = true;
@@ -57,8 +61,8 @@ public class ObserverTest {
 
   @Test
   public void testLvlObserver(){
-    ILevel lvl1 = new RealLevel("Level one",32,0.4,pl);
-    ILevel lvl2 = new RealLevel("Level two",32,0.5,pl);
+    ILevel lvl1 = new RealLevel("Level one",32,0.4,pl,gameConsole);
+    ILevel lvl2 = new RealLevel("Level two",32,0.5,pl,gameConsole);
     lvl1.setObservers(Observers);
     HomeworkTwoFacade aux = new HomeworkTwoFacade();
     boolean f = true;
@@ -78,9 +82,9 @@ public class ObserverTest {
   @Test
   public void testBonusObserver(){
     List<GameObserver> Observer = new ArrayList<GameObserver>();
-    Observer.add(new BonusObserver(System.out));
+    Observer.add(new BonusObserver(gameConsole));
     List<IBonus>bonuses = Bonus.genBonuses(10, 0.4, pl,Observer);
-    ILevel lvl1 = new RealLevel("Level one",32,0.4,pl);
+    ILevel lvl1 = new RealLevel("Level one",32,0.4,pl,gameConsole);
     lvl1.setBonuses(bonuses);
     
   }

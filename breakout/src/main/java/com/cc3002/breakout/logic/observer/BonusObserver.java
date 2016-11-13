@@ -1,26 +1,35 @@
 package com.cc3002.breakout.logic.observer;
 
-import java.io.PrintStream;
+import com.cc3002.breakout.logic.level.GameConsole;
 
 public class BonusObserver extends GameObserver {
 
-  public BonusObserver(PrintStream st) {
-    super(st);
+  public BonusObserver(GameConsole gameConsole) {
+    super(gameConsole);
   }
 
   public void scoreDiscount() {
-    stream.println("Score discount emitted.");
+    gameConsole.print("Score discount emitted.");
   }
   
   public void scoreBonus() {
-    stream.println("Extra score bonus emitted.");
+    gameConsole.print("Extra score bonus emitted.");
   }
   
   public void lifeDiscount() {
-    stream.println("Heart discount emitted.");
+    gameConsole.print("Heart discount emitted.");
   }
   
   public void lifeBonus() {
-    stream.println("Extra heart bonus emitted.");
+    gameConsole.print("Extra heart bonus emitted.");
   }
+
+  @Override
+  public void scoreSoftBrickUpdate() {}
+
+  @Override
+  public void scoreStoneBrickUpdate() {}
+
+  @Override
+  public void levelUpdate(String name) {}
 }

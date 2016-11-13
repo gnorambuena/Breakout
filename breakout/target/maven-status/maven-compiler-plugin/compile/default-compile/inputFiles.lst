@@ -1,5 +1,6 @@
 /Users/gabriel/git/breakout/breakout/src/main/java/com/cc3002/breakout/logic/bonus/Bonus.java
 /Users/gabriel/git/breakout/breakout/src/main/java/com/cc3002/breakout/logic/brick/IBrick.java
+/Users/gabriel/git/breakout/breakout/src/main/java/com/cc3002/breakout/logic/level/GameLevel.java
 /Users/gabriel/git/breakout/breakout/src/main/java/com/cc3002/breakout/logic/bonus/AddScoreModifier.java
 /Users/gabriel/git/breakout/breakout/src/main/java/com/cc3002/breakout/logic/observer/BonusObserver.java
 /Users/gabriel/git/breakout/breakout/src/main/java/com/cc3002/breakout/facade/NullOutputStream.java
@@ -18,4 +19,5 @@
 /Users/gabriel/git/breakout/breakout/src/main/java/com/cc3002/breakout/logic/brick/SoftBrick.java
 /Users/gabriel/git/breakout/breakout/src/main/java/com/cc3002/breakout/logic/level/Life.java
 /Users/gabriel/git/breakout/breakout/src/main/java/com/cc3002/breakout/logic/observer/LevelObserver.java
+/Users/gabriel/git/breakout/breakout/src/main/java/com/cc3002/breakout/logic/level/LevelHandler.java
 /Users/gabriel/git/breakout/breakout/src/main/java/com/cc3002/breakout/logic/level/Player.java

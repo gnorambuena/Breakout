@@ -25,7 +25,7 @@ public class RealLevel extends GameLevel {
   Player player;
   List<IBonus> bonuses;
   List<GameObserver> observers;
-  ILevel nextLvl;
+  GameConsole gameConsole;
   
   /**
    * Constructor del RealLevel.
@@ -34,13 +34,14 @@ public class RealLevel extends GameLevel {
    * @param bricks Una Lista de IBrick.
    */
   
-  public RealLevel(String levelName, List<IBrick> bricks, Player newPlayer) {
+  public RealLevel(String levelName, List<IBrick> bricks,
+      Player newPlayer, GameConsole newGameConsole) {
     name = levelName;
     level = bricks;
     requiredPoints = genScore();
     player = newPlayer;
     observers = null;
-    nextLvl = null;
+    gameConsole = newGameConsole;
   }
   /**
    * Constructor del RealLevel
@@ -51,14 +52,15 @@ public class RealLevel extends GameLevel {
    * @param probability Probabilidad de generar un SoftBrick.
    */
   
-  public RealLevel(String levelName, int num ,double probability, Player newPlayer) {
+  public RealLevel(String levelName, int num ,double probability,
+      Player newPlayer, GameConsole newGameConsole) {
     name = levelName;
     requiredPoints = new Score();
     observers = new ArrayList<GameObserver>();
-    observers.add(new ScoreObserver(System.out));
+    gameConsole = newGameConsole;
+    observers.add(new ScoreObserver(newGameConsole));
     player = newPlayer;
     level = genNewLevel(probability,num);
-    nextLvl = null;
   }
   
   public void setObservers(final List<GameObserver> newObservers) {
@@ -123,6 +125,15 @@ public class RealLevel extends GameLevel {
   public void setRequiredPoints(int newRequiredPoints) {
     requiredPoints = new Score(newRequiredPoints);
   }
+  
+  @Override
+  public void setNextLevel(ILevel newLevel) {}
+  
+  @Override
+  public void setCurrentLevel(ILevel newLevel) {}
+  
+  @Override
+  public void autoSwitchToNextLevel() {}
   
 }
 
