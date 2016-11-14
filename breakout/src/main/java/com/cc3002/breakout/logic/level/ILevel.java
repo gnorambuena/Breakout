@@ -1,5 +1,6 @@
 package com.cc3002.breakout.logic.level;
 
+import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.observer.GameObserver;
 
@@ -42,4 +43,6 @@ public interface ILevel {
   boolean hasCurrentLevel();
   
   public Player getPlayer();
+
+  void setBonusHandler(BonusHandler bonusHandler);
 }

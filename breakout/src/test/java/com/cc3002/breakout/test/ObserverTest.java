@@ -50,6 +50,7 @@ public class ObserverTest {
   @Test
   public void testScoreObserver() {
     ILevel lvl = new RealLevel("Level one",32,0.4,pl,gameConsole);
+    lvl.setBonusHandler(new BonusHandler());
     lvl.setObservers(observers);
     List<IBrick> bricks = lvl.getBricks();
     boolean flag = true;

@@ -18,19 +18,19 @@ public class BonusObserver extends GameObserver {
   }
 
   public void scoreDiscount() {
-    gameConsole.print("Score discount emitted." + System.lineSeparator());
+    gameConsole.print("Score discount emitted.");
   }
   
   public void scoreBonus() {
-    gameConsole.print("Extra score bonus emitted." + System.lineSeparator());
+    gameConsole.print("Extra score bonus emitted.");
   }
   
   public void lifeDiscount() {
-    gameConsole.print("Heart discount emitted." + System.lineSeparator());
+    gameConsole.print("Heart discount emitted.");
   }
   
   public void lifeBonus() {
-    gameConsole.print("Extra heart bonus emitted." + System.lineSeparator());
+    gameConsole.print("Extra heart bonus emitted.");
   }
 
   /**

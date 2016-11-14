@@ -19,7 +19,7 @@ public class LevelObserver extends GameObserver {
 
   @Override
   public void levelUpdate(String name) {
-    gameConsole.print("Playing Level " + name + "." + System.lineSeparator());
+    gameConsole.print("Playing Level " + name + ".");
   }
   
   public void setLevelHandler(final LevelHandler newLevelHandler) {
@@ -77,7 +77,9 @@ public class LevelObserver extends GameObserver {
 
   @Override
   public void levelAutoSwitch() {
-    levelHandler.autoSwitchToNextLevel();
+    if (levelHandler.getAutoSwitch()) {
+      levelHandler.autoSwitchToNextLevel();
+    }
   }
 
   /**

@@ -1,5 +1,6 @@
 package com.cc3002.breakout.logic.brick;
 
+import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.level.Printer;
 import com.cc3002.breakout.logic.level.Score;
 import com.cc3002.breakout.logic.observer.GameObserver;
@@ -17,6 +18,7 @@ public class StoneBrick implements IBrick {
   int hitpoints;
   Score playerScore;
   List<GameObserver> observers;
+  BonusHandler bonusHandler;
   
   /**
    * Constructor del StoneBrick, toma una referencia al Score del jugador,
@@ -24,10 +26,11 @@ public class StoneBrick implements IBrick {
    * @param plScore Score del jugador.
    * @param newObservers Observers del juego.
    */
-  public StoneBrick(Score plScore,List<GameObserver> newObservers) {
+  public StoneBrick(Score plScore,List<GameObserver> newObservers,BonusHandler newBonusHandler) {
     hitpoints = 3;
     playerScore = plScore;
     observers = newObservers;
+    bonusHandler = newBonusHandler;
   }
 
   public int remainingHits() {
@@ -54,6 +57,7 @@ public class StoneBrick implements IBrick {
         for (GameObserver obs : observers) {
           obs.scoreStoneBrickUpdate();
         }
+        bonusHandler.reached();
         playerScore.add(50);
       }
     }
@@ -66,6 +70,11 @@ public class StoneBrick implements IBrick {
 
   public boolean isDestroyed() {
     return hitpoints == 0;
+  }
+  
+
+  public void setBonusHandler(BonusHandler newBonusHandler) {
+    bonusHandler = newBonusHandler;
   }
 }
 

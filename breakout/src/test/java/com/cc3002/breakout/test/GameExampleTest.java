@@ -34,16 +34,16 @@ public class GameExampleTest {
     game = new HomeworkTwoFacade();
     game.setGameConsoleOutput(System.out);
     List<IBrick> aux = new ArrayList<IBrick>();
-    aux.add(new SoftBrick(game.getPlayer().getScore(),game.getGameObservers()));
-    aux.add(new StoneBrick(game.getPlayer().getScore(),game.getGameObservers()));
-    aux.add(new SoftBrick(game.getPlayer().getScore(),game.getGameObservers()));
-    aux.add(new StoneBrick(game.getPlayer().getScore(),game.getGameObservers()));
+    aux.add(new SoftBrick(game.getPlayer().getScore(),game.getGameObservers(),game.getBonusHandler()));
+    aux.add(new StoneBrick(game.getPlayer().getScore(),game.getGameObservers(),game.getBonusHandler()));
+    aux.add(new SoftBrick(game.getPlayer().getScore(),game.getGameObservers(),game.getBonusHandler()));
+    aux.add(new StoneBrick(game.getPlayer().getScore(),game.getGameObservers(),game.getBonusHandler()));
     ILevel auxlvl = new RealLevel("Basic", aux, game.getPlayer(), game.getGameConsole());
     auxlvl.setObservers(game.getGameObservers());
     game.setCurrentLevel(auxlvl);
     aux = new ArrayList<IBrick>();
-    aux.add(new StoneBrick(game.getPlayer().getScore(),game.getGameObservers()));
-    aux.add(new StoneBrick(game.getPlayer().getScore(),game.getGameObservers()));
+    aux.add(new StoneBrick(game.getPlayer().getScore(),game.getGameObservers(),game.getBonusHandler()));
+    aux.add(new StoneBrick(game.getPlayer().getScore(),game.getGameObservers(),game.getBonusHandler()));
     ILevel auxlvl2 = new RealLevel("Medium", aux, game.getPlayer(),game.getGameConsole());
     game.setNextLevel(auxlvl2);
     List<IBonus> bonuses = new ArrayList<IBonus>();
@@ -56,6 +56,7 @@ public class GameExampleTest {
   public void test() {
     List<IBrick> bricks = game.getBricks();
     BonusHandler bonusHandler = game.getBonusHandler();
+    game.autoSwitchToNextLevel();
     bricks.get(0).hit();
     bonusHandler.reached();
     bricks.get(1).hit();
@@ -78,7 +79,6 @@ public class GameExampleTest {
     bricks.get(1).hit();
     bricks.get(1).hit();
     bonusHandler.reached();
-    
   }
 
 }

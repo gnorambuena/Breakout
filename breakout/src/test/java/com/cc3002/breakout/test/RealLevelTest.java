@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 
-
+import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.brick.SoftBrick;
 import com.cc3002.breakout.logic.brick.StoneBrick;
@@ -50,8 +50,9 @@ public class RealLevelTest {
       }
     }
     for (int i = 0 ; i < 16 ; i++) {
-      aux.add(new SoftBrick(pl.getScore(),lv1.getObservers()));
-      aux.add(new StoneBrick(pl.getScore(),lv1.getObservers()));
+      BonusHandler bonusHandler = new BonusHandler();
+      aux.add(new SoftBrick(pl.getScore(),lv1.getObservers(),bonusHandler));
+      aux.add(new StoneBrick(pl.getScore(),lv1.getObservers(),bonusHandler));
     }
     lv2 = new RealLevel("Level two",aux,pl,gameConsole);
     lv2.setObservers(lv1.getObservers());

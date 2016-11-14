@@ -1,5 +1,6 @@
 package com.cc3002.breakout.logic.level;
 
+import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.observer.GameObserver;
 
@@ -15,16 +16,20 @@ public class LevelHandler extends GameLevel {
   ILevel nextLevel;
   Score totalScore;
   List<GameObserver> observers;
+  boolean autoSwitch;
+  BonusHandler bonusHandler;
   
   /**
    * Constructor del Objeto que maneja los niveles.
    * @param newLevel Nivel que debe manejar como currentLevel.
    */
-  public LevelHandler(ILevel newLevel) {
+  public LevelHandler(ILevel newLevel, BonusHandler newBonusHandler) {
     currentLevel = newLevel;
     observers = null;
     nextLevel = null;
     totalScore = new Score();
+    autoSwitch = false;
+    bonusHandler = newBonusHandler;
   }
   
   /**
@@ -35,6 +40,7 @@ public class LevelHandler extends GameLevel {
     currentLevel = newCurrentLevel;
     if (currentLevel != null) {
       currentLevel.setObservers(observers);
+      currentLevel.setBonusHandler(bonusHandler);
       Player player = getPlayer();
       totalScore.add(player.getTotalPoints());
       currentLevel.setRequiredPoints();
@@ -116,10 +122,25 @@ public class LevelHandler extends GameLevel {
   public boolean hasNextLevel() {
     return nextLevel != null;
   }
-
+  
+  /**
+  * Metodo que setea el autoSwitch, y chequea si ya se cumplio la condicion.
+  */
   public void autoSwitchToNextLevel() {
+    autoSwitch = true;
+    if (currentLevel.getRequiredPoints() <= currentLevel.getPlayer().getTotalPoints()) {
+      switchToNextLevel();
+    }
+  }
+  
+
+  /**
+   * Metodo que realiza el autoSwitch.
+   */
+  public void switchToNextLevel() {
     setCurrentLevel(nextLevel);
     nextLevel = null;
+    autoSwitch = false;
   }
 
   public boolean hasCurrentLevel() {
@@ -133,6 +154,14 @@ public class LevelHandler extends GameLevel {
 
   public long getTotalPoints() {
     return totalScore.getPoints();
+  }
+
+  public boolean getAutoSwitch() {
+    return autoSwitch;
+  }
+
+  public void setBonusHandler(BonusHandler newBonusHandler) {
+    bonusHandler = newBonusHandler;
   }
 
 }

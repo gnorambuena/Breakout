@@ -17,12 +17,12 @@ public class ScoreObserver extends GameObserver {
   
   @Override
   public void scoreSoftBrickUpdate() {
-    gameConsole.print("Soft brick destroyed and gained 10 points." + System.lineSeparator());
+    gameConsole.print("Soft brick destroyed and gained 10 points.");
   }
   
   @Override
   public void scoreStoneBrickUpdate() {
-    gameConsole.print("Stone brick destroyed and gained 50 points." + System.lineSeparator());
+    gameConsole.print("Stone brick destroyed and gained 50 points.");
   }
 
 

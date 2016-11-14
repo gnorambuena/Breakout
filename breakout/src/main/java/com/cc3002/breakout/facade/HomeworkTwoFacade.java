@@ -47,7 +47,7 @@ public class HomeworkTwoFacade {
   
   public HomeworkTwoFacade() {
     bonusHandler = new BonusHandler();
-    levelHandler = new LevelHandler(null);
+    levelHandler = new LevelHandler(null,bonusHandler);
     pl = new Player();
     curScore = new Score();
     probability = 0.2;
@@ -68,7 +68,7 @@ public class HomeworkTwoFacade {
   public HomeworkTwoFacade(String name, int num, double prob) {
     bonusHandler = new BonusHandler();
     pl = new Player();
-    levelHandler = new LevelHandler(newLevelWithSoftAndStoneBricks(name, num, prob));
+    levelHandler = new LevelHandler(newLevelWithSoftAndStoneBricks(name, num, prob),bonusHandler);
     number = num;
     curScore = new Score();
     probability = prob;

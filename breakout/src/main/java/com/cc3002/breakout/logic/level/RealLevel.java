@@ -1,5 +1,6 @@
 package com.cc3002.breakout.logic.level;
 
+import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.brick.SoftBrick;
 import com.cc3002.breakout.logic.brick.StoneBrick;
@@ -24,6 +25,7 @@ public class RealLevel extends GameLevel {
   Player player;
   List<GameObserver> observers;
   GameConsole gameConsole;
+  BonusHandler bonusHandler;
   
   /**
    * Constructor del RealLevel.
@@ -64,6 +66,17 @@ public class RealLevel extends GameLevel {
     player.getScore().setRequiredPoints(requiredPoints.getPoints());
   }
   
+  /**
+   * Setea el bonusHandler para el level.
+   * @param newBonusHandler el bonusHandler que se usara.
+   */
+  public void setBonusHandler(BonusHandler newBonusHandler) {
+    bonusHandler = newBonusHandler;
+    for (IBrick brick : level) {
+      brick.setBonusHandler(bonusHandler);
+    }
+  }
+  
   public void setObservers(final List<GameObserver> newObservers) {
     observers = newObservers;
     player.setObservers(newObservers);
@@ -96,10 +109,10 @@ public class RealLevel extends GameLevel {
       
       if (chance < probability) {
         requiredPoints.add(10);
-        newlevel.add(new SoftBrick(player.getScore(),observers));
+        newlevel.add(new SoftBrick(player.getScore(),observers,bonusHandler));
       } else {
         requiredPoints.add(50);
-        newlevel.add(new StoneBrick(player.getScore(),observers));
+        newlevel.add(new StoneBrick(player.getScore(),observers,bonusHandler));
       }
     }
     return newlevel;

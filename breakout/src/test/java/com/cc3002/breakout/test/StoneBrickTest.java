@@ -6,6 +6,8 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import com.cc3002.breakout.logic.bonus.BonusHandler;
+import com.cc3002.breakout.logic.brick.SoftBrick;
 import com.cc3002.breakout.logic.brick.StoneBrick;
 import com.cc3002.breakout.logic.level.Printer;
 import com.cc3002.breakout.logic.level.Score;
@@ -20,8 +22,9 @@ public class StoneBrickTest {
 
   @Before
   public void setUp() throws Exception {
-    stoneBrick = new StoneBrick(new Score(),null);
-    auxBrick = new StoneBrick(new Score(),null);
+    BonusHandler bonusHandler = new BonusHandler();
+    stoneBrick = new StoneBrick(new Score(),null,bonusHandler);
+    auxBrick = new StoneBrick(new Score(),null,bonusHandler);
   }
 
   @Test
