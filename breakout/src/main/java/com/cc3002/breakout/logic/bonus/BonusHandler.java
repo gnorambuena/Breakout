@@ -1,12 +1,12 @@
 package com.cc3002.breakout.logic.bonus;
 
-import com.cc3002.breakout.logic.level.Player;
-import com.cc3002.breakout.logic.observer.GameObserver;
+import com.cc3002.breakout.facade.Flyweight;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
 
 /**
  * Esta clase se encarga de manejar los bonuses del level.
@@ -16,14 +16,19 @@ import java.util.Random;
 public class BonusHandler {
   
   List<IBonus> bonuses;
-  List<GameObserver> observers;
   int currentBonus;
-  
-  public BonusHandler() {
+  static Flyweight flyweight;
+
+  /**
+   * Objeto que se encarga de manejar los bonuses.
+   * @param newFlyweight Flyweight del juego.
+   */
+  public BonusHandler(Flyweight newFlyweight) {
+    flyweight = newFlyweight;
     bonuses = new ArrayList<IBonus>();
     currentBonus = 0;
   }
-  
+
   /**
    * Setea los bonuses para este Handler.
    * @param newBonuses Los bonuses a setear.
@@ -31,17 +36,6 @@ public class BonusHandler {
   public void setBonuses(final List<IBonus> newBonuses) {
     bonuses = newBonuses;
     currentBonus = 0;
-  }
-  
-  /**
-   * Setea los observers para cada nivel.
-   * @param newObservers Los Observers a setear.
-   */
-  public void setObservers(List<GameObserver> newObservers) {
-    observers = newObservers;
-    for (GameObserver observer : observers) {
-      observer.setBonusHandler(this);
-    }
   }
   
   /**
@@ -60,29 +54,27 @@ public class BonusHandler {
    * de ocurrencia de bonos.
    * @param number Numero de bonos a generar.
    * @param probability Probabilidad de ocurrencia de un bono.
-   * @param player Referencia al jugador.
-   * @param observers GameObservers del juego.
    * @return Retorna una Lista con los bonos generados.
    */
   public static List<IBonus> genBonuses(int number, double probability,
-      Player player, List<GameObserver> observers) {
+      Flyweight newFlyweight) {
     List<IBonus> ans = new ArrayList<IBonus>();
     Random rand = new Random();
     int numberOfBonuses = (int)(number * probability);
     for (int i = 0 ; i < numberOfBonuses ; i++) {
       float chance = rand.nextFloat();
       if (chance < 0.5) {
-        ans.add(new AddLifeModifier(player,observers));
+        ans.add(new AddLifeModifier(flyweight));
       } else {
-        ans.add(new AddScoreModifier(player,observers));
+        ans.add(new AddScoreModifier(flyweight));
       }
     }
     for (int i = numberOfBonuses ; i < number ; i++) {
       float chance = rand.nextFloat();
       if (chance < 0.5) {
-        ans.add(new LossLifeModifier(player,observers));
+        ans.add(new LossLifeModifier(flyweight));
       } else {
-        ans.add(new LossScoreModifier(player,observers));
+        ans.add(new LossScoreModifier(flyweight));
       }
     }
     Collections.shuffle(ans);

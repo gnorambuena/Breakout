@@ -1,6 +1,7 @@
 package com.cc3002.breakout.logic.bonus;
 
 
+import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.level.Player;
 import com.cc3002.breakout.logic.observer.GameObserver;
 
@@ -15,9 +16,9 @@ public class LossLifeModifier implements IBonus {
   Player player;
   List<GameObserver> observers;
   
-  public LossLifeModifier(Player newPlayer, List<GameObserver> newObservers) {
-    player = newPlayer;
-    observers = newObservers;
+  public LossLifeModifier(Flyweight flyweight) {
+    player = flyweight.getPlayer();
+    observers = flyweight.getObservers();
   }
   
   /**

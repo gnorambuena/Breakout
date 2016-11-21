@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 
+import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.brick.SoftBrick;
@@ -26,19 +27,15 @@ public class RealLevelTest {
   ILevel lv2;
   List<IBrick> aux;
   long points;
-  Player pl;
-  GameConsole gameConsole;
-  
+  Flyweight flyweight;
   /**
    * Setting up para testear un RealLevel.
    * @throws Exception Tira una Exception cuando falla al crear el RealLevel.
    */
   @Before
   public void setUp() throws Exception {
-    pl = new Player();
-    gameConsole = new GameConsole();
-    gameConsole.setStream(System.out);
-    lv1 = new RealLevel("Level one",16,0.5f,pl,gameConsole);
+    flyweight = new Flyweight();
+    lv1 = new RealLevel("Level one",16,0.5f,flyweight);
     aux = new ArrayList<IBrick>();
 
     points = 0;
@@ -50,26 +47,24 @@ public class RealLevelTest {
       }
     }
     for (int i = 0 ; i < 16 ; i++) {
-      BonusHandler bonusHandler = new BonusHandler();
-      aux.add(new SoftBrick(pl.getScore(),lv1.getObservers(),bonusHandler));
-      aux.add(new StoneBrick(pl.getScore(),lv1.getObservers(),bonusHandler));
+      aux.add(new SoftBrick(flyweight));
+      aux.add(new StoneBrick(flyweight));
     }
-    lv2 = new RealLevel("Level two",aux,pl,gameConsole);
-    lv2.setObservers(lv1.getObservers());
+    lv2 = new RealLevel("Level two",aux,flyweight);
   }
 
   @Test
   public void testILevelStringListOfIBrick() {
     assertSame(lv2,lv2);
     assertNotSame(lv1,lv2);
-    assertNotSame(lv2,new RealLevel("Testing Level",24,0.3f,pl,gameConsole));
+    assertNotSame(lv2,new RealLevel("Testing Level",24,0.3,flyweight));
   }
 
   @Test
   public void testILevelStringIntDouble() {
     assertSame(lv1,lv1);
     assertNotSame(lv1,lv2);
-    assertNotSame(lv1,new RealLevel("Testing Level",24,0.3f,pl,gameConsole));
+    assertNotSame(lv1,new RealLevel("Testing Level",24,0.3f,flyweight));
   }
 
   @Test

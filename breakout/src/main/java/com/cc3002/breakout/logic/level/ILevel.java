@@ -1,8 +1,7 @@
 package com.cc3002.breakout.logic.level;
 
-import com.cc3002.breakout.logic.bonus.BonusHandler;
+import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.brick.IBrick;
-import com.cc3002.breakout.logic.observer.GameObserver;
 
 import java.util.List;
 
@@ -22,10 +21,6 @@ public interface ILevel {
 
   int getRequiredPoints();
   
-  public void setObservers(final List<GameObserver> newObservers);
-  
-  public List<GameObserver> getObservers();
-  
   public void setRequiredPoints();
   
   public void setRequiredPoints(int newPoints);
@@ -41,8 +36,6 @@ public interface ILevel {
   void autoSwitchToNextLevel();
 
   boolean hasCurrentLevel();
-  
-  public Player getPlayer();
 
-  void setBonusHandler(BonusHandler bonusHandler);
+  void setFlyweight(Flyweight flyweight);
 }

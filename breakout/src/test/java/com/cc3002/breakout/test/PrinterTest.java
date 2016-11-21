@@ -3,6 +3,7 @@ package com.cc3002.breakout.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.brick.SoftBrick;
 import com.cc3002.breakout.logic.brick.StoneBrick;
@@ -24,9 +25,9 @@ public class PrinterTest {
    */
   @Before
   public void setUp() throws Exception {
-    BonusHandler bonusHandler = new BonusHandler();
-    softbrick = new SoftBrick(new Score(),null,bonusHandler);
-    stonebrick = new StoneBrick(new Score(),null,bonusHandler);
+    BonusHandler bonusHandler = new BonusHandler(new Flyweight());
+    softbrick = new SoftBrick(new Flyweight());
+    stonebrick = new StoneBrick(new Flyweight());
     printer = new Printer();
   }
 

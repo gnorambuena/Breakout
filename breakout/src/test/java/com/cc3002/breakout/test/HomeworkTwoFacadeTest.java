@@ -25,8 +25,10 @@ public class HomeworkTwoFacadeTest {
   @Before
   public void setUp() throws Exception {
     game1 = new HomeworkTwoFacade();
-    game2 = new HomeworkTwoFacade("Lvl two",32,0.5);
-    aux = new HomeworkTwoFacade("Lvl three",32,0.5);
+    game2 = new HomeworkTwoFacade();
+    game2.setCurrentLevel(game2.newLevelWithSoftAndStoneBricks("Lvl two",32,0.5));
+    aux = new HomeworkTwoFacade();
+    aux.setCurrentLevel(aux.newLevelWithSoftAndStoneBricks("Lvl three",32,0.5));
   }
   
   @Test

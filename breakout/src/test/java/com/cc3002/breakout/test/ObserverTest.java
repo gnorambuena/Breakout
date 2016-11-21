@@ -2,6 +2,7 @@ package com.cc3002.breakout.test;
 
 import static org.junit.Assert.assertTrue;
 
+import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.facade.HomeworkTwoFacade;
 import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.bonus.IBonus;
@@ -27,6 +28,7 @@ public class ObserverTest {
   List<GameObserver> observers;
   GameConsole gameConsole;
   BonusHandler bonusHandler;
+  Flyweight flyweight;
   
   /**
    * Setting up para los test de los distintos Observer.
@@ -34,24 +36,17 @@ public class ObserverTest {
    */
   @Before
   public void setUp() throws Exception {
-    pl = new Player();
-    observers = new ArrayList<GameObserver>();
-    bonusHandler = new BonusHandler();
-    gameConsole = new GameConsole();
+    flyweight = new Flyweight();
+    pl = flyweight.getPlayer();
+    observers = flyweight.getObservers();
+    bonusHandler = flyweight.getBonusHandler();
+    gameConsole = flyweight.getGameConsole();
     gameConsole.setStream(System.out);
-    GameObserver firstObserver = new ScoreObserver(gameConsole);
-    GameObserver secondObserver = new BonusObserver(gameConsole);
-    GameObserver thirdObserver = new LevelObserver(gameConsole);
-    observers.add(firstObserver);
-    observers.add(secondObserver);
-    observers.add(thirdObserver);
   }
 
   @Test
   public void testScoreObserver() {
-    ILevel lvl = new RealLevel("Level one",32,0.4,pl,gameConsole);
-    lvl.setBonusHandler(new BonusHandler());
-    lvl.setObservers(observers);
+    ILevel lvl = flyweight.newLevelWithSoftAndStoneBricks("Level one",32,0.4);
     List<IBrick> bricks = lvl.getBricks();
     boolean flag = true;
     try {
@@ -68,9 +63,8 @@ public class ObserverTest {
 
   @Test
   public void testLvlObserver() {
-    ILevel lvl1 = new RealLevel("Level one",32,0.4,pl,gameConsole);
-    ILevel lvl2 = new RealLevel("Level two",32,0.5,pl,gameConsole);
-    lvl1.setObservers(observers);
+    ILevel lvl1 = flyweight.newLevelWithSoftAndStoneBricks("Level one",32,0.4);
+    ILevel lvl2 = flyweight.newLevelWithSoftAndStoneBricks("Level two",32,0.5);
     HomeworkTwoFacade aux = new HomeworkTwoFacade();
     boolean flag = true;
     try {
@@ -89,9 +83,9 @@ public class ObserverTest {
   @Test
   public void testBonusObserver() {
     List<GameObserver> auxObservers = new ArrayList<GameObserver>();
-    auxObservers.add(new BonusObserver(gameConsole));
-    List<IBonus> bonuses = BonusHandler.genBonuses(10, 0.4, pl,auxObservers);
-    ILevel lvl1 = new RealLevel("Level one",32,0.4,pl,gameConsole);
+    auxObservers.add(new BonusObserver(flyweight));
+    List<IBonus> bonuses = BonusHandler.genBonuses(10, 0.4,flyweight);
+    ILevel lvl1 = flyweight.newLevelWithSoftAndStoneBricks("Level one",32,0.4);
     bonusHandler.setBonuses(bonuses);
     boolean flag = true;
     try {

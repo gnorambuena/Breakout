@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.brick.SoftBrick;
 import com.cc3002.breakout.logic.brick.StoneBrick;
@@ -22,9 +23,8 @@ public class StoneBrickTest {
 
   @Before
   public void setUp() throws Exception {
-    BonusHandler bonusHandler = new BonusHandler();
-    stoneBrick = new StoneBrick(new Score(),null,bonusHandler);
-    auxBrick = new StoneBrick(new Score(),null,bonusHandler);
+    stoneBrick = new StoneBrick(new Flyweight());
+    auxBrick = new StoneBrick(new Flyweight());
   }
 
   @Test
@@ -44,7 +44,7 @@ public class StoneBrickTest {
     assertTrue(stoneBrick.isStoneBrick());
   }
   
-  @Test(expected = NullPointerException.class)
+  @Test
   public void testRemainingHits() {
     stoneBrick.hit();
     assertSame(stoneBrick.remainingHits(),2);
@@ -54,7 +54,7 @@ public class StoneBrickTest {
     assertSame(stoneBrick.remainingHits(),0);
   }
   
-  @Test(expected = NullPointerException.class)
+  @Test
   public void testToString() {
     assertEquals(auxBrick.print(new Printer()),"#");
     auxBrick.hit();

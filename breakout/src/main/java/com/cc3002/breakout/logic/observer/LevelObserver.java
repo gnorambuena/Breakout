@@ -1,8 +1,6 @@
 package com.cc3002.breakout.logic.observer;
 
-import com.cc3002.breakout.logic.bonus.BonusHandler;
-import com.cc3002.breakout.logic.level.GameConsole;
-import com.cc3002.breakout.logic.level.LevelHandler;
+import com.cc3002.breakout.facade.Flyweight;
 
 /**
  * Observer para los ILevel.
@@ -11,20 +9,15 @@ import com.cc3002.breakout.logic.level.LevelHandler;
  */
 public class LevelObserver extends GameObserver {
 
-  LevelHandler levelHandler;
-  
-  public LevelObserver(GameConsole gameConsole) {
-    super(gameConsole);
+  public LevelObserver(Flyweight newFlyweight) {
+    super(newFlyweight);
   }
 
   @Override
   public void levelUpdate(String name) {
-    gameConsole.print("Playing Level " + name + ".");
+    flyweight.getGameConsole().print("Playing Level " + name + ".");
   }
   
-  public void setLevelHandler(final LevelHandler newLevelHandler) {
-    levelHandler = newLevelHandler;
-  }
 
   /**
    * Este observer no deberia responder nada a este mensaje.
@@ -77,17 +70,9 @@ public class LevelObserver extends GameObserver {
 
   @Override
   public void levelAutoSwitch() {
-    if (levelHandler.getAutoSwitch()) {
-      levelHandler.autoSwitchToNextLevel();
+    if (flyweight.getAutoSwitch()) {
+      flyweight.getLevelHandler().autoSwitchToNextLevel();
     }
-  }
-
-  /**
-   * Este observer no deberia responder nada a este mensaje.
-   */
-  @Override
-  public void setBonusHandler(BonusHandler newBonusHandler) {
-    //Filler comment.
   }
 
   /**

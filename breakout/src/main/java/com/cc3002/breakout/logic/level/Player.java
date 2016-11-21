@@ -1,8 +1,6 @@
 package com.cc3002.breakout.logic.level;
 
-import com.cc3002.breakout.logic.observer.GameObserver;
-
-import java.util.List;
+import com.cc3002.breakout.facade.Flyweight;
 
 /**
  * Abstraccion de un jugador,
@@ -15,12 +13,18 @@ import java.util.List;
 public class Player {
   Score sc;
   Life life;
-  
-  public Player() {
-    sc = new Score();
+  Flyweight flyweight;
+ 
+  /**
+   * Abstraccion de un jugador.
+   * @param newFlyweight Flyweight del juego.
+   */
+  public Player(Flyweight newFlyweight) {
+    flyweight = newFlyweight;
+    sc = new Score(newFlyweight);
     life = new Life();
   }
-  
+
   public int getNumberOfHearts() {
     return life.getHearts();
   }
@@ -45,8 +49,4 @@ public class Player {
     life.addHearts();
   }
 
-  public void setObservers(List<GameObserver> newObservers) {
-    sc.setObservers(newObservers);
-  }
-  
 }

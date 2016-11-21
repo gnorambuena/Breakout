@@ -1,11 +1,9 @@
 package com.cc3002.breakout.logic.brick;
 
-import com.cc3002.breakout.logic.bonus.BonusHandler;
+import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.level.Printer;
-import com.cc3002.breakout.logic.level.Score;
 import com.cc3002.breakout.logic.observer.GameObserver;
 
-import java.util.List;
 
 /**
  * Representa un SoftBrick del juego,
@@ -16,24 +14,18 @@ import java.util.List;
 
 public class  SoftBrick implements IBrick {
   int hitpoints;
-  Score playerScore;
-  List<GameObserver> observers;
-  BonusHandler bonusHandler;
+  Flyweight flyweight;
   
   /**
    * Constructor del StoneBrick, toma una referencia al Score del jugador,
    * y la lista de Observers del Juego.
-   * @param plScore Score del jugador.
-   * @param newObservers Observers del juego.
+   * @param newFlyweight objeto Flyweight del juego.
    */
-  public SoftBrick(Score plScore, List<GameObserver> newObservers, BonusHandler newBonusHandler) {
+  public SoftBrick(Flyweight newFlyweight) {
     hitpoints = 1;
-    playerScore = plScore;
-    observers = newObservers;
-    bonusHandler = newBonusHandler;
+    flyweight = newFlyweight;
   }
-
- 
+  
   public boolean isSoftBrick() {
     return true;
   }
@@ -58,12 +50,11 @@ public class  SoftBrick implements IBrick {
   public void hit() {
     if (hitpoints > 0) {
       hitpoints--;
-      for (GameObserver obs : observers) {
+      for (GameObserver obs : flyweight.getObservers()) {
         obs.scoreSoftBrickUpdate();
       }
-
-      bonusHandler.reached();
-      playerScore.add(10);
+      flyweight.getBonusHandler().reached();
+      flyweight.getCurScore().add(10);
     }
   }
 
@@ -71,9 +62,4 @@ public class  SoftBrick implements IBrick {
     return hitpoints == 0;
   }
 
-
-  public void setBonusHandler(BonusHandler newBonusHandler) {
-    bonusHandler = newBonusHandler;
-  }
-  
 }

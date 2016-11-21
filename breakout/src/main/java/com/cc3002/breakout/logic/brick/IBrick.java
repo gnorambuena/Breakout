@@ -1,6 +1,5 @@
 package com.cc3002.breakout.logic.brick;
 
-import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.level.Printer;
 
 /**
@@ -25,5 +24,4 @@ public interface IBrick {
   
   public boolean isDestroyed();
   
-  public void setBonusHandler(BonusHandler newBonusHandler);
 }

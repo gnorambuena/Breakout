@@ -1,7 +1,6 @@
 package com.cc3002.breakout.logic.level;
 
 import com.cc3002.breakout.logic.brick.IBrick;
-import com.cc3002.breakout.logic.observer.GameObserver;
 
 import java.util.List;
 
@@ -20,10 +19,6 @@ public abstract class GameLevel implements ILevel {
 
   public abstract int getRequiredPoints();
 
-  public abstract void setObservers(List<GameObserver> newObservers);
-
-  public abstract List<GameObserver> getObservers();
-
   public abstract void setRequiredPoints();
 
   public abstract void setNextLevel(ILevel newLevel);
@@ -37,6 +32,4 @@ public abstract class GameLevel implements ILevel {
   public abstract void autoSwitchToNextLevel();
 
   public abstract boolean hasCurrentLevel();
-
-  public abstract Player getPlayer();
 }

@@ -1,5 +1,6 @@
 package com.cc3002.breakout.test;
 
+import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.facade.HomeworkTwoFacade;
 import com.cc3002.breakout.logic.bonus.AddLifeModifier;
 import com.cc3002.breakout.logic.bonus.AddScoreModifier;
@@ -23,6 +24,7 @@ import java.util.List;
 public class GameExampleTest {
 
   HomeworkTwoFacade game;
+  Flyweight flyweight;
   
   /**
    * Setting up de el juego, basicamente se quiere jugar
@@ -32,30 +34,30 @@ public class GameExampleTest {
   @Before
   public void setUp() throws Exception {
     game = new HomeworkTwoFacade();
+    flyweight = game.getFlyweight();
     game.setGameConsoleOutput(System.out);
     List<IBrick> aux = new ArrayList<IBrick>();
-    aux.add(new SoftBrick(game.getPlayer().getScore(),game.getGameObservers(),game.getBonusHandler()));
-    aux.add(new StoneBrick(game.getPlayer().getScore(),game.getGameObservers(),game.getBonusHandler()));
-    aux.add(new SoftBrick(game.getPlayer().getScore(),game.getGameObservers(),game.getBonusHandler()));
-    aux.add(new StoneBrick(game.getPlayer().getScore(),game.getGameObservers(),game.getBonusHandler()));
-    ILevel auxlvl = new RealLevel("Basic", aux, game.getPlayer(), game.getGameConsole());
-    auxlvl.setObservers(game.getGameObservers());
+    aux.add(new SoftBrick(flyweight));
+    aux.add(new StoneBrick(flyweight));
+    aux.add(new SoftBrick(flyweight));
+    aux.add(new StoneBrick(flyweight));
+    ILevel auxlvl = new RealLevel("Basic", aux, flyweight);
     game.setCurrentLevel(auxlvl);
     aux = new ArrayList<IBrick>();
-    aux.add(new StoneBrick(game.getPlayer().getScore(),game.getGameObservers(),game.getBonusHandler()));
-    aux.add(new StoneBrick(game.getPlayer().getScore(),game.getGameObservers(),game.getBonusHandler()));
-    ILevel auxlvl2 = new RealLevel("Medium", aux, game.getPlayer(),game.getGameConsole());
+    aux.add(new StoneBrick(flyweight));
+    aux.add(new StoneBrick(flyweight));
+    ILevel auxlvl2 = new RealLevel("Medium", aux,flyweight);
     game.setNextLevel(auxlvl2);
     List<IBonus> bonuses = new ArrayList<IBonus>();
-    bonuses.add(new LossScoreModifier(game.getPlayer(),game.getGameObservers()));
-    bonuses.add(new LossLifeModifier(game.getPlayer(),game.getGameObservers()));
+    bonuses.add(new LossScoreModifier(flyweight));
+    bonuses.add(new LossLifeModifier(flyweight));
     game.registerBonuses(bonuses);
   }
 
   @Test
   public void test() {
     List<IBrick> bricks = game.getBricks();
-    BonusHandler bonusHandler = game.getBonusHandler();
+    BonusHandler bonusHandler = flyweight.getBonusHandler();
     game.autoSwitchToNextLevel();
     bricks.get(0).hit();
     bonusHandler.reached();
@@ -65,10 +67,11 @@ public class GameExampleTest {
     bricks.get(2).hit();
     bricks.get(3).hit();
     bricks.get(3).hit();
+    game.autoSwitchToNextLevel();
     bricks.get(3).hit();
     List<IBonus> bonuses = new ArrayList<IBonus>();
-    bonuses.add(new AddLifeModifier(game.getPlayer(),game.getGameObservers()));
-    bonuses.add(new AddScoreModifier(game.getPlayer(),game.getGameObservers()));
+    bonuses.add(new AddLifeModifier(flyweight));
+    bonuses.add(new AddScoreModifier(flyweight));
     game.registerBonuses(bonuses);
     bricks = game.getBricks();
     bricks.get(0).hit();

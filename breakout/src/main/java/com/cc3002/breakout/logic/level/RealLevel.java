@@ -1,11 +1,9 @@
 package com.cc3002.breakout.logic.level;
 
-import com.cc3002.breakout.logic.bonus.BonusHandler;
+import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.brick.SoftBrick;
 import com.cc3002.breakout.logic.brick.StoneBrick;
-import com.cc3002.breakout.logic.observer.GameObserver;
-import com.cc3002.breakout.logic.observer.ScoreObserver;
 
 
 import java.util.ArrayList;
@@ -21,11 +19,8 @@ import java.util.Random;
 public class RealLevel extends GameLevel {
   String name;
   List<IBrick> level;
-  Score requiredPoints;
-  Player player;
-  List<GameObserver> observers;
-  GameConsole gameConsole;
-  BonusHandler bonusHandler;
+  int requiredPoints;
+  Flyweight flyweight;
   
   /**
    * Constructor del RealLevel.
@@ -34,64 +29,27 @@ public class RealLevel extends GameLevel {
    * @param bricks Una Lista de IBrick.
    */
   
-  public RealLevel(String levelName, List<IBrick> bricks,
-      Player newPlayer, GameConsole newGameConsole) {
+  public RealLevel(String levelName, List<IBrick> bricks, Flyweight newFlyweight) {
     name = levelName;
     level = bricks;
-    requiredPoints = genScore();
-    player = newPlayer;
-    player.getScore().setRequiredPoints(requiredPoints.getPoints());
-    observers = null;
-    gameConsole = newGameConsole;
+    requiredPoints = genRequiredPoints();
+    flyweight = newFlyweight;
   }
   
   /**
-   * Constructor del RealLevel
-   * Genera al azar con probability de generar
-   * un SoftBrick.
-   * @param levelName El nombre del nivel.
-   * @param num El numero de bricks.
-   * @param probability Probabilidad de generar un SoftBrick.
+   * Constructor que se encarga de generar un level random.
+   * @param levelName Nombre del nivel.
+   * @param probability Probabilidad de ocurrencia de un SoftBrick.
+   * @param number Numero de Bricks del nivel.
    */
-  
-  public RealLevel(String levelName, int num ,double probability,
-      Player newPlayer, GameConsole newGameConsole) {
+  public RealLevel(String levelName, int number, double probability,Flyweight newFlyweight) {
     name = levelName;
-    observers = new ArrayList<GameObserver>();
-    gameConsole = newGameConsole;
-    observers.add(new ScoreObserver(newGameConsole));
-    player = newPlayer;
-    level = genNewLevel(probability,num);
-    requiredPoints = genScore();
-    player.getScore().setRequiredPoints(requiredPoints.getPoints());
+    flyweight = newFlyweight;
+    level = genNewLevel(probability,number);
+    requiredPoints = genRequiredPoints();
   }
-  
-  /**
-   * Setea el bonusHandler para el level.
-   * @param newBonusHandler el bonusHandler que se usara.
-   */
-  public void setBonusHandler(BonusHandler newBonusHandler) {
-    bonusHandler = newBonusHandler;
-    for (IBrick brick : level) {
-      brick.setBonusHandler(bonusHandler);
-    }
-  }
-  
-  public void setObservers(final List<GameObserver> newObservers) {
-    observers = newObservers;
-    player.setObservers(newObservers);
-  }
-  
-  public void setRequiredPoints() {
-    player.getScore().setCurrentPoints(0);
-    player.getScore().setRequiredPoints(getRequiredPoints());
-  }
-  
-  public void setRequiredPoints(int newPoints) {
-    player.getScore().setRequiredPoints(newPoints);
-    requiredPoints.setCurrentPoints(newPoints);
-  }
-  
+
+
   /**
    * Metodo privado que se encarga de generar un level random.
    * @param probability Probabilidad de ocurrencia de un SoftBrick.
@@ -99,7 +57,7 @@ public class RealLevel extends GameLevel {
    * @return La lista de IBricks con los bricks generados.
    */
   private List<IBrick> genNewLevel(double probability, int numberOfBricks) {
-    requiredPoints = new Score();
+    requiredPoints = 0;
     List<IBrick> newlevel = new ArrayList<IBrick>();
     Random rand = new Random();
     
@@ -108,17 +66,17 @@ public class RealLevel extends GameLevel {
       float chance = rand.nextFloat();
       
       if (chance < probability) {
-        requiredPoints.add(10);
-        newlevel.add(new SoftBrick(player.getScore(),observers,bonusHandler));
+        requiredPoints += 10;
+        newlevel.add(new SoftBrick(flyweight));
       } else {
-        requiredPoints.add(50);
-        newlevel.add(new StoneBrick(player.getScore(),observers,bonusHandler));
+        requiredPoints += 50;
+        newlevel.add(new StoneBrick(flyweight));
       }
     }
     return newlevel;
   }
   
-  private Score genScore() {
+  private int genRequiredPoints() {
     int points = 0;
     for (int i = 0 ; i < level.size() ; i++) {
       if (level.get(i).isSoftBrick()) {
@@ -127,7 +85,7 @@ public class RealLevel extends GameLevel {
         points += 50;
       }
     }
-    return new Score(points);
+    return points;
   }
 
   public String getLevelName() {
@@ -143,12 +101,9 @@ public class RealLevel extends GameLevel {
   }
   
   public int getRequiredPoints() {
-    return 7 * (int)requiredPoints.getPoints() / 10;
+    return 7 * (int)requiredPoints / 10;
   }
   
-  public List<GameObserver> getObservers() {
-    return observers;
-  }
   
   /**
    * RealLevel no ejecuta nada con este mensaje.
@@ -176,11 +131,6 @@ public class RealLevel extends GameLevel {
   public void autoSwitchToNextLevel() {
     //Filler comment. 
   }
-  
-  @Override
-  public Player getPlayer() {
-    return player;
-  }
 
   @Override
   public ILevel getCurrentLevel() {
@@ -198,6 +148,21 @@ public class RealLevel extends GameLevel {
   public boolean hasCurrentLevel() {
     //Filler comment.
     return false;
+  }
+
+  public void setFlyweight(Flyweight newFlyweight) {
+    flyweight = newFlyweight;
+  }
+
+
+  public void setRequiredPoints(int newPoints) {
+    requiredPoints = newPoints;
+  }
+
+
+  @Override
+  public void setRequiredPoints() {
+    genRequiredPoints();
   }
   
 }

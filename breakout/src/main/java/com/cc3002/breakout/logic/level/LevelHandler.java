@@ -1,10 +1,12 @@
 package com.cc3002.breakout.logic.level;
 
-import com.cc3002.breakout.logic.bonus.BonusHandler;
+
+import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.observer.GameObserver;
 
 import java.util.List;
+
 
 /**
  * Esta clase se encarga de manejar el cambio de niveles del juego.
@@ -14,24 +16,18 @@ import java.util.List;
 public class LevelHandler extends GameLevel {
   ILevel currentLevel;
   ILevel nextLevel;
-  Score totalScore;
-  List<GameObserver> observers;
-  boolean autoSwitch;
-  BonusHandler bonusHandler;
+  Flyweight flyweight;
   
   /**
    * Constructor del Objeto que maneja los niveles.
-   * @param newLevel Nivel que debe manejar como currentLevel.
+   * @param newFlyweight Flyweight que contiene las referencias.
    */
-  public LevelHandler(ILevel newLevel, BonusHandler newBonusHandler) {
-    currentLevel = newLevel;
-    observers = null;
+  public LevelHandler(Flyweight newFlyweight) {
+    flyweight = newFlyweight;
+    currentLevel = null;
     nextLevel = null;
-    totalScore = new Score();
-    autoSwitch = false;
-    bonusHandler = newBonusHandler;
   }
-  
+
   /**
    *  Setea el nivel actual.
    */
@@ -39,14 +35,10 @@ public class LevelHandler extends GameLevel {
   public void setCurrentLevel(final ILevel newCurrentLevel) {
     currentLevel = newCurrentLevel;
     if (currentLevel != null) {
-      currentLevel.setObservers(observers);
-      currentLevel.setBonusHandler(bonusHandler);
-      Player player = getPlayer();
-      totalScore.add(player.getTotalPoints());
+      currentLevel.setFlyweight(flyweight);
       currentLevel.setRequiredPoints();
-      for (GameObserver observer: currentLevel.getObservers()) {
+      for (GameObserver observer: flyweight.getObservers()) {
         observer.levelUpdate(currentLevel.getLevelName());
-        observer.setLevelHandler(this);
       }
     }
   }
@@ -65,21 +57,6 @@ public class LevelHandler extends GameLevel {
 
   public int getRequiredPoints() {
     return currentLevel.getRequiredPoints();
-  }
-
-  /**
-   * Setea los Observers para el nivel actual.
-   * 
-   */
-  public void setObservers(List<GameObserver> newObservers) {
-    observers = newObservers;
-    if (currentLevel != null) {
-      currentLevel.setObservers(newObservers);
-    }
-  }
-
-  public List<GameObserver> getObservers() {
-    return currentLevel.getObservers();
   }
 
   public void setRequiredPoints() {
@@ -127,9 +104,10 @@ public class LevelHandler extends GameLevel {
   * Metodo que setea el autoSwitch, y chequea si ya se cumplio la condicion.
   */
   public void autoSwitchToNextLevel() {
-    autoSwitch = true;
-    if (currentLevel.getRequiredPoints() <= currentLevel.getPlayer().getTotalPoints()) {
+    if (flyweight.getAutoSwitch()
+        && currentLevel.getRequiredPoints() <= flyweight.getCurScore().getPoints()) {
       switchToNextLevel();
+      flyweight.updateScore();
     }
   }
   
@@ -140,28 +118,14 @@ public class LevelHandler extends GameLevel {
   public void switchToNextLevel() {
     setCurrentLevel(nextLevel);
     nextLevel = null;
-    autoSwitch = false;
   }
 
   public boolean hasCurrentLevel() {
     return currentLevel != null;
   }
 
-  @Override
-  public Player getPlayer() {
-    return currentLevel.getPlayer();
-  }
-
-  public long getTotalPoints() {
-    return totalScore.getPoints();
-  }
-
-  public boolean getAutoSwitch() {
-    return autoSwitch;
-  }
-
-  public void setBonusHandler(BonusHandler newBonusHandler) {
-    bonusHandler = newBonusHandler;
+  public void setFlyweight(Flyweight flyweight) {
+    //filler comment
   }
 
 }

@@ -3,9 +3,9 @@ package com.cc3002.breakout.test;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 
+import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.level.Player;
 import com.cc3002.breakout.logic.observer.GameObserver;
-import com.cc3002.breakout.logic.observer.NullObserver;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,16 +24,13 @@ public class PlayerTest {
    */
   @Before
   public void setUp() throws Exception {
-    pl1 = new Player();
-    observers = new ArrayList<GameObserver>();
-    observers.add(new NullObserver());
-    pl1.setObservers(observers);
+    pl1 = new Player(new Flyweight());
   }
 
   @Test
   public void testPlayer() {
     assertSame(pl1,pl1);
-    assertNotSame(pl1,new Player());
+    assertNotSame(pl1,new Player(new Flyweight()));
   }
 
   @Test
@@ -57,13 +54,4 @@ public class PlayerTest {
     assertNotSame(pl1.getScore(),100L);
   }
   
-  @Test
-  public void testAddScore() {
-    pl1.addScore(100);
-    assertSame(pl1.getScore().getPoints(),100L);
-    pl1.addScore(-100);
-    assertSame(pl1.getScore().getPoints(),0L);
-    assertNotSame(pl1.getScore().getPoints(),10000L);
-  }
-
 }

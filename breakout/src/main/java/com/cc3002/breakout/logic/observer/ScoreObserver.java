@@ -1,8 +1,6 @@
 package com.cc3002.breakout.logic.observer;
 
-import com.cc3002.breakout.logic.bonus.BonusHandler;
-import com.cc3002.breakout.logic.level.GameConsole;
-import com.cc3002.breakout.logic.level.LevelHandler;
+import com.cc3002.breakout.facade.Flyweight;
 
 /**
  * Observer para el Score.
@@ -11,18 +9,18 @@ import com.cc3002.breakout.logic.level.LevelHandler;
  */
 public class ScoreObserver extends GameObserver {
 
-  public ScoreObserver(GameConsole gameConsole) {
-    super(gameConsole);
+  public ScoreObserver(Flyweight newFlyweight) {
+    super(newFlyweight);
   }
-  
+
   @Override
   public void scoreSoftBrickUpdate() {
-    gameConsole.print("Soft brick destroyed and gained 10 points.");
+    flyweight.getGameConsole().print("Soft brick destroyed and gained 10 points.");
   }
   
   @Override
   public void scoreStoneBrickUpdate() {
-    gameConsole.print("Stone brick destroyed and gained 50 points.");
+    flyweight.getGameConsole().print("Stone brick destroyed and gained 50 points.");
   }
 
 
@@ -75,26 +73,6 @@ public class ScoreObserver extends GameObserver {
   //Filler comment.
   }
   
-
-  /**
-   * Este observer no deberia responder nada a este mensaje.
-   * @o
-   */
-  @Override
-  public void setLevelHandler(LevelHandler newLevelHandler) {
-  //Filler comment.
-  }
-  
-
-  /**
-   * Este observer no deberia responder nada a este mensaje.
-   */
-  @Override
-  public void setBonusHandler(BonusHandler newBonusHandler) {
-  //Filler comment.
-  }
-  
-
   /**
    * Este observer no deberia responder nada a este mensaje.
    */

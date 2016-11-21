@@ -1,8 +1,6 @@
 package com.cc3002.breakout.logic.observer;
 
-import com.cc3002.breakout.logic.bonus.BonusHandler;
-import com.cc3002.breakout.logic.level.GameConsole;
-import com.cc3002.breakout.logic.level.LevelHandler;
+import com.cc3002.breakout.facade.Flyweight;
 
 /**
  * Clase abstracta para todos los Observer del juego.
@@ -11,10 +9,10 @@ import com.cc3002.breakout.logic.level.LevelHandler;
  */
 public abstract class GameObserver {
   
-  GameConsole gameConsole;
+  Flyweight flyweight;
   
-  public GameObserver(GameConsole newGameConsole) {
-    gameConsole = newGameConsole;
+  public GameObserver(Flyweight newFlyweight) {
+    flyweight = newFlyweight;
   }
   
   public abstract void scoreSoftBrickUpdate();
@@ -32,10 +30,6 @@ public abstract class GameObserver {
   public abstract void lifeBonus();
   
   public abstract void levelAutoSwitch();
-  
-  public abstract void setLevelHandler(final LevelHandler newLevelHandler);
- 
-  public abstract void setBonusHandler(final BonusHandler newBonusHandler);
 
   public abstract void bonusAutoSwitch();
 }

@@ -4,13 +4,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.facade.HomeworkTwoFacade;
 import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.bonus.IBonus;
 import com.cc3002.breakout.logic.level.GameConsole;
 import com.cc3002.breakout.logic.level.Player;
 import com.cc3002.breakout.logic.observer.GameObserver;
-import com.cc3002.breakout.logic.observer.NullObserver;
+import com.cc3002.breakout.logic.observer.ScoreObserver;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,8 +38,8 @@ public class BonusTest {
     int numberOfDiscount = 0;
     try {
       List<GameObserver> observer = new ArrayList<GameObserver>();
-      observer.add(new NullObserver());
-      List<IBonus> bonuses = BonusHandler.genBonuses(32, 0.3, new Player(),observer);
+      observer.add(new ScoreObserver(new Flyweight()));
+      List<IBonus> bonuses = BonusHandler.genBonuses(32, 0.3, new Flyweight());
       for (int i = 0 ; i < bonuses.size() ; i++) {
         if (bonuses.get(i).isExtraBonus()) {
           numberOfBonuses++;

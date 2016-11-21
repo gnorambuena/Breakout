@@ -1,7 +1,6 @@
 package com.cc3002.breakout.logic.observer;
 
-import com.cc3002.breakout.logic.bonus.BonusHandler;
-import com.cc3002.breakout.logic.level.GameConsole;
+import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.level.LevelHandler;
 
 /**
@@ -10,27 +9,25 @@ import com.cc3002.breakout.logic.level.LevelHandler;
  *
  */
 public class BonusObserver extends GameObserver {
-
-  BonusHandler bonusHandler;
   
-  public BonusObserver(GameConsole gameConsole) {
-    super(gameConsole);
+  public BonusObserver(Flyweight newFlyweight) {
+    super(newFlyweight);
   }
 
   public void scoreDiscount() {
-    gameConsole.print("Score discount emitted.");
+    flyweight.getGameConsole().print("Score discount emitted.");
   }
   
   public void scoreBonus() {
-    gameConsole.print("Extra score bonus emitted.");
+    flyweight.getGameConsole().print("Extra score bonus emitted.");
   }
   
   public void lifeDiscount() {
-    gameConsole.print("Heart discount emitted.");
+    flyweight.getGameConsole().print("Heart discount emitted.");
   }
   
   public void lifeBonus() {
-    gameConsole.print("Extra heart bonus emitted.");
+    flyweight.getGameConsole().print("Extra heart bonus emitted.");
   }
 
   /**
@@ -74,13 +71,9 @@ public class BonusObserver extends GameObserver {
      //Filler comment.
   }
 
-  @Override
-  public void setBonusHandler(BonusHandler newBonusHandler) {
-    bonusHandler = newBonusHandler; 
-  }
 
   @Override
   public void bonusAutoSwitch() {
-    bonusHandler.autoSwitch();
+    flyweight.getBonusHandler().autoSwitch();
   }
 }

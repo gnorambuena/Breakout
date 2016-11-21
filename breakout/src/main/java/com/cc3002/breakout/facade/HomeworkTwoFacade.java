@@ -1,26 +1,16 @@
 package com.cc3002.breakout.facade;
 
-import com.cc3002.breakout.logic.bonus.AddLifeModifier;
-import com.cc3002.breakout.logic.bonus.AddScoreModifier;
-import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.bonus.IBonus;
-import com.cc3002.breakout.logic.bonus.LossLifeModifier;
-import com.cc3002.breakout.logic.bonus.LossScoreModifier;
 import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.level.GameConsole;
 import com.cc3002.breakout.logic.level.ILevel;
 import com.cc3002.breakout.logic.level.LevelHandler;
 import com.cc3002.breakout.logic.level.Player;
-import com.cc3002.breakout.logic.level.RealLevel;
-import com.cc3002.breakout.logic.level.Score;
-import com.cc3002.breakout.logic.observer.BonusObserver;
 import com.cc3002.breakout.logic.observer.GameObserver;
-import com.cc3002.breakout.logic.observer.LevelObserver;
-import com.cc3002.breakout.logic.observer.ScoreObserver;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Facade de la tarea 2.
@@ -29,14 +19,7 @@ import java.util.List;
  */
 
 public class HomeworkTwoFacade {
-  LevelHandler levelHandler;
-  Score curScore;
-  Player pl;
-  double probability;
-  int number;
-  List<GameObserver> observers;
-  GameConsole gameConsole;
-  BonusHandler bonusHandler;
+  Flyweight flyweight;
   
   /**
    * Constructor vacío del Facade,
@@ -46,98 +29,60 @@ public class HomeworkTwoFacade {
    */
   
   public HomeworkTwoFacade() {
-    bonusHandler = new BonusHandler();
-    levelHandler = new LevelHandler(null,bonusHandler);
-    pl = new Player();
-    curScore = new Score();
-    probability = 0.2;
-    number = 32;
-    gameConsole = new GameConsole();
-    genGameObservers();
-    pl.getScore().setObservers(observers);
-    bonusHandler.setObservers(observers);
+    flyweight = new Flyweight();
   }
   
-  /**
-   * Constructor de la Facade.
-   * @param name Nombre del nivel.
-   * @param num Numero de bricks en el nivel.
-   * @param prob Probabilidades de aparición de un SoftBrick en el nivel.
-   */
-  
-  public HomeworkTwoFacade(String name, int num, double prob) {
-    bonusHandler = new BonusHandler();
-    pl = new Player();
-    levelHandler = new LevelHandler(newLevelWithSoftAndStoneBricks(name, num, prob),bonusHandler);
-    number = num;
-    curScore = new Score();
-    probability = prob;
-    gameConsole = new GameConsole();
-    genGameObservers();
-  }
-
-  private void genGameObservers() {
-    observers = new ArrayList<GameObserver>();
-    observers.add(new ScoreObserver(gameConsole));
-    observers.add(new BonusObserver(gameConsole));
-    observers.add(new LevelObserver(gameConsole));
-  }
   
   public List<GameObserver> getGameObservers() {
-    return observers;
+    return flyweight.getObservers();
   }
   
   public Player getPlayer() {
-    return pl;
+    return flyweight.getPlayer();
   }
   
   public GameConsole getGameConsole() {
-    return gameConsole;
+    return flyweight.getGameConsole();
   }
   
   public long earnedScore() {
-    return pl.getTotalPoints() + levelHandler.getTotalPoints();
+    return flyweight.getEarnedScore();
   }
 
   public List<IBrick> getBricks() {
-    return levelHandler.getBricks();
+    return flyweight.getBricks();
   }
 
   public ILevel getCurrentLevel() {
-    return levelHandler.getCurrentLevel();
+    return flyweight.getCurrentLevel();
   }
 
   public String getLevelName() {
-    return levelHandler.getLevelName();
+    return flyweight.getLevelName();
   }
 
   public int getNumberOfHearts() {
-    return pl.getNumberOfHearts();
+    return flyweight.getNumberOfHearts();
   }
 
   public int getRequiredPoints() {
-    return (int)levelHandler.getRequiredPoints();
-  }
-  
-  public BonusHandler getBonusHandler() {
-    return bonusHandler;
+    return flyweight.getRequiredPoints();
   }
   
   public boolean hasNextLevel() {
-    return levelHandler.hasNextLevel();
+    return flyweight.hasNextLevel();
   }
 
   public int lossOfHeart() {
-    pl.lossOfHeart();
-    return pl.getNumberOfHearts();
+    return flyweight.lossOfHeart();
   }
 
   public ILevel newLevelWithSoftAndStoneBricks(String levelName, int number, double probability) {
-    return new RealLevel(levelName, number, probability,pl,gameConsole);
+    return flyweight.newLevelWithSoftAndStoneBricks(levelName,number,probability);
   }
 
   public long numberOfBricks() {
-    return levelHandler.getNumberOfBricks();
+    return flyweight.getNumberOfBricks();
   }
 
   /**
@@ -145,8 +90,7 @@ public class HomeworkTwoFacade {
    * @param newLevel nivel al que se seteara el juego.
    */
   public void setCurrentLevel(final ILevel newLevel) {
-    levelHandler.setObservers(observers);
-    levelHandler.setCurrentLevel(newLevel);
+    flyweight.setCurrentLevel(newLevel);
   }
   
   /**
@@ -162,49 +106,53 @@ public class HomeworkTwoFacade {
   }
   
   public void setNextLevel() {
-    levelHandler.setNextLevel(
-        newLevelWithSoftAndStoneBricks("Another Level",number,probability * 1.1));
+    flyweight.setNextLevel();
   }
   
   public void setNextLevel(final ILevel newLevel) {
-    levelHandler.setNextLevel(newLevel);
+    flyweight.setNextLevel(newLevel);
   }
   
   public List<IBonus> newBonuses(final int number, final double probability) {
-    return BonusHandler.genBonuses(number,probability,pl,levelHandler.getObservers());
+    return flyweight.newBonuses(number,probability);
   }
   
   public void registerBonuses(final List<IBonus> bonuses) {
-    bonusHandler.setBonuses(bonuses);
+    flyweight.registerBonuses(bonuses);
   }
   
   public void setGameConsoleOutput(final PrintStream printStream) {
-    gameConsole.setStream(printStream);
+    flyweight.setGameConsoleOutput(printStream);
   }
   
   public void autoSwitchToNextLevel() {
-    levelHandler.autoSwitchToNextLevel();
+    flyweight.setAutoSwitch(true);
+    flyweight.autoSwitchToNextLevel();
   }
   
   public boolean hasCurrentLevel() {
-    return levelHandler.hasCurrentLevel();
+    return flyweight.hasCurrentLevel();
   }
   
   public IBonus newExtraScore() {
-    return new AddScoreModifier(pl,observers);
+    return flyweight.newExtraScore();
   }
   
   public IBonus newExtraHeart() {
-    return new AddLifeModifier(pl,observers);
+    return flyweight.newExtraHeart();
   }
   
   public IBonus newScoreDiscount() {
-    return new LossScoreModifier(pl,observers);
+    return flyweight.newScoreDiscount();
   }
   
   public IBonus newHeartDiscount() {
-    return new LossLifeModifier(pl,observers);
+    return flyweight.newHeartDiscount();
   }
-  
+
+
+  public Flyweight getFlyweight() {
+    return flyweight;
+  }
   
 }

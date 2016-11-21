@@ -1,8 +1,8 @@
 package com.cc3002.breakout.logic.level;
 
+import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.observer.GameObserver;
 
-import java.util.List;
 /**
  * Abstraccion del Score,
  * sirve para mantener el score del nivel
@@ -14,49 +14,42 @@ import java.util.List;
 public class Score {
   long points;
   long requiredPoints;
-  List<GameObserver> observers;
+  Flyweight flyweight;
   
   public Score() {
     points = 0;
     requiredPoints = 100000000L;
   }
   
-  public Score(long pt) {
-    points = pt;
+  /**
+   * Este objeto se encarga de mantener el Score del juego y el jugador.
+   * @param newFlyweight Flyweight del juego.
+   */
+  public Score(Flyweight newFlyweight) {
+    points = 0;
     requiredPoints = 100000000L;
-  }
-  
-  public void setObservers(List<GameObserver> newGameObserver) {
-    observers = newGameObserver;
-  }
-  
-  public void setRequiredPoints(long newPoints) {
-    requiredPoints = newPoints;
-  }
-  
-  public void setCurrentPoints(long newPoints) {
-    points = newPoints;
-  }
-  
-  public long getRequiredPoints() {
-    return requiredPoints;
+    flyweight = newFlyweight;
   }
   
   /**
-   * Anademe puntaje al jugador.
+   * Anade puntaje al jugador.
    * Si este sobrepasa los puntos requeridos se cambio de nivel.
    * @param pt Puntos a anadir.
    */
   public void add(long pt) {
     points += pt;
-    if (points > requiredPoints) {
-      for (GameObserver observer : observers) {
+    if (points > flyweight.getRequiredPoints()) {
+      for (GameObserver observer : flyweight.getObservers()) {
         observer.bonusAutoSwitch();
       }
-      for (GameObserver observer: observers) {
+      for (GameObserver observer: flyweight.getObservers()) {
         observer.levelAutoSwitch();
       }
     }
+  }
+  
+  public void addNextLevel(long pt) {
+    points += pt;
   }
   
   public long getPoints() {
