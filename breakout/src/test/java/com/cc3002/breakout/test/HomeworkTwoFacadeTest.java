@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import com.cc3002.breakout.facade.HomeworkTwoFacade;
 import com.cc3002.breakout.logic.level.ILevel;
@@ -119,5 +120,47 @@ public class HomeworkTwoFacadeTest {
   public void testSpawnBricks() {
     assertNotEquals(game2.spawnBricks(game2.getCurrentLevel()),
         aux.spawnBricks(aux.getCurrentLevel()));
+  }
+  
+  @Test 
+  public void testNewBonuses() {
+    boolean flag = true;
+    try{
+      game1.newBonuses(32, 0.5);
+    } catch(Exception e) {
+      flag = false;
+    }
+    assertTrue(flag);
+  }
+  
+  @Test 
+  public void testGetGameConsole() {
+    boolean flag = true;
+    try{
+      game1.getGameConsole();
+    } catch(Exception e) {
+      flag = false;
+    }
+    assertTrue(flag);
+  }
+  
+  @Test 
+  public void testGetGameObservers() {
+    boolean flag = true;
+    try{
+      game1.getGameObservers();
+    } catch(Exception e) {
+      flag = false;
+    }
+    assertTrue(flag);
+  }
+  
+  @Test 
+  public void testCurrentLevel() {
+    assertFalse(game1.hasCurrentLevel());
+    ILevel aux = game1.newLevelWithSoftAndStoneBricks("Testing Level", 32, 0.8);
+    game1.setCurrentLevel(aux);
+    assertTrue(game1.hasCurrentLevel());
+    game1.setNextLevel();
   }
 }
