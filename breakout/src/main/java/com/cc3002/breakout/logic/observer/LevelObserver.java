@@ -70,7 +70,7 @@ public class LevelObserver extends GameObserver {
 
   @Override
   public void levelAutoSwitch() {
-    if (flyweight.getAutoSwitch()) {
+    if (flyweight.getAutoSwitch().isOpen()) {
       flyweight.getLevelHandler().autoSwitchToNextLevel();
     }
   }

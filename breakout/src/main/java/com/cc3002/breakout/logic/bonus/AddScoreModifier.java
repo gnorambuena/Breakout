@@ -39,7 +39,4 @@ public class AddScoreModifier implements IBonus {
     return false;
   }
 
-  public List<GameObserver> getObservers() {
-    return observers;
-  }
 }

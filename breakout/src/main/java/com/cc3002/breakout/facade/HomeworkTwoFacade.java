@@ -126,7 +126,7 @@ public class HomeworkTwoFacade {
   }
   
   public void autoSwitchToNextLevel() {
-    flyweight.setAutoSwitch(true);
+    flyweight.setAutoSwitch();
     flyweight.autoSwitchToNextLevel();
   }
   

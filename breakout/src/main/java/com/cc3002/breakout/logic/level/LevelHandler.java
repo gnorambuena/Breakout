@@ -104,7 +104,7 @@ public class LevelHandler extends GameLevel {
   * Metodo que setea el autoSwitch, y chequea si ya se cumplio la condicion.
   */
   public void autoSwitchToNextLevel() {
-    if (flyweight.getAutoSwitch()
+    if (flyweight.getAutoSwitch().isOpen()
         && currentLevel.getRequiredPoints() <= flyweight.getCurScore().getPoints()) {
       switchToNextLevel();
       flyweight.updateScore();

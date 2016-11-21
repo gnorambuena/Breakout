@@ -17,12 +17,17 @@ import com.cc3002.breakout.logic.observer.BonusObserver;
 import com.cc3002.breakout.logic.observer.GameObserver;
 import com.cc3002.breakout.logic.observer.LevelObserver;
 import com.cc3002.breakout.logic.observer.ScoreObserver;
+import com.cc3002.breakout.logic.state.AutomaticSwitch;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Flyweight design pattern, contiene referencias a los principales objetos del juego.
+ * @author gabriel
+ *
+ */
 public class Flyweight {
   
   BonusHandler bonusHandler;
@@ -31,7 +36,7 @@ public class Flyweight {
   Score curScore;
   List<GameObserver> observers;
   GameConsole gameConsole;
-  boolean autoSwitch;
+  AutomaticSwitch autoSwitch;
   
   /**
    * flyweight design pattern.
@@ -40,7 +45,7 @@ public class Flyweight {
     genPlayerAndScore();
     genGameConsoleAndObservers();
     genHandlers();
-    autoSwitch = false;
+    autoSwitch = new AutomaticSwitch();
   }
   
   private void genHandlers() {
@@ -175,12 +180,19 @@ public class Flyweight {
     return new LossLifeModifier(this);
   }
 
-  public boolean getAutoSwitch() {
+  public AutomaticSwitch getAutoSwitch() {
     return autoSwitch;
   }
 
-  public void setAutoSwitch(boolean flag) {
-    autoSwitch = flag;
+  /**
+   * Cambia el estado del autoSwitch.
+   */
+  public void setAutoSwitch() {
+    if (autoSwitch.isOpen()) {
+      autoSwitch.close();
+    } else {
+      autoSwitch.open();
+    }
   }
   
   public Score getCurScore() {
