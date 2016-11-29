@@ -2,8 +2,9 @@ package com.cc3002.breakout.logic.brick;
 
 import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.level.Printer;
-import com.cc3002.breakout.logic.observer.GameObserver;
 
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Representa un SoftBrick del juego,
@@ -12,7 +13,7 @@ import com.cc3002.breakout.logic.observer.GameObserver;
  *
  */
 
-public class  SoftBrick implements IBrick {
+public class  SoftBrick extends Observable implements IBrick {
   int hitpoints;
   Flyweight flyweight;
   
@@ -24,6 +25,9 @@ public class  SoftBrick implements IBrick {
   public SoftBrick(Flyweight newFlyweight) {
     hitpoints = 1;
     flyweight = newFlyweight;
+    for (Observer observer: flyweight.getObservers()) {
+      addObserver(observer);
+    }
   }
   
   public boolean isSoftBrick() {
@@ -50,9 +54,9 @@ public class  SoftBrick implements IBrick {
   public void hit() {
     if (hitpoints > 0) {
       hitpoints--;
-      for (GameObserver obs : flyweight.getObservers()) {
-        obs.scoreSoftBrickUpdate();
-      }
+      setChanged();
+      notifyObservers("SOB");
+      clearChanged();
       flyweight.getBonusHandler().reached();
       flyweight.getCurScore().add(10);
     }

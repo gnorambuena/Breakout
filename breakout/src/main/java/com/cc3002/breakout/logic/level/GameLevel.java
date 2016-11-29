@@ -3,13 +3,14 @@ package com.cc3002.breakout.logic.level;
 import com.cc3002.breakout.logic.brick.IBrick;
 
 import java.util.List;
+import java.util.Observable;
 
 /**
  * Clase abstracta que sirve de superclass para RealLevel y LevelHandler.
  * @author gabriel
  *
  */
-public abstract class GameLevel implements ILevel {
+public abstract class GameLevel extends Observable implements ILevel {
 
   public abstract String getLevelName();
 

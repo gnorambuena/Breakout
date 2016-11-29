@@ -13,15 +13,14 @@ import com.cc3002.breakout.logic.level.LevelHandler;
 import com.cc3002.breakout.logic.level.Player;
 import com.cc3002.breakout.logic.level.RealLevel;
 import com.cc3002.breakout.logic.level.Score;
-import com.cc3002.breakout.logic.observer.BonusObserver;
 import com.cc3002.breakout.logic.observer.GameObserver;
 import com.cc3002.breakout.logic.observer.LevelObserver;
-import com.cc3002.breakout.logic.observer.ScoreObserver;
 import com.cc3002.breakout.logic.state.AutomaticSwitch;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 
 /**
  * Flyweight design pattern, contiene referencias a los principales objetos del juego.
@@ -34,7 +33,7 @@ public class Flyweight {
   LevelHandler levelHandler;
   Player player;
   Score curScore;
-  List<GameObserver> observers;
+  List<Observer> observers;
   GameConsole gameConsole;
   AutomaticSwitch autoSwitch;
   
@@ -42,8 +41,8 @@ public class Flyweight {
    * flyweight design pattern.
    */
   public Flyweight() {
-    genPlayerAndScore();
     genGameConsoleAndObservers();
+    genPlayerAndScore();
     genHandlers();
     autoSwitch = new AutomaticSwitch();
   }
@@ -51,7 +50,6 @@ public class Flyweight {
   private void genHandlers() {
     bonusHandler = new BonusHandler(this);
     levelHandler = new LevelHandler(this);
-
   }
   
   private void genPlayerAndScore() {
@@ -61,13 +59,12 @@ public class Flyweight {
   
   private void genGameConsoleAndObservers() {
     gameConsole = new GameConsole();
-    observers = new ArrayList<GameObserver>();
-    observers.add(new ScoreObserver(this));
-    observers.add(new BonusObserver(this));
+    observers = new ArrayList<Observer>();
+    observers.add(new GameObserver(this));
     observers.add(new LevelObserver(this));
   }
   
-  public List<GameObserver> getObservers() {
+  public List<Observer> getObservers() {
     return observers;
   }
 

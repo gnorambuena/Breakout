@@ -3,9 +3,9 @@ package com.cc3002.breakout.logic.level;
 
 import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.brick.IBrick;
-import com.cc3002.breakout.logic.observer.GameObserver;
 
 import java.util.List;
+import java.util.Observer;
 
 
 /**
@@ -24,6 +24,9 @@ public class LevelHandler extends GameLevel {
    */
   public LevelHandler(Flyweight newFlyweight) {
     flyweight = newFlyweight;
+    for (Observer observer: flyweight.getObservers()) {
+      addObserver(observer);
+    }
     currentLevel = null;
     nextLevel = null;
   }
@@ -37,9 +40,9 @@ public class LevelHandler extends GameLevel {
     if (currentLevel != null) {
       currentLevel.setFlyweight(flyweight);
       currentLevel.setRequiredPoints();
-      for (GameObserver observer: flyweight.getObservers()) {
-        observer.levelUpdate(currentLevel.getLevelName());
-      }
+      setChanged();
+      notifyObservers(currentLevel.getLevelName());
+      clearChanged();
     }
   }
   
@@ -106,6 +109,7 @@ public class LevelHandler extends GameLevel {
   public void autoSwitchToNextLevel() {
     if (flyweight.getAutoSwitch().isOpen()
         && currentLevel.getRequiredPoints() <= flyweight.getCurScore().getPoints()) {
+      flyweight.getBonusHandler().autoSwitch();
       switchToNextLevel();
       flyweight.updateScore();
     }

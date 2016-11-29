@@ -1,5 +1,10 @@
 package com.cc3002.breakout.logic.state;
 
+/**
+ * Open state.
+ * @author gabriel
+ *
+ */
 class Open extends State {
   
   @Override

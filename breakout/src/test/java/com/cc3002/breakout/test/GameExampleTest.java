@@ -60,7 +60,6 @@ public class GameExampleTest {
     BonusHandler bonusHandler = flyweight.getBonusHandler();
     game.autoSwitchToNextLevel();
     bricks.get(0).hit();
-    bonusHandler.reached();
     bricks.get(1).hit();
     bricks.get(1).hit();
     bricks.get(1).hit();
@@ -77,11 +76,9 @@ public class GameExampleTest {
     bricks.get(0).hit();
     bricks.get(0).hit();
     bricks.get(0).hit();
-    bonusHandler.reached();
     bricks.get(1).hit();
     bricks.get(1).hit();
     bricks.get(1).hit();
-    bonusHandler.reached();
   }
 
 }

@@ -1,24 +1,30 @@
 package com.cc3002.breakout.logic.bonus;
 
+
 import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.level.Player;
-import com.cc3002.breakout.logic.observer.GameObserver;
 
-import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Modificador que agrega 5 en Score.
  * @author gabriel
  *
  */
-public class AddScoreModifier implements IBonus {
+public class AddScoreModifier extends Observable implements IBonus {
   
   Player player;
-  List<GameObserver> observers;
-  
+
+  /**
+   * Constructor de un modificador que agrega puntaje.
+   * @param flyweight flyweight del juego.
+   */
   public AddScoreModifier(Flyweight flyweight) {
     player = flyweight.getPlayer();
-    observers = flyweight.getObservers();
+    for (Observer observer: flyweight.getObservers()) {
+      addObserver(observer);
+    }
   }
   
   /**
@@ -26,9 +32,9 @@ public class AddScoreModifier implements IBonus {
    */
   public void reached() {
     player.addScore(5);
-    for (GameObserver observer : observers) {
-      observer.scoreBonus();
-    }
+    setChanged();
+    notifyObservers("ES");
+    clearChanged();
   }
 
   public boolean isExtraBonus() {

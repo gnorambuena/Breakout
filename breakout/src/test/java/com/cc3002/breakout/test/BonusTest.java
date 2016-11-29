@@ -9,14 +9,11 @@ import com.cc3002.breakout.facade.HomeworkTwoFacade;
 import com.cc3002.breakout.logic.bonus.BonusHandler;
 import com.cc3002.breakout.logic.bonus.IBonus;
 import com.cc3002.breakout.logic.level.GameConsole;
-import com.cc3002.breakout.logic.level.Player;
-import com.cc3002.breakout.logic.observer.GameObserver;
-import com.cc3002.breakout.logic.observer.ScoreObserver;
+
 
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,8 +34,6 @@ public class BonusTest {
     int numberOfBonuses = 0;
     int numberOfDiscount = 0;
     try {
-      List<GameObserver> observer = new ArrayList<GameObserver>();
-      observer.add(new ScoreObserver(new Flyweight()));
       List<IBonus> bonuses = BonusHandler.genBonuses(32, 0.3, new Flyweight());
       for (int i = 0 ; i < bonuses.size() ; i++) {
         if (bonuses.get(i).isExtraBonus()) {

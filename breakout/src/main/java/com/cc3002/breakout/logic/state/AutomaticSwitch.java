@@ -1,5 +1,10 @@
 package com.cc3002.breakout.logic.state;
 
+/**
+ * Automatic Switch for gameChange.
+ * @author gabriel
+ *
+ */
 public class AutomaticSwitch {
   private State state;
   

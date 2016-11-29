@@ -1,5 +1,10 @@
 package com.cc3002.breakout.logic.state;
 
+/**
+ * State Design pattern.
+ * @author gabriel
+ *
+ */
 class State {
   private AutomaticSwitch autoSwitch;
   

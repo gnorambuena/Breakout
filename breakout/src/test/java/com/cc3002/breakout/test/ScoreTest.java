@@ -7,12 +7,10 @@ import static org.junit.Assert.assertSame;
 import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.level.Score;
 import com.cc3002.breakout.logic.observer.GameObserver;
-import com.cc3002.breakout.logic.observer.ScoreObserver;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ScoreTest {
@@ -30,8 +28,6 @@ public class ScoreTest {
     testingLong = new Score(flyweight);
     testingLong.add(100);
     testing = new Score(flyweight);
-    observers = new ArrayList<GameObserver>();
-    observers.add(new ScoreObserver(new Flyweight()));
   }
   
   @Test

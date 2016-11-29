@@ -3,22 +3,27 @@ package com.cc3002.breakout.logic.bonus;
 
 import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.level.Player;
-import com.cc3002.breakout.logic.observer.GameObserver;
 
-import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Modificador que quita una vida al Player.
  * @author gabriel
  *
  */
-public class LossLifeModifier implements IBonus {
+public class LossLifeModifier extends Observable implements IBonus {
   Player player;
-  List<GameObserver> observers;
   
+  /**
+   * Constructor de un modificador que quita vidas.
+   * @param flyweight flyweight del juego.
+   */
   public LossLifeModifier(Flyweight flyweight) {
     player = flyweight.getPlayer();
-    observers = flyweight.getObservers();
+    for (Observer observer: flyweight.getObservers()) {
+      addObserver(observer);
+    }
   }
   
   /**
@@ -26,9 +31,9 @@ public class LossLifeModifier implements IBonus {
    */
   public void reached() {
     player.lossOfHeart();
-    for (GameObserver observer : observers) {
-      observer.lifeDiscount();
-    }
+    setChanged();
+    notifyObservers("HD");
+    clearChanged();
   }
 
   public boolean isExtraBonus() {

@@ -17,7 +17,7 @@ public class BonusHandler {
   
   List<IBonus> bonuses;
   int currentBonus;
-  static Flyweight flyweight;
+  Flyweight flyweight;
 
   /**
    * Objeto que se encarga de manejar los bonuses.
@@ -64,17 +64,17 @@ public class BonusHandler {
     for (int i = 0 ; i < numberOfBonuses ; i++) {
       float chance = rand.nextFloat();
       if (chance < 0.5) {
-        ans.add(new AddLifeModifier(flyweight));
+        ans.add(new AddLifeModifier(newFlyweight));
       } else {
-        ans.add(new AddScoreModifier(flyweight));
+        ans.add(new AddScoreModifier(newFlyweight));
       }
     }
     for (int i = numberOfBonuses ; i < number ; i++) {
       float chance = rand.nextFloat();
       if (chance < 0.5) {
-        ans.add(new LossLifeModifier(flyweight));
+        ans.add(new LossLifeModifier(newFlyweight));
       } else {
-        ans.add(new LossScoreModifier(flyweight));
+        ans.add(new LossScoreModifier(newFlyweight));
       }
     }
     Collections.shuffle(ans);

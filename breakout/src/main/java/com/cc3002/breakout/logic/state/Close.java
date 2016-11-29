@@ -1,5 +1,10 @@
 package com.cc3002.breakout.logic.state;
 
+/**
+ * Close state.
+ * @author gabriel
+ *
+ */
 class Close extends State {
   
   @Override

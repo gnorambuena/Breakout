@@ -1,85 +1,63 @@
 package com.cc3002.breakout.logic.observer;
 
+
 import com.cc3002.breakout.facade.Flyweight;
+
+import java.util.HashSet;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Set;
 
 /**
  * Observer para los ILevel.
  * @author gabriel
  *
  */
-public class LevelObserver extends GameObserver {
+public class LevelObserver implements Observer {
 
+  Flyweight flyweight;
+  Set<String> tabla;
+  
+  /**
+   * Observer del juego, se encarga de mostrar los mensajes de los eventos.
+   * @param newFlyweight Flyweight del juego.
+   */
   public LevelObserver(Flyweight newFlyweight) {
-    super(newFlyweight);
-  }
+    flyweight = newFlyweight;
+    
+    tabla = new HashSet<String>();
+    tabla.add("SD");
+    tabla.add("ES");
+    tabla.add("HD");
+    tabla.add("EH");
+    tabla.add("SOB");
+    tabla.add("STB");
 
-  @Override
-  public void levelUpdate(String name) {
-    flyweight.getGameConsole().print("Playing Level " + name + ".");
   }
   
 
   /**
-   * Este observer no deberia responder nada a este mensaje.
+   * Update para los metodos autoSwitch y Update.
    */
-  @Override
-  public void scoreSoftBrickUpdate() {
-    //Filler comment.
+  public void update(Observable object, Object arg) {
+    if (arg != null) {
+      String value = arg.toString();
+      if (value.equals("AS")) {
+        levelAutoSwitch();
+      } else if (!tabla.contains(value)) {
+        levelUpdate(value);
+      }
+    }
+  }
+  
+  private void levelUpdate(String name) {
+    flyweight.getGameConsole().print("Playing Level " + name + ".");
   }
 
-
-  /**
-   * Este observer no deberia responder nada a este mensaje.
-   */
-  @Override
-  public void scoreStoneBrickUpdate() {
-    //Filler comment.
-  }
-
-  /**
-   * Este observer no deberia responder nada a este mensaje.
-   */
-  @Override
-  public void scoreDiscount() {
-    //Filler comment.
-  }
-
-  /**
-   * Este observer no deberia responder nada a este mensaje.
-   */
-  @Override
-  public void scoreBonus() {
-    //Filler comment.
-  }
-
-  /**
-   * Este observer no deberia responder nada a este mensaje.
-   */
-  @Override
-  public void lifeDiscount() {
-    //Filler comment.
-  }
-
-  /**
-   * Este observer no deberia responder nada a este mensaje.
-   */
-  @Override
-  public void lifeBonus() {
-    //Filler comment.
-  }
-
-  @Override
-  public void levelAutoSwitch() {
+  private void levelAutoSwitch() {
     if (flyweight.getAutoSwitch().isOpen()) {
       flyweight.getLevelHandler().autoSwitchToNextLevel();
     }
   }
 
-  /**
-   * Este observer no deberia responder nada a este mensaje.
-   */
-  @Override
-  public void bonusAutoSwitch() {
-    //Filler comment.
-  }
 }

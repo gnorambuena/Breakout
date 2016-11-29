@@ -1,7 +1,10 @@
 package com.cc3002.breakout.logic.level;
 
+
 import com.cc3002.breakout.facade.Flyweight;
-import com.cc3002.breakout.logic.observer.GameObserver;
+
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Abstraccion del Score,
@@ -11,7 +14,7 @@ import com.cc3002.breakout.logic.observer.GameObserver;
  *
  */
 
-public class Score {
+public class Score extends Observable {
   long points;
   long requiredPoints;
   Flyweight flyweight;
@@ -29,6 +32,10 @@ public class Score {
     points = 0;
     requiredPoints = 100000000L;
     flyweight = newFlyweight;
+    
+    for (Observer observer: flyweight.getObservers()) {
+      addObserver(observer);
+    }
   }
   
   /**
@@ -39,12 +46,9 @@ public class Score {
   public void add(long pt) {
     points += pt;
     if (points > flyweight.getRequiredPoints()) {
-      for (GameObserver observer : flyweight.getObservers()) {
-        observer.bonusAutoSwitch();
-      }
-      for (GameObserver observer: flyweight.getObservers()) {
-        observer.levelAutoSwitch();
-      }
+      setChanged();
+      notifyObservers("AS");
+      clearChanged();
     }
   }
   

@@ -10,22 +10,17 @@ import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.level.GameConsole;
 import com.cc3002.breakout.logic.level.ILevel;
 import com.cc3002.breakout.logic.level.Player;
-import com.cc3002.breakout.logic.level.RealLevel;
-import com.cc3002.breakout.logic.observer.BonusObserver;
-import com.cc3002.breakout.logic.observer.GameObserver;
-import com.cc3002.breakout.logic.observer.LevelObserver;
-import com.cc3002.breakout.logic.observer.ScoreObserver;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 
 public class ObserverTest {
   
   Player pl;
-  List<GameObserver> observers;
+  List<Observer> observers;
   GameConsole gameConsole;
   BonusHandler bonusHandler;
   Flyweight flyweight;
@@ -82,10 +77,7 @@ public class ObserverTest {
   
   @Test
   public void testBonusObserver() {
-    List<GameObserver> auxObservers = new ArrayList<GameObserver>();
-    auxObservers.add(new BonusObserver(flyweight));
     List<IBonus> bonuses = BonusHandler.genBonuses(10, 0.4,flyweight);
-    ILevel lvl1 = flyweight.newLevelWithSoftAndStoneBricks("Level one",32,0.4);
     bonusHandler.setBonuses(bonuses);
     boolean flag = true;
     try {

@@ -1,8 +1,11 @@
 package com.cc3002.breakout.logic.brick;
 
+
 import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.level.Printer;
-import com.cc3002.breakout.logic.observer.GameObserver;
+
+import java.util.Observable;
+import java.util.Observer;
 
 
 /**
@@ -12,7 +15,7 @@ import com.cc3002.breakout.logic.observer.GameObserver;
  *
  */
 
-public class StoneBrick implements IBrick {
+public class StoneBrick extends Observable implements IBrick {
   int hitpoints;
   Flyweight flyweight;
   
@@ -24,6 +27,9 @@ public class StoneBrick implements IBrick {
   public StoneBrick(Flyweight newFlyweight) {
     hitpoints = 3;
     flyweight = newFlyweight;
+    for (Observer observer: flyweight.getObservers()) {
+      addObserver(observer);
+    }
   }
 
   public int remainingHits() {
@@ -47,9 +53,9 @@ public class StoneBrick implements IBrick {
     if (hitpoints > 0) {
       hitpoints--;
       if (isDestroyed()) {
-        for (GameObserver obs : flyweight.getObservers()) {
-          obs.scoreStoneBrickUpdate();
-        }
+        setChanged();
+        notifyObservers("STB");
+        clearChanged();
         flyweight.getBonusHandler().reached();
         flyweight.getCurScore().add(50);
       }

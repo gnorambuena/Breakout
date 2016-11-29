@@ -6,10 +6,10 @@ import com.cc3002.breakout.logic.level.GameConsole;
 import com.cc3002.breakout.logic.level.ILevel;
 import com.cc3002.breakout.logic.level.LevelHandler;
 import com.cc3002.breakout.logic.level.Player;
-import com.cc3002.breakout.logic.observer.GameObserver;
 
 import java.io.PrintStream;
 import java.util.List;
+import java.util.Observer;
 
 
 /**
@@ -33,7 +33,7 @@ public class HomeworkTwoFacade {
   }
   
   
-  public List<GameObserver> getGameObservers() {
+  public List<Observer> getGameObservers() {
     return flyweight.getObservers();
   }
   

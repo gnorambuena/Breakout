@@ -2,23 +2,28 @@ package com.cc3002.breakout.logic.bonus;
 
 import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.level.Player;
-import com.cc3002.breakout.logic.observer.GameObserver;
 
-import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Modificador que aumenta en uno el numero de vidas.
  * @author gabriel
  *
  */
-public class AddLifeModifier implements IBonus {
+public class AddLifeModifier extends Observable implements IBonus {
 
   Player player;
-  List<GameObserver> observers;
   
+  /**
+   * Constructor de un modificador que agrega vidas.
+   * @param flyweight flyweight del juego.
+   */
   public AddLifeModifier(Flyweight flyweight) {
     player = flyweight.getPlayer();
-    observers = flyweight.getObservers();
+    for (Observer observer: flyweight.getObservers()) {
+      addObserver(observer);
+    }
   }
   
   /**
@@ -26,9 +31,9 @@ public class AddLifeModifier implements IBonus {
    */
   public void reached() {
     player.addHearts();
-    for (GameObserver observer : observers) {
-      observer.lifeBonus();
-    }
+    setChanged();
+    notifyObservers("EH");
+    clearChanged();
   }
 
   public boolean isExtraBonus() {
