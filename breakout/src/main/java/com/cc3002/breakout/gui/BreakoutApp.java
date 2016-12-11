@@ -1,71 +1,57 @@
 package com.cc3002.breakout.gui;
 
-import java.util.List;
-
-import org.jbox2d.dynamics.FixtureDef;
-
 import com.almasb.ents.Entity;
-import com.almasb.fxgl.app.FXGL;
 import com.almasb.fxgl.app.GameApplication;
-import com.almasb.fxgl.effect.ParticleControl;
-import com.almasb.fxgl.effect.ParticleEmitter;
-import com.almasb.fxgl.effect.ParticleEmitters;
-import com.almasb.fxgl.effect.Vignette;
+import com.almasb.fxgl.audio.AudioPlayer;
+import com.almasb.fxgl.audio.Sound;
 import com.almasb.fxgl.entity.Entities;
-import com.almasb.fxgl.entity.EntityView;
 import com.almasb.fxgl.entity.GameEntity;
-import com.almasb.fxgl.entity.component.BoundingBoxComponent;
 import com.almasb.fxgl.entity.component.CollidableComponent;
 import com.almasb.fxgl.entity.component.TypeComponent;
-import com.almasb.fxgl.entity.control.ExpireCleanControl;
 import com.almasb.fxgl.gameplay.Achievement;
 import com.almasb.fxgl.input.ActionType;
 import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.InputMapping;
 import com.almasb.fxgl.input.OnUserAction;
-import com.almasb.fxgl.input.UserAction;
-import com.almasb.fxgl.physics.CollisionHandler;
-import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.settings.GameSettings;
 import com.almasb.fxgl.ui.UI;
-import com.cc3002.breakout.gui.event.DeathEvent;
-import com.cc3002.breakout.gui.event.Events;
-import com.cc3002.breakout.gui.EntityType;
 import com.cc3002.breakout.facade.HomeworkTwoFacade;
-import com.cc3002.breakout.gui.EntityFactory;
+import com.cc3002.breakout.gui.collisionhandler.BallWallCollisionHandler;
+import com.cc3002.breakout.gui.collisionhandler.BatBallCollisionHandler;
+import com.cc3002.breakout.gui.collisionhandler.BrickBallCollisionHandler;
 import com.cc3002.breakout.gui.control.BatControl;
 import com.cc3002.breakout.logic.level.ILevel;
-import com.cc3002.breakout.logic.level.Player;
 
-import javafx.beans.binding.BooleanBinding;
-import javafx.beans.binding.DoubleBinding;
-import javafx.beans.binding.StringBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.event.Event;
-import javafx.geometry.BoundingBox;
-import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
-import javafx.util.Duration;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jbox2d.dynamics.FixtureDef;
 
 public class BreakoutApp extends GameApplication {
 
   private int width = 600;
   private int height = 600;
+  private int curLevel = 0;
+  private List<ILevel> levels;
   private IntegerProperty scorePlayer;
   private IntegerProperty lifesPlayer;
   private HomeworkTwoFacade game = new HomeworkTwoFacade();
   private BatControl playerBat;
   private GameEntity bat;
   private GameEntity ball;
-  private Entity walls;
   private UIOverlay uioverlay;
-  
+  private Sound ballBrickHit;
+  private Sound ballWallHit;
+  private Sound batBallHit;
+  private Sound levelDone;
+  private Sound gamefinished;
   @Override
   protected void initInput() {
     
@@ -76,85 +62,31 @@ public class BreakoutApp extends GameApplication {
   
   @Override
   protected void initAssets() {
-    // TODO Auto-generated method stub
-    
+    ballBrickHit = getAssetLoader().loadSound("ballbrickhit.wav");
+    ballWallHit = getAssetLoader().loadSound("ballwall.wav");
+    batBallHit = getAssetLoader().loadSound("batball.wav");
+    levelDone = getAssetLoader().loadSound("leveldone.wav");
+    gamefinished = getAssetLoader().loadSound("gamefinished.wav");
   }
 
   @Override
   protected void initGame() {
     scorePlayer = new SimpleIntegerProperty(0);
-    lifesPlayer = new SimpleIntegerProperty(3);
+    lifesPlayer = new SimpleIntegerProperty(30);
     initBackground();
     initPlayerBat();
     initBall();
     initScreenBounds();
-    initBricks();
+    initLevels();
     initUI();
-    
-    Achievement a = getAchievementManager().getAchievementByName("Game Finished");
- // then, bind it to trigger, which is a property (x > getWidth())
-    a.bind(new AchievementBinding((first,second) -> first >= second,
-        game.getFlyweight().getCurScore().getPoints(),game.getRequiredPoints()));
   }
 
   @Override
   protected void initPhysics() {
     getPhysicsWorld().setGravity(0, 0);
-    
-    getPhysicsWorld().addCollisionHandler(new CollisionHandler(EntityType.BALL, EntityType.WALL) {
-      
-      protected void onHitBoxTrigger(Entity a, Entity b, HitBox boxA, HitBox boxB) {
-          System.out.println(boxB.getName() + " hitted by "+ boxA.getName());
-          if(boxB.getName().equals("TOP")){
-            System.out.println("Event fired!");
-            int totalLifes = game.lossOfHeart();
-            lifesPlayer.set(totalLifes);
-            if(totalLifes == 0){
-              uioverlay.showMessage("Game Over!");
-              pause();
-            }
-            Point2D pos = bat.getPosition();
-            System.out.println(pos.getX()+" "+pos.getY());
-            pos = pos.add(35, -15);
-            System.out.println(pos.getX()+" "+pos.getY());
-            getGameWorld().removeEntity(ball);
-            ball = (GameEntity)EntityFactory.newBall(pos.getX(),pos.getY());
-            getGameWorld().addEntity(ball);
-            ParticleEmitter emitter = ParticleEmitters.newSparkEmitter();
-            emitter.setColorFunction(() -> Color.GOLD);
-
-            Entities.builder()
-                    .at(pos)
-                    .with(new ParticleControl(emitter))
-                    .with(new ExpireCleanControl(Duration.seconds(1)))
-                    .buildAndAttach(getGameWorld());
-          }
-      }
-    });
-
-    getPhysicsWorld().addCollisionHandler(new CollisionHandler(EntityType.PLAYER_BAT, EntityType.BALL) {
-      @Override
-      protected void onHitBoxTrigger(Entity a, Entity b, HitBox boxA, HitBox boxB) {
-          System.out.println(boxB.getName() + " hitted by "+ boxA.getName());
-      }
-    });
-    
-    getPhysicsWorld().addCollisionHandler(new CollisionHandler(EntityType.BRICK, EntityType.BALL) {
-      @Override
-      protected void onHitBoxTrigger(Entity a, Entity b, HitBox boxA, HitBox boxB) {
-          System.out.println(boxB.getName() + " hitted by "+ boxA.getName());
-          BrickEntity brick = (BrickEntity)a;
-          brick.getRefBrick().hit();
-          if (brick.getRefBrick().isDestroyed()) {
-            getGameWorld().removeEntity(a);
-            scorePlayer.set((int)game.getFlyweight().getCurScore().getPoints());
-          } else if (brick.getRefBrick().remainingHits() == 2) {
-            brick.getMainViewComponent().setView(new EntityView(new Rectangle(35, 10,Color.DARKGOLDENROD)));
-          } else {
-            brick.getMainViewComponent().setView(new EntityView(new Rectangle(35, 10,Color.BISQUE)));
-          }
-      }
-    });
+    getPhysicsWorld().addCollisionHandler(new BallWallCollisionHandler(this));
+    getPhysicsWorld().addCollisionHandler(new BatBallCollisionHandler(this));
+    getPhysicsWorld().addCollisionHandler(new BrickBallCollisionHandler(this));
   }
 
   @Override
@@ -182,8 +114,9 @@ public class BreakoutApp extends GameApplication {
     settings.setHeight(height);
     settings.setTitle("Breakout App");
     settings.setVersion("0.1");
+    settings.setProfilingEnabled(false);
     settings.setIntroEnabled(false); // turn off intro
-    settings.setMenuEnabled(false);  // turn off menus
+    settings.setMenuEnabled(true);  // turn off menus
   }
   
   private void initPlayerBat() {
@@ -201,7 +134,6 @@ public class BreakoutApp extends GameApplication {
   
   private void initScreenBounds() {
     Entity walls = Entities.makeScreenBounds(100);
-    this.walls = walls;
     walls.addComponent(new TypeComponent(EntityType.WALL));
     walls.addComponent(new CollidableComponent(true));
     
@@ -213,14 +145,63 @@ public class BreakoutApp extends GameApplication {
     getGameWorld().addEntity(walls);
   }
   
-  private void initBricks() {
-    int numbricks = 90;
-    ILevel level = game.newLevelWithSoftAndStoneBricks("First Level", numbricks, 0.6f);
-    game.setCurrentLevel(level);
-    for(int j = 0 ; j < numbricks ; j+=15){
-      for(int i = 0 ; i < 15 ; i++){
-        getGameWorld().addEntity(EntityFactory.newBrick(i*40, 100+j, level.getBricks().get(i+j)));
+  private void initLevels() {
+    levels = new ArrayList<ILevel>();
+    int numbricks = 15;
+    ILevel levelOne = game.newLevelWithSoftAndStoneBricks("Level One", numbricks, 0.6f);
+    game.setCurrentLevel(levelOne);
+    ILevel levelTwo = game.newLevelWithSoftAndStoneBricks("Level Two", numbricks, 0.5f);
+    game.setNextLevel(levelTwo);
+    ILevel levelThree = game.newLevelWithSoftAndStoneBricks("Level Three", numbricks + 15, 0.5f);
+    ILevel levelFour = game.newLevelWithSoftAndStoneBricks("Level Four", numbricks + 15, 0.4f);
+    ILevel levelFive = game.newLevelWithSoftAndStoneBricks("Level Five", numbricks + 30, 0.4f);
+    levels.add(levelOne);
+    levels.add(levelTwo);
+    levels.add(levelThree);
+    levels.add(levelFour);
+    levels.add(levelFive);
+    initBricks(levelOne);
+  }
+  
+  private void initBricks(ILevel curLevel) {
+    int numbricks = curLevel.getBricks().size();
+    for ( int j = 0 ; j < numbricks ; j += 15 ) {
+      for ( int i = 0 ; i < 15 ; i++ ) {
+        getGameWorld().addEntity(EntityFactory
+            .newBrick(i * 40 , 100 + j , curLevel.getBricks().get(i + j)));
       }
+    }
+  }
+  
+  public void playNextLevel() {
+    
+    if (curLevel + 1 == levels.size()) {
+      pause();
+      new AudioController().playSound(gamefinished);
+      uioverlay.showMessage("You win!");
+    } else {
+      removeLevel();
+      game.autoSwitchToNextLevel();
+      curLevel++;
+      ILevel curILevel = levels.get(curLevel);
+      initBricks(curILevel);
+      new AudioController().playSound(levelDone);
+      game.autoSwitchToNextLevel();
+      if (curLevel < 4) {
+        game.setNextLevel(levels.get(curLevel + 1));
+      }
+      setBall((GameEntity)EntityFactory.newBall(getWidth() / 2, 5 * getHeight() / 7 - 5));
+      getGameWorld().removeEntities(bat);
+      initPlayerBat();
+      uioverlay.showMessageFlash("Playing " + curILevel.getLevelName() );
+      scorePlayer.set((int)game.getFlyweight().getCurScore().getPoints());
+    }
+  }
+  
+  private void removeLevel() {
+    List<Entity> bricks = getGameWorld().getEntitiesByType(EntityType.BRICK);
+    for(Entity brick : bricks) {
+      getGameWorld().removeEntity(brick);
     }
   }
   
@@ -229,7 +210,7 @@ public class BreakoutApp extends GameApplication {
     bg.getMainViewComponent().setView(new Rectangle(getWidth(), getHeight(), Color.rgb(0, 0, 5)));
 
     getGameWorld().addEntity(bg);
-}
+  }
   
   @Override
   protected void initAchievements() {
@@ -237,27 +218,74 @@ public class BreakoutApp extends GameApplication {
     getAchievementManager().registerAchievement(a);
   }
   
+  public IntegerProperty getScorePlayer() {
+    return scorePlayer;
+  }
+  
+  public IntegerProperty getLifesPlayer() {
+    return lifesPlayer;
+  }
+  
+  public HomeworkTwoFacade getFacade() {
+    return game;
+  }
+  
+  public UIOverlay getUIOverlay() {
+    return uioverlay;
+  }
+  
+  public GameEntity getBall() {
+    return ball;
+  }
+  
+  public GameEntity getBat() {
+    return bat;
+  }
+  
+  public Sound getBrickHitSound() {
+    return ballBrickHit;
+  }
+  
+  public Sound getWallHitSound() {
+    return ballWallHit;
+  }
+  
+  public Sound getBatHitSound() {
+    return batBallHit;
+  }
+  
+  public void setBall(GameEntity aBall) {
+    getGameWorld().removeEntities(ball);
+    ball = aBall;
+    getGameWorld().addEntities(ball); 
+  }
+  
+  public void pause() {
+    super.pause();
+  }
+  
   @OnUserAction(name = "Left", type = ActionType.ON_ACTION)
   public void up() {
-      playerBat.left();
+    playerBat.left();
   }
 
   @OnUserAction(name = "Right", type = ActionType.ON_ACTION)
   public void right() {
-      playerBat.right();
+    playerBat.right();
   }
 
   @OnUserAction(name = "Left", type = ActionType.ON_ACTION_END)
   public void stopBat() {
-      playerBat.stop();
+    playerBat.stop();
   }
 
   @OnUserAction(name = "Right", type = ActionType.ON_ACTION_END)
   public void stopBat2() {
-      playerBat.stop();
+    playerBat.stop();
   }
   
   public static void main(String[] args) {
     launch(args);
   }
+
 }

@@ -88,13 +88,14 @@ public class UIOverlay extends Parent {
 
     public void showMessageFlash(String message) {
         Text text = new Text(message);
-        text.setTranslateX(width / 2 - text.getLayoutBounds().getWidth() / 2);
+        text.setTranslateX(width / 2 - text.getLayoutBounds().getWidth() / 2 - 100);
         text.setTranslateY(height / 2);
-        text.setFont(FONT);
+        text.setFill(Color.AZURE);
+        text.setFont(FXGL.getUIFactory().newFont(40));
         text.setOpacity(0);
         getChildren().add(text);
 
-        FadeTransition ft = new FadeTransition(Duration.seconds(0.33), text);
+        FadeTransition ft = new FadeTransition(Duration.seconds(2), text);
         ft.setToValue(1);
         ft.setAutoReverse(true);
         ft.setCycleCount(2);

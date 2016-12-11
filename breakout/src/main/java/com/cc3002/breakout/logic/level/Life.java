@@ -9,7 +9,7 @@ public class Life {
   private int hearts;
   
   public Life() {
-    hearts = 3;
+    hearts = 30;
   }
   
   public int getHearts() {

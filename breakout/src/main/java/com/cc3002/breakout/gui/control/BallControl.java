@@ -25,6 +25,8 @@ package com.cc3002.breakout.gui.control;
  * SOFTWARE.
  */
 
+import java.util.Random;
+
 import com.almasb.ents.AbstractControl;
 import com.almasb.ents.Entity;
 import com.almasb.fxgl.app.FXGL;
@@ -37,46 +39,49 @@ import com.cc3002.breakout.gui.event.DeathEvent;
  */
 public class BallControl extends AbstractControl {
 
-    private PhysicsComponent ball;
-    private BoundingBoxComponent bbox;
+  private PhysicsComponent ball;
+  private BoundingBoxComponent bbox;
 
-    @Override
-    public void onAdded(Entity entity) {
-        bbox = entity.getComponentUnsafe(BoundingBoxComponent.class);
-        ball = entity.getComponentUnsafe(PhysicsComponent.class);
+  @Override
+  public void onAdded(Entity entity) {
+    bbox = entity.getComponentUnsafe(BoundingBoxComponent.class);
+    ball = entity.getComponentUnsafe(PhysicsComponent.class);
+  }
+
+  @Override
+  public void onUpdate(Entity entity, double tpf) {
+    //System.out.println("LIMITED");
+    limitVelocity();
+    if (bbox.getMaxYWorld() > FXGL.getSettings().getHeight()) {
+      System.out.println("Event fired!");
+      FXGL.getEventBus().fireEvent(new DeathEvent(DeathEvent.ANY));
     }
+  }
 
-    @Override
-    public void onUpdate(Entity entity, double tpf) {
-        //System.out.println("LIMITED");
-        limitVelocity();
-      if (bbox.getMaxYWorld() > FXGL.getSettings().getHeight()) {
-        System.out.println("Event fired!");
-          FXGL.getEventBus().fireEvent(new DeathEvent(DeathEvent.ANY));
-      }
-    }
-
-    public void stop(){
-      ball.setLinearVelocity(0,0);
+  
+  private void limitVelocity() {
+    if (Math.abs(ball.getLinearVelocity().getX()) > 5 * 60) {
+      //System.out.println("LIMITEDX");
+      ball.setLinearVelocity(Math.signum(ball.getLinearVelocity().getX()) * 5 * 60,
+                ball.getLinearVelocity().getY());
     }
     
-    private void limitVelocity() {
-        /*if (Math.abs(ball.getLinearVelocity().getX()) < 5 * 60) {
-          System.out.println("LIMITEDX");
-            ball.setLinearVelocity(Math.signum(ball.getLinearVelocity().getX()) * 5 * 60,
-                    ball.getLinearVelocity().getY());
-        }*/
-
-        if (Math.abs(ball.getLinearVelocity().getY()) > 5 * 60 * 2) {
-          System.out.println("LIMITEDY");
-            ball.setLinearVelocity(ball.getLinearVelocity().getX(),
-                    Math.signum(ball.getLinearVelocity().getY()) * 5 * 60 * 2);
-        }
-        
-        if (Math.abs(ball.getLinearVelocity().getY()) < 5 * 60 ) {
-          System.out.println("LIMITEDY");
-            ball.setLinearVelocity(ball.getLinearVelocity().getX(),
-                    Math.signum(ball.getLinearVelocity().getY()) * 5 * 60);
-        }
+    if (Math.abs(ball.getLinearVelocity().getX()) < 10 ) {
+      //System.out.println("LIMITEDX");
+      ball.setLinearVelocity(Math.signum(ball.getLinearVelocity().getX()) * 10,
+                ball.getLinearVelocity().getY());
     }
+    
+    if (Math.abs(ball.getLinearVelocity().getY()) > 5 * 60 * 2) {
+      //System.out.println("LIMITEDY");
+      ball.setLinearVelocity(ball.getLinearVelocity().getX(),
+                Math.signum(ball.getLinearVelocity().getY()) * 5 * 60 * 2);
+    }
+      
+    if (Math.abs(ball.getLinearVelocity().getY()) < 5 * 60 ) {
+      //System.out.println("LIMITEDY");
+      ball.setLinearVelocity(ball.getLinearVelocity().getX(),
+                Math.signum(ball.getLinearVelocity().getY()) * 5 * 60);
+    }
+  }
 }

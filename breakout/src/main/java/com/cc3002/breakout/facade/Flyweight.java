@@ -198,11 +198,14 @@ public class Flyweight {
 
   public void updateScore() {
     player.getScore().addNextLevel(curScore.getPoints());
-    curScore = new Score(this);
+    curScore.add(-1 * curScore.getPoints());
   }
 
   public LevelHandler getLevelHandler() {
     return levelHandler;
   }
 
+  public boolean isLevelCompleted() {
+    return levelHandler.getRequiredPoints() <= curScore.getPoints();
+  }
 }
