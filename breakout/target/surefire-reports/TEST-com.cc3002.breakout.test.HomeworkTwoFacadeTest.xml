@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="18" failures="0" name="com.cc3002.breakout.test.HomeworkTwoFacadeTest" time="0.01" errors="0" skipped="0">
+<testsuite tests="18" failures="0" name="com.cc3002.breakout.test.HomeworkTwoFacadeTest" time="0.015" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib"/>
@@ -27,13 +27,13 @@
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Mac OS X"/>
-    <property name="classworlds.conf" value="/Users/gabriel/Documents/workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf1772731067199524892.tmp"/>
+    <property name="classworlds.conf" value="/Users/gabriel/Documents/workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf7383488337624481934.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/Users/gabriel/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="10.11.6"/>
+    <property name="os.version" value="10.12.1"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="user.home" value="/Users/gabriel"/>
     <property name="user.timezone" value="America/Argentina/Cordoba"/>
@@ -65,20 +65,20 @@
   </properties>
   <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testCurrentLevel" time="0"/>
   <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testNewLevelWithSoftAndStoneBricks" time="0"/>
-  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testGetCurrentLevel" time="0"/>
+  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testGetCurrentLevel" time="0.001"/>
   <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testGetGameConsole" time="0"/>
-  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testGetNumberOfHearts" time="0.001"/>
-  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testHomeworkOneFacade" time="0"/>
+  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testGetNumberOfHearts" time="0"/>
+  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testHomeworkOneFacade" time="0.002"/>
   <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testGetLevelName" time="0"/>
   <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testLossOfHeart" time="0"/>
-  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testSetCurrentLevel" time="0"/>
+  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testSetCurrentLevel" time="0.001"/>
   <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testGetRequiredPoints" time="0"/>
-  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testNewBonuses" time="0.001"/>
-  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testNumberOfBricks" time="0.002"/>
+  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testNewBonuses" time="0"/>
+  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testNumberOfBricks" time="0.004"/>
   <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testGetGameObservers" time="0"/>
-  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testGetBricks" time="0.001"/>
-  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testHasNextLevel" time="0"/>
-  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testSpawnBricks" time="0.004"/>
-  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testEarnedScore" time="0"/>
-  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testHomeworkOneFacadeStringIntDouble" time="0.001"/>
+  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testGetBricks" time="0"/>
+  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testHasNextLevel" time="0.001"/>
+  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testSpawnBricks" time="0.005"/>
+  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testEarnedScore" time="0.001"/>
+  <testcase classname="com.cc3002.breakout.test.HomeworkTwoFacadeTest" name="testHomeworkOneFacadeStringIntDouble" time="0"/>
 </testsuite>

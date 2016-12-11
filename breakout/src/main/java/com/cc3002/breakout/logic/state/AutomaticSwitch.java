@@ -9,7 +9,7 @@ public class AutomaticSwitch {
   private State state;
   
   public AutomaticSwitch() {
-    this.setState(new Open());
+    this.setState(new Close());
   }
   
   public void setState(State newState) {
