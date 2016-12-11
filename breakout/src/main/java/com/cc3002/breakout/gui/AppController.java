@@ -25,12 +25,6 @@ public class AppController implements UIController {
   
   @FXML
   private Label labelLifesPlayer;
-  /*@FXML
-  private Label labelScoreEnemy;
-  
-  public Label getLabelScoreEnemy() {
-    return labelScoreEnemy;
-  }*/
   
   public Label getLabelScorePlayer() {
     return labelScorePlayer;
@@ -47,18 +41,13 @@ public class AppController implements UIController {
   public Label getLabelLifes() {
     return labelLifes;
   } 
+  
   @Override
   public void init() {
     labelScorePlayer.setFont(FXGL.getUIFactory().newFont(40));
     labelScore.setFont(FXGL.getUIFactory().newFont(40));
     labelLifes.setFont(FXGL.getUIFactory().newFont(40));
     labelLifesPlayer.setFont(FXGL.getUIFactory().newFont(40));
-    //labelScoreEnemy.setFont(FXGL.getUIFactory().newFont(72));
-
-    /*labelScoreEnemy.layoutBoundsProperty().addListener((observable, oldValue, newBounds) -> {
-      double width = newBounds.getWidth();
-      labelScoreEnemy.setTranslateX(800 - 100 - width);
-    });*/
 
     labelScorePlayer.textProperty().addListener((observable, oldValue, newValue) -> {
       animateLabel(labelScorePlayer);
@@ -69,9 +58,7 @@ public class AppController implements UIController {
       animateLabel(labelLifesPlayer);
     });
 
-    /*labelScoreEnemy.textProperty().addListener((observable, oldValue, newValue) -> {
-      animateLabel(labelScoreEnemy);
-    });*/
+
   }
   
   private void animateLabel(Label label) {

@@ -10,6 +10,7 @@ import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.effect.ParticleControl;
 import com.almasb.fxgl.effect.ParticleEmitter;
 import com.almasb.fxgl.effect.ParticleEmitters;
+import com.almasb.fxgl.effect.Vignette;
 import com.almasb.fxgl.entity.Entities;
 import com.almasb.fxgl.entity.EntityView;
 import com.almasb.fxgl.entity.GameEntity;
@@ -63,6 +64,7 @@ public class BreakoutApp extends GameApplication {
   private GameEntity bat;
   private GameEntity ball;
   private Entity walls;
+  private UIOverlay uioverlay;
   
   @Override
   protected void initInput() {
@@ -105,7 +107,12 @@ public class BreakoutApp extends GameApplication {
           System.out.println(boxB.getName() + " hitted by "+ boxA.getName());
           if(boxB.getName().equals("TOP")){
             System.out.println("Event fired!");
-            lifesPlayer.set(game.lossOfHeart());
+            int totalLifes = game.lossOfHeart();
+            lifesPlayer.set(totalLifes);
+            if(totalLifes == 0){
+              uioverlay.showMessage("Game Over!");
+              pause();
+            }
             Point2D pos = bat.getPosition();
             System.out.println(pos.getX()+" "+pos.getY());
             pos = pos.add(35, -15);
@@ -154,12 +161,13 @@ public class BreakoutApp extends GameApplication {
   protected void initUI() {
     AppController controller = new AppController();
     UI ui = getAssetLoader().loadUI("main.fxml", controller);
-
+    uioverlay = new UIOverlay(width,height);
     controller.getLabelScorePlayer().textProperty().bind(scorePlayer.asString());
     controller.getLabelScore().setText("SCORE");
     controller.getLabelLifesPlayer().textProperty().bind(lifesPlayer.asString());
     controller.getLabelLifes().setText("LIFES");
     getGameScene().addUI(ui);
+    getGameScene().addUINodes(uioverlay);
   }
 
   @Override
