@@ -3,12 +3,21 @@ package com.cc3002.breakout.gui;
 import javafx.beans.binding.BooleanBinding;
 
 
-
+/**
+ * Achievement.
+ * @author gabriel
+ *
+ */
 public class AchievementBinding extends BooleanBinding {
   
+  /**
+   * Interface para hacer un lambda.
+   * @author gabriel
+   *
+   */
   interface TwoArgInterface {
 
-    public boolean operation(long a, long b);
+    public boolean operation(long firstarg, long secondarg);
   }
   
   TwoArgInterface bindingOperator;

@@ -8,6 +8,11 @@ import com.almasb.fxgl.time.UpdateEvent;
 
 import javafx.beans.property.DoubleProperty;
 
+/**
+ * Controlador de audio para utilizar sonidos en el juego.
+ * @author gabriel
+ *
+ */
 public class AudioController implements AudioPlayer {
 
   @Override
@@ -50,6 +55,7 @@ public class AudioController implements AudioPlayer {
     // TODO Auto-generated method stub
     sound.getClip$FXGL().play(volume);
   }
+  
   @Override
   public void stopSound(Sound sound) {
     // TODO Auto-generated method stub

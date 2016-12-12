@@ -2,9 +2,11 @@ package com.cc3002.breakout.test;
 
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.bonus.BonusHandler;
@@ -108,4 +110,8 @@ public class RealLevelTest {
         + "*#*#*#*#*#*#*#*#" + System.lineSeparator());
   }*/
   
+  @Test
+  public void isLevel() {
+    assertTrue(lv1.isLevel());
+  }
 }

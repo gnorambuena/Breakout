@@ -14,8 +14,13 @@ import com.cc3002.breakout.logic.level.Score;
 import javafx.beans.property.IntegerProperty;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import sun.audio.AudioPlayer;
 
+
+/**
+ * Handler para la colision producida por la pelota y el brick.
+ * @author gabriel
+ *
+ */
 public class BrickBallCollisionHandler extends CollisionHandler {
   
   GameWorld gameworld;
@@ -23,6 +28,10 @@ public class BrickBallCollisionHandler extends CollisionHandler {
   Score curScore;
   BreakoutApp breakout;
   
+  /**
+   * Constructor para el handler de la colision entre un brick y la pelota.
+   * @param breakout Referencia a la app.
+   */
   public BrickBallCollisionHandler(BreakoutApp breakout) {
     super(EntityType.BRICK, EntityType.BALL);
     gameworld = breakout.getGameWorld();
@@ -32,13 +41,14 @@ public class BrickBallCollisionHandler extends CollisionHandler {
   }
   
   @Override
-  protected void onHitBoxTrigger(Entity a, Entity b, HitBox boxA, HitBox boxB) {
+  protected void onHitBoxTrigger(Entity firstEntity, Entity secondEntity,
+      HitBox boxA, HitBox boxB) {
     //System.out.println(boxB.getName() + " hitted by "+ boxA.getName());
     new AudioController().playSound(breakout.getBrickHitSound());
-    BrickEntity brick = (BrickEntity)a;
+    BrickEntity brick = (BrickEntity)firstEntity;
     brick.getRefBrick().hit();
     if (brick.getRefBrick().isDestroyed()) {
-      gameworld.removeEntity(a);
+      gameworld.removeEntity(firstEntity);
       scorePlayer.set((int)curScore.getPoints());
       if (breakout.getFacade().getFlyweight().isLevelCompleted()) {
         breakout.playNextLevel();

@@ -15,32 +15,43 @@ import com.cc3002.breakout.gui.AudioController;
 import com.cc3002.breakout.gui.BreakoutApp;
 import com.cc3002.breakout.gui.EntityFactory;
 import com.cc3002.breakout.gui.EntityType;
-import com.cc3002.breakout.gui.UIOverlay;
+import com.cc3002.breakout.gui.Overlay;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+/**
+ * Handler para la colision de la pelota con la muralla.
+ * @author gabriel
+ *
+ */
 public class BallWallCollisionHandler extends CollisionHandler {
   
   GameWorld gameworld;
   GameEntity bat;
   HomeworkTwoFacade game;
   IntegerProperty lifesPlayer;
-  UIOverlay uioverlay;
+  Overlay uioverlay;
   BreakoutApp breakout;
   
+  /**
+   * Constructor para el Handler de la colision entre la pelota y la muralla.
+   * @param breakout Referencia a la app.
+   */
   public BallWallCollisionHandler(BreakoutApp breakout) {
     super(EntityType.BALL, EntityType.WALL);
     gameworld = breakout.getGameWorld();
     game = breakout.getFacade();
     lifesPlayer = breakout.getLifesPlayer();
-    uioverlay = breakout.getUIOverlay();
+    uioverlay = breakout.getOverlay();
     this.breakout = breakout;
   }
   
-  protected void onHitBoxTrigger(Entity a, Entity b, HitBox boxA, HitBox boxB) {
+  @Override
+  protected void onHitBoxTrigger(Entity firstEntity, Entity secondEntity,
+      HitBox boxA, HitBox boxB) {
     //System.out.println(boxB.getName() + " hitted by " + boxA.getName());
     new AudioController().playSound(breakout.getWallHitSound(),0.35);
     if (boxB.getName().equals("TOP")) {

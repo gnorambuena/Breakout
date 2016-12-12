@@ -6,7 +6,6 @@ import com.almasb.fxgl.ui.UIController;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 /**

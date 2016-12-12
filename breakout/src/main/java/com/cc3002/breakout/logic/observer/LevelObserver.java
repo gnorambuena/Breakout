@@ -42,7 +42,7 @@ public class LevelObserver implements Observer {
   public void update(Observable object, Object arg) {
     if (arg != null) {
       String value = arg.toString();
-      if (value.equals("AS")) {
+      if ("AS".equals(value)) {
         levelAutoSwitch();
       } else if (!tabla.contains(value)) {
         levelUpdate(value);

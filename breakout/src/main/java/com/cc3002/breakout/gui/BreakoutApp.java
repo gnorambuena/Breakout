@@ -2,13 +2,11 @@ package com.cc3002.breakout.gui;
 
 import com.almasb.ents.Entity;
 import com.almasb.fxgl.app.GameApplication;
-import com.almasb.fxgl.audio.AudioPlayer;
 import com.almasb.fxgl.audio.Sound;
 import com.almasb.fxgl.entity.Entities;
 import com.almasb.fxgl.entity.GameEntity;
 import com.almasb.fxgl.entity.component.CollidableComponent;
 import com.almasb.fxgl.entity.component.TypeComponent;
-import com.almasb.fxgl.gameplay.Achievement;
 import com.almasb.fxgl.input.ActionType;
 import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.InputMapping;
@@ -28,12 +26,16 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import org.jbox2d.dynamics.FixtureDef;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jbox2d.dynamics.FixtureDef;
-
+/**
+ * Clase principal del juego, desde aqui se inicializan todos los objetos.
+ * @author gabriel
+ *
+ */
 public class BreakoutApp extends GameApplication {
 
   private int width = 600;
@@ -46,12 +48,13 @@ public class BreakoutApp extends GameApplication {
   private BatControl playerBat;
   private GameEntity bat;
   private GameEntity ball;
-  private UIOverlay uioverlay;
+  private Overlay uioverlay;
   private Sound ballBrickHit;
   private Sound ballWallHit;
   private Sound batBallHit;
-  private Sound levelDone;
-  private Sound gamefinished;
+  //private Sound levelDone;
+  //private Sound gamefinished;
+  
   @Override
   protected void initInput() {
     
@@ -65,8 +68,8 @@ public class BreakoutApp extends GameApplication {
     ballBrickHit = getAssetLoader().loadSound("ballbrickhit.wav");
     ballWallHit = getAssetLoader().loadSound("ballwall.wav");
     batBallHit = getAssetLoader().loadSound("batball.wav");
-    levelDone = getAssetLoader().loadSound("leveldone.wav");
-    gamefinished = getAssetLoader().loadSound("gamefinished.wav");
+    //levelDone = getAssetLoader().loadSound("leveldone.wav");
+    //gamefinished = getAssetLoader().loadSound("gamefinished.wav");
   }
 
   @Override
@@ -93,12 +96,12 @@ public class BreakoutApp extends GameApplication {
   protected void initUI() {
     AppController controller = new AppController();
     UI ui = getAssetLoader().loadUI("main.fxml", controller);
-    uioverlay = new UIOverlay(width,height);
+    getGameScene().addUI(ui);
+    uioverlay = new Overlay(width,height);
     controller.getLabelScorePlayer().textProperty().bind(scorePlayer.asString());
     controller.getLabelScore().setText("SCORE");
     controller.getLabelLifesPlayer().textProperty().bind(lifesPlayer.asString());
     controller.getLabelLifes().setText("LIFES");
-    getGameScene().addUI(ui);
     getGameScene().addUINodes(uioverlay);
   }
 
@@ -173,11 +176,14 @@ public class BreakoutApp extends GameApplication {
     }
   }
   
+  /**
+   * Metodo que se encarga de hacer pasar al siguiente nivel del juego en la gui.
+   */
   public void playNextLevel() {
     
     if (curLevel + 1 == levels.size()) {
       pause();
-      new AudioController().playSound(gamefinished);
+      //new AudioController().playSound(gamefinished);
       uioverlay.showMessage("You win!");
     } else {
       removeLevel();
@@ -185,7 +191,7 @@ public class BreakoutApp extends GameApplication {
       curLevel++;
       ILevel curILevel = levels.get(curLevel);
       initBricks(curILevel);
-      new AudioController().playSound(levelDone);
+      //new AudioController().playSound(levelDone);
       game.autoSwitchToNextLevel();
       if (curLevel < 4) {
         game.setNextLevel(levels.get(curLevel + 1));
@@ -200,7 +206,7 @@ public class BreakoutApp extends GameApplication {
   
   private void removeLevel() {
     List<Entity> bricks = getGameWorld().getEntitiesByType(EntityType.BRICK);
-    for(Entity brick : bricks) {
+    for (Entity brick : bricks) {
       getGameWorld().removeEntity(brick);
     }
   }
@@ -214,8 +220,8 @@ public class BreakoutApp extends GameApplication {
   
   @Override
   protected void initAchievements() {
-    Achievement a = new Achievement("Game Finished", "Finishing the game, Congratulations.");
-    getAchievementManager().registerAchievement(a);
+    //Achievement a = new Achievement("Game Finished", "Finishing the game, Congratulations.");
+    //getAchievementManager().registerAchievement(a);
   }
   
   public IntegerProperty getScorePlayer() {
@@ -230,7 +236,7 @@ public class BreakoutApp extends GameApplication {
     return game;
   }
   
-  public UIOverlay getUIOverlay() {
+  public Overlay getOverlay() {
     return uioverlay;
   }
   
@@ -254,9 +260,13 @@ public class BreakoutApp extends GameApplication {
     return batBallHit;
   }
   
-  public void setBall(GameEntity aBall) {
+  /**
+   * Metodo que se encarga de spawnear una nueva pelota.
+   * @param newball La pelota ya creada.
+   */
+  public void setBall(GameEntity newball) {
     getGameWorld().removeEntities(ball);
-    ball = aBall;
+    ball = newball;
     getGameWorld().addEntities(ball); 
   }
   

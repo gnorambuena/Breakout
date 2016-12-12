@@ -27,8 +27,8 @@ public class LevelHandler extends GameLevel {
     for (Observer observer: flyweight.getObservers()) {
       addObserver(observer);
     }
-    currentLevel = null;
-    nextLevel = null;
+    currentLevel = new NullLevel();
+    nextLevel = new NullLevel();
   }
 
   /**
@@ -37,7 +37,7 @@ public class LevelHandler extends GameLevel {
   @Override
   public void setCurrentLevel(final ILevel newCurrentLevel) {
     currentLevel = newCurrentLevel;
-    if (currentLevel != null) {
+    if (currentLevel.isLevel()) {
       currentLevel.setFlyweight(flyweight);
       currentLevel.setRequiredPoints();
       setChanged();
@@ -121,15 +121,18 @@ public class LevelHandler extends GameLevel {
    */
   public void switchToNextLevel() {
     setCurrentLevel(nextLevel);
-    nextLevel = null;
+    nextLevel = new NullLevel();
   }
 
   public boolean hasCurrentLevel() {
-    return currentLevel != null;
+    return currentLevel.isLevel();
   }
 
   public void setFlyweight(Flyweight flyweight) {
     //filler comment
   }
 
+  public boolean isLevel() {
+    return true;
+  }
 }

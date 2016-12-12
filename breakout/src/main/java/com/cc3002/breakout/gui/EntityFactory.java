@@ -13,19 +13,32 @@ import com.cc3002.breakout.gui.control.BallControl;
 import com.cc3002.breakout.gui.control.BatControl;
 import com.cc3002.breakout.logic.brick.IBrick;
 
-import org.jbox2d.dynamics.BodyType;
-import org.jbox2d.dynamics.FixtureDef;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
+import org.jbox2d.dynamics.BodyType;
+import org.jbox2d.dynamics.FixtureDef;
+
+/**
+ * Factory de todas las entidades del juego, sirve para crear el bat, el ball
+ * y los bricks.
+ * @author gabriel
+ *
+ */
 public class EntityFactory {
   
-  public static Entity newBat (double x, double y) {
+  /**
+   * Metodo que se encarga de generar un nuevo bate para el juego.
+   * @param xpos Posicion en x donde aparecera el bate.
+   * @param ypos Posicion en y donde aparecera el bate.
+   * @return Una nueva entidad que representa al bate.
+   */
+  public static Entity newBat(double xpos, double ypos) {
     GameEntity bat = new GameEntity();
     bat.getTypeComponent().setValue(EntityType.PLAYER_BAT);
-    bat.getPositionComponent().setValue(x, y);
+    bat.getPositionComponent().setValue(xpos, ypos);
     bat.getBoundingBoxComponent().addHitBox(new HitBox("BAT", BoundingShape.box(80, 15)));
     bat.getMainViewComponent().setView(new Rectangle(80,15, Color.BLUE));
 
@@ -45,10 +58,16 @@ public class EntityFactory {
     return bat;
   }
   
-  public static Entity newBall(double x, double y) {
+  /**
+   * Metodo que se encarga de generar una nueva pelota para el juego.
+   * @param xpos Posicion en x donde aparecera la pelota.
+   * @param ypos Posicion en y donde aparecera la pelota.
+   * @return Una nueva entidad que representa la pelota.
+   */
+  public static Entity newBall(double xpos, double ypos) {
     GameEntity ball = new GameEntity();
     ball.getTypeComponent().setValue(EntityType.BALL);
-    ball.getPositionComponent().setValue(x, y);
+    ball.getPositionComponent().setValue(xpos, ypos);
     ball.getBoundingBoxComponent().addHitBox(new HitBox("BODY", BoundingShape.circle(5)));
     ball.getMainViewComponent().setView(new Circle(5, Color.LIGHTGRAY));
 
@@ -69,14 +88,22 @@ public class EntityFactory {
     return ball;
   }
 
-  
-  public static BrickEntity newBrick(double x, double y, IBrick refBrick) {
+  /**
+   * Metodo que se encarga de generar un nuevo brick para el juego.
+   * @param xpos Posicion en x donde aparecera el brick.
+   * @param ypos Posicion en y donde aparacera el brick.
+   * @param refBrick IBrick de referencia, la parte logica del brick.
+   * @return Una nueva entidad que representa al brick.
+   */
+  public static BrickEntity newBrick(double xpos, double ypos, IBrick refBrick) {
     
     BrickEntity brick = new BrickEntity();
     brick.setRefBrick(refBrick);
     brick.getTypeComponent().setValue(EntityType.BRICK);
-    brick.getPositionComponent().setValue(x, y);
-    brick.getMainViewComponent().setView(new EntityView(new Rectangle(35, 10, refBrick.isSoftBrick() ? Color.BISQUE : Color.BROWN)), true);
+    brick.getPositionComponent().setValue(xpos, ypos);
+    brick.getMainViewComponent()
+        .setView(new EntityView(
+          new Rectangle(35, 10, refBrick.isSoftBrick() ? Color.BISQUE : Color.BROWN)), true);
 
     PhysicsComponent brickPhysics = new PhysicsComponent();
     brickPhysics.setBodyType(BodyType.STATIC);

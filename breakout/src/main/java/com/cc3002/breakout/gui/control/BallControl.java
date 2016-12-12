@@ -25,7 +25,6 @@ package com.cc3002.breakout.gui.control;
  * SOFTWARE.
  */
 
-import java.util.Random;
 
 import com.almasb.ents.AbstractControl;
 import com.almasb.ents.Entity;
@@ -66,9 +65,9 @@ public class BallControl extends AbstractControl {
                 ball.getLinearVelocity().getY());
     }
     
-    if (Math.abs(ball.getLinearVelocity().getX()) < 10 ) {
+    if (Math.abs(ball.getLinearVelocity().getX()) < 30 ) {
       //System.out.println("LIMITEDX");
-      ball.setLinearVelocity(Math.signum(ball.getLinearVelocity().getX()) * 10,
+      ball.setLinearVelocity(Math.signum(ball.getLinearVelocity().getX()) * 30,
                 ball.getLinearVelocity().getY());
     }
     

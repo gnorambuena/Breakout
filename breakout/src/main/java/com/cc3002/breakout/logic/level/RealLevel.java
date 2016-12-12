@@ -165,5 +165,8 @@ public class RealLevel extends GameLevel {
     genRequiredPoints();
   }
   
+  public boolean isLevel() {
+    return true;
+  }
 }
 

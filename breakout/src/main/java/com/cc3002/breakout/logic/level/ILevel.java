@@ -38,4 +38,6 @@ public interface ILevel {
   boolean hasCurrentLevel();
 
   void setFlyweight(Flyweight flyweight);
+  
+  public boolean isLevel();
 }
