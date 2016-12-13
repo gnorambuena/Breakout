@@ -19,6 +19,8 @@ import com.cc3002.breakout.gui.collisionhandler.BallWallCollisionHandler;
 import com.cc3002.breakout.gui.collisionhandler.BatBallCollisionHandler;
 import com.cc3002.breakout.gui.collisionhandler.BrickBallCollisionHandler;
 import com.cc3002.breakout.gui.control.BatControl;
+import com.cc3002.breakout.gui.observer.BonusObserver;
+import com.cc3002.breakout.logic.bonus.IBonus;
 import com.cc3002.breakout.logic.level.ILevel;
 
 import javafx.beans.property.IntegerProperty;
@@ -42,6 +44,7 @@ public class BreakoutApp extends GameApplication {
   private int height = 600;
   private int curLevel = 0;
   private List<ILevel> levels;
+  private List<List<IBonus>> bonusesperlevel;
   private IntegerProperty scorePlayer;
   private IntegerProperty lifesPlayer;
   private HomeworkTwoFacade game = new HomeworkTwoFacade();
@@ -49,9 +52,14 @@ public class BreakoutApp extends GameApplication {
   private GameEntity bat;
   private GameEntity ball;
   private Overlay uioverlay;
-  private Sound ballBrickHit;
+  private Sound ballSoftBrickHit;
+  private Sound ballStoneBrickHit;
   private Sound ballWallHit;
   private Sound batBallHit;
+  private Sound ballFalling;
+  private Sound bonus;
+  private Sound discount;
+  boolean canPassNextLevel = false;
   //private Sound levelDone;
   //private Sound gamefinished;
   
@@ -61,13 +69,18 @@ public class BreakoutApp extends GameApplication {
     Input input = getInput(); // get input service
     input.addInputMapping(new InputMapping("Left", KeyCode.A));
     input.addInputMapping(new InputMapping("Right", KeyCode.D));
+    input.addInputMapping(new InputMapping("Pass", KeyCode.T));
   }
   
   @Override
   protected void initAssets() {
-    ballBrickHit = getAssetLoader().loadSound("ballbrickhit.wav");
+    ballSoftBrickHit = getAssetLoader().loadSound("softbrickhit.wav");
+    ballStoneBrickHit = getAssetLoader().loadSound("stonebrickhit.wav");
     ballWallHit = getAssetLoader().loadSound("ballwall.wav");
     batBallHit = getAssetLoader().loadSound("batball.wav");
+    ballFalling = getAssetLoader().loadSound("ballfalling.wav");
+    bonus = getAssetLoader().loadSound("bonus.wav");
+    discount = getAssetLoader().loadSound("discount.wav");
     //levelDone = getAssetLoader().loadSound("leveldone.wav");
     //gamefinished = getAssetLoader().loadSound("gamefinished.wav");
   }
@@ -82,6 +95,7 @@ public class BreakoutApp extends GameApplication {
     initScreenBounds();
     initLevels();
     initUI();
+    initBonus();
   }
 
   @Override
@@ -179,28 +193,32 @@ public class BreakoutApp extends GameApplication {
   /**
    * Metodo que se encarga de hacer pasar al siguiente nivel del juego en la gui.
    */
+  @OnUserAction(name = "Pass", type = ActionType.ON_ACTION)
   public void playNextLevel() {
-    
-    if (curLevel + 1 == levels.size()) {
-      pause();
-      //new AudioController().playSound(gamefinished);
-      uioverlay.showMessage("You win!");
-    } else {
-      removeLevel();
-      game.autoSwitchToNextLevel();
-      curLevel++;
-      ILevel curILevel = levels.get(curLevel);
-      initBricks(curILevel);
-      //new AudioController().playSound(levelDone);
-      game.autoSwitchToNextLevel();
-      if (curLevel < 4) {
-        game.setNextLevel(levels.get(curLevel + 1));
+    if (canPassNextLevel) {
+      canPassNextLevel = false;
+      if (curLevel + 1 == levels.size()) {
+        pause();
+        //new AudioController().playSound(gamefinished);
+        uioverlay.showMessage("You win!");
+      } else {
+        removeLevel();
+        game.autoSwitchToNextLevel();
+        curLevel++;
+        ILevel curILevel = levels.get(curLevel);
+        initBricks(curILevel);
+        game.registerBonuses(bonusesperlevel.get(curLevel));
+        //new AudioController().playSound(levelDone);
+        game.autoSwitchToNextLevel();
+        if (curLevel < 4) {
+          game.setNextLevel(levels.get(curLevel + 1));
+        }
+        setBall((GameEntity)EntityFactory.newBall(getWidth() / 2, 5 * getHeight() / 7 - 5));
+        getGameWorld().removeEntities(bat);
+        initPlayerBat();
+        uioverlay.showMessageFlash("Playing " + curILevel.getLevelName(), 2);
+        scorePlayer.set((int)game.getFlyweight().getCurScore().getPoints());
       }
-      setBall((GameEntity)EntityFactory.newBall(getWidth() / 2, 5 * getHeight() / 7 - 5));
-      getGameWorld().removeEntities(bat);
-      initPlayerBat();
-      uioverlay.showMessageFlash("Playing " + curILevel.getLevelName() );
-      scorePlayer.set((int)game.getFlyweight().getCurScore().getPoints());
     }
   }
   
@@ -216,6 +234,16 @@ public class BreakoutApp extends GameApplication {
     bg.getMainViewComponent().setView(new Rectangle(getWidth(), getHeight(), Color.rgb(0, 0, 5)));
 
     getGameWorld().addEntity(bg);
+  }
+  
+  protected void initBonus() {
+    game.getFlyweight().addObserver(new BonusObserver(this));
+    bonusesperlevel = new ArrayList<List<IBonus>>();
+    for (ILevel level : levels) {
+      List<IBonus> curBonus = game.newBonuses((int)(level.getNumberOfBricks() * 0.4),0.8);
+      bonusesperlevel.add(curBonus);
+    }
+    game.registerBonuses(bonusesperlevel.get(0));
   }
   
   @Override
@@ -248,8 +276,12 @@ public class BreakoutApp extends GameApplication {
     return bat;
   }
   
-  public Sound getBrickHitSound() {
-    return ballBrickHit;
+  public Sound getSoftBrickHitSound() {
+    return ballSoftBrickHit;
+  }
+  
+  public Sound getStoneBrickHitSound() {
+    return ballStoneBrickHit;
   }
   
   public Sound getWallHitSound() {
@@ -260,6 +292,18 @@ public class BreakoutApp extends GameApplication {
     return batBallHit;
   }
   
+  public Sound getBallFallingSound() {
+    return ballFalling;
+  }
+  
+  public Sound getBonusSound() {
+    return bonus;
+  }
+  
+  public Sound getDiscountSound() {
+    return discount;
+  }
+  
   /**
    * Metodo que se encarga de spawnear una nueva pelota.
    * @param newball La pelota ya creada.
@@ -268,6 +312,11 @@ public class BreakoutApp extends GameApplication {
     getGameWorld().removeEntities(ball);
     ball = newball;
     getGameWorld().addEntities(ball); 
+  }
+  
+  public void setFlagPassNextLevel() {
+    canPassNextLevel = true;
+    uioverlay.showMessageFlash("Press <T> to play next!", 3);
   }
   
   public void pause() {

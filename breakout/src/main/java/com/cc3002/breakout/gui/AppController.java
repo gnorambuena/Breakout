@@ -8,9 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
-/**
- * @author Almas Baimagambetov (AlmasB) (almaslvl@gmail.com)
- */
 public class AppController implements UIController {
 
   @FXML
@@ -56,8 +53,6 @@ public class AppController implements UIController {
     labelLifesPlayer.textProperty().addListener((observable, oldValue, newValue) -> {
       animateLabel(labelLifesPlayer);
     });
-
-
   }
   
   private void animateLabel(Label label) {

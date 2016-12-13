@@ -1,8 +1,9 @@
 package com.cc3002.breakout.logic.bonus;
 
 
+
 import com.cc3002.breakout.facade.Flyweight;
-import com.cc3002.breakout.logic.level.Player;
+import com.cc3002.breakout.logic.level.Score;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -14,14 +15,14 @@ import java.util.Observer;
  */
 public class LossScoreModifier extends Observable implements IBonus {
   
-  Player player;
+  Score curScore;
 
   /**
    * Constructor de un modificador que quita puntaje.
    * @param flyweight flyweight del juego.
    */
   public LossScoreModifier(Flyweight flyweight) {
-    player = flyweight.getPlayer();
+    curScore = flyweight.getCurScore();
     for (Observer observer: flyweight.getObservers()) {
       addObserver(observer);
     }
@@ -31,7 +32,7 @@ public class LossScoreModifier extends Observable implements IBonus {
    * Metodo que ejecuta el modificador.
    */
   public void reached() {
-    player.addScore(-3);
+    curScore.add(-3);
     setChanged();
     notifyObservers("SD");
     clearChanged();

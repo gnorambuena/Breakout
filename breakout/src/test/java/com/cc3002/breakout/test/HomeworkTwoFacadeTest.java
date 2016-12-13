@@ -83,7 +83,7 @@ public class HomeworkTwoFacadeTest {
   
   @Test
   public void testHasNextLevel() {
-    assertTrue(game2.hasNextLevel());
+    assertFalse(game2.hasNextLevel());
   }
   
   @Test

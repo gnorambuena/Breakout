@@ -98,7 +98,7 @@ public class Overlay extends Parent {
    * que este se muestra rapidamente.
    * @param message Mensaje a mostrar.
    */
-  public void showMessageFlash(String message) {
+  public void showMessageFlash(String message, double duration) {
     Text text = new Text(message);
     text.setTranslateX(width / 2 - text.getLayoutBounds().getWidth() / 2 - 100);
     text.setTranslateY(height / 2);
@@ -107,7 +107,7 @@ public class Overlay extends Parent {
     text.setOpacity(0);
     getChildren().add(text);
 
-    FadeTransition ft = new FadeTransition(Duration.seconds(2), text);
+    FadeTransition ft = new FadeTransition(Duration.seconds(duration), text);
     ft.setToValue(1);
     ft.setAutoReverse(true);
     ft.setCycleCount(2);

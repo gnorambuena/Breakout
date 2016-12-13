@@ -53,13 +53,13 @@ public class BallWallCollisionHandler extends CollisionHandler {
   protected void onHitBoxTrigger(Entity firstEntity, Entity secondEntity,
       HitBox boxA, HitBox boxB) {
     //System.out.println(boxB.getName() + " hitted by " + boxA.getName());
-    new AudioController().playSound(breakout.getWallHitSound(),0.35);
     if (boxB.getName().equals("TOP")) {
+      new AudioController().playSound(breakout.getBallFallingSound());
       bat = breakout.getBat();
       //System.out.println("Event fired!");
       int totalLifes = game.lossOfHeart();
       lifesPlayer.set(totalLifes);
-      if (totalLifes == 0) {
+      if (totalLifes <= 0) {
         uioverlay.showMessage("Game Over!");
         breakout.pause();
       }
@@ -77,6 +77,8 @@ public class BallWallCollisionHandler extends CollisionHandler {
               .with(new ParticleControl(emitter))
               .with(new ExpireCleanControl(Duration.seconds(1)))
               .buildAndAttach(gameworld);
+    } else {
+      new AudioController().playSound(breakout.getWallHitSound(),0.35);
     }
   }
 }

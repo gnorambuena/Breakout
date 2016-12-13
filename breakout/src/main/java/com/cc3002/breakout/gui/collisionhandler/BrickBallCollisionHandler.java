@@ -44,14 +44,19 @@ public class BrickBallCollisionHandler extends CollisionHandler {
   protected void onHitBoxTrigger(Entity firstEntity, Entity secondEntity,
       HitBox boxA, HitBox boxB) {
     //System.out.println(boxB.getName() + " hitted by "+ boxA.getName());
-    new AudioController().playSound(breakout.getBrickHitSound());
     BrickEntity brick = (BrickEntity)firstEntity;
+    if (brick.getRefBrick().isSoftBrick()) {
+      new AudioController().playSound(breakout.getSoftBrickHitSound(),0.7);
+    }
+    if (brick.getRefBrick().isStoneBrick()) {
+      new AudioController().playSound(breakout.getStoneBrickHitSound(),0.6);
+    }
     brick.getRefBrick().hit();
     if (brick.getRefBrick().isDestroyed()) {
       gameworld.removeEntity(firstEntity);
       scorePlayer.set((int)curScore.getPoints());
       if (breakout.getFacade().getFlyweight().isLevelCompleted()) {
-        breakout.playNextLevel();
+        breakout.setFlagPassNextLevel();;
       }
     } else if (brick.getRefBrick().remainingHits() == 2) {
       brick.getMainViewComponent()

@@ -100,7 +100,7 @@ public class LevelHandler extends GameLevel {
   }
 
   public boolean hasNextLevel() {
-    return nextLevel != null;
+    return nextLevel.isLevel();
   }
   
   /**
