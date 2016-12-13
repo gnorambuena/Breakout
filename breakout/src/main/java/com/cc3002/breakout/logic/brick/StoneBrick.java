@@ -69,6 +69,11 @@ public class StoneBrick extends Observable implements IBrick {
   public boolean isDestroyed() {
     return hitpoints == 0;
   }
+  
+  @Override
+  public boolean isMetalBrick() {
+    return false;
+  }
 
 }
 

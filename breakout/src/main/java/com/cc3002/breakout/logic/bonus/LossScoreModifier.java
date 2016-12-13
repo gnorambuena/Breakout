@@ -46,4 +46,13 @@ public class LossScoreModifier extends Observable implements IBonus {
     return true;
   }
 
+  @Override
+  public boolean isBatResize() {
+    return false;
+  }
+  
+  @Override
+  public boolean isAddBall() {
+    return false;
+  }
 }

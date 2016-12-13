@@ -58,25 +58,28 @@ public class BallWallCollisionHandler extends CollisionHandler {
       bat = breakout.getBat();
       //System.out.println("Event fired!");
       int totalLifes = game.lossOfHeart();
-      lifesPlayer.set(totalLifes);
-      if (totalLifes <= 0) {
+      if (totalLifes < 0) {
         uioverlay.showMessage("Game Over!");
+        breakout.setFlagCanRestartGame();
         breakout.pause();
+      } else {
+        lifesPlayer.set(totalLifes);
+        Point2D pos = bat.getPosition();
+        //System.out.println(pos.getX() + " " + pos.getY());
+        pos = pos.add(35, -15);
+        //System.out.println(pos.getX() + " " + pos.getY());
+        breakout.setBall( (GameEntity)firstEntity,
+            (GameEntity)EntityFactory.newBall(pos.getX(),pos.getY()));
+        
+        ParticleEmitter emitter = ParticleEmitters.newSparkEmitter();
+        emitter.setColorFunction(() -> Color.GOLD);
+  
+        Entities.builder()
+                .at(pos)
+                .with(new ParticleControl(emitter))
+                .with(new ExpireCleanControl(Duration.seconds(1)))
+                .buildAndAttach(gameworld);
       }
-      Point2D pos = bat.getPosition();
-      //System.out.println(pos.getX() + " " + pos.getY());
-      pos = pos.add(35, -15);
-      //System.out.println(pos.getX() + " " + pos.getY());
-      breakout.setBall((GameEntity)EntityFactory.newBall(pos.getX(),pos.getY()));
-      
-      ParticleEmitter emitter = ParticleEmitters.newSparkEmitter();
-      emitter.setColorFunction(() -> Color.GOLD);
-
-      Entities.builder()
-              .at(pos)
-              .with(new ParticleControl(emitter))
-              .with(new ExpireCleanControl(Duration.seconds(1)))
-              .buildAndAttach(gameworld);
     } else {
       new AudioController().playSound(breakout.getSound("ballWallHit"),0.35);
     }

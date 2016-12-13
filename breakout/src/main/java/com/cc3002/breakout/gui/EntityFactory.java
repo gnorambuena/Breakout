@@ -35,22 +35,24 @@ public class EntityFactory {
    * @param ypos Posicion en y donde aparecera el bate.
    * @return Una nueva entidad que representa al bate.
    */
-  public static Entity newBat(double xpos, double ypos) {
+  public static Entity newBat(double xpos, double ypos, double width, double height) {
     GameEntity bat = new GameEntity();
     bat.getTypeComponent().setValue(EntityType.PLAYER_BAT);
     bat.getPositionComponent().setValue(xpos, ypos);
-    bat.getBoundingBoxComponent().addHitBox(new HitBox("BAT", BoundingShape.box(80, 15)));
-    bat.getMainViewComponent().setView(new Rectangle(80,15, Color.BLUE));
+    bat.getBoundingBoxComponent().addHitBox(new HitBox("BAT", BoundingShape.box(width, height)));
+    bat.getMainViewComponent().setView(new Rectangle(width,height, Color.BLUE));
 
     PhysicsComponent batPhysics = new PhysicsComponent();
     batPhysics.setBodyType(BodyType.KINEMATIC);
 
     FixtureDef def = new FixtureDef();
+    def.setFriction(0.0f);
     def.setDensity(0.5f);
     def.setRestitution(1.0f);
 
     batPhysics.setFixtureDef(def);
 
+    //batPhysics.setOnPhysicsInitialized(() -> batPhysics.setLinearVelocity(0, 0));
     bat.addComponent(batPhysics);
     bat.addComponent(new CollidableComponent(true));
     bat.addControl(new BatControl());
@@ -77,7 +79,7 @@ public class EntityFactory {
     FixtureDef def = new FixtureDef();
     def.setDensity(0.3f);
     def.setRestitution(1.0f);
-
+    //def.setFriction(0.05f);
     ballPhysics.setFixtureDef(def);
     ballPhysics.setOnPhysicsInitialized(() -> ballPhysics.setLinearVelocity(5 * 60, -5 * 60));
 
@@ -103,7 +105,8 @@ public class EntityFactory {
     brick.getPositionComponent().setValue(xpos, ypos);
     brick.getMainViewComponent()
         .setView(new EntityView(
-          new Rectangle(35, 10, refBrick.isSoftBrick() ? Color.BISQUE : Color.BROWN)), true);
+          new Rectangle(35, 10, refBrick.isSoftBrick() ? Color.BISQUE :
+            refBrick.isStoneBrick() ? Color.BROWN : Color.DARKGREY)), true);
 
     PhysicsComponent brickPhysics = new PhysicsComponent();
     brickPhysics.setBodyType(BodyType.STATIC);
@@ -111,7 +114,7 @@ public class EntityFactory {
     FixtureDef def = new FixtureDef();
     def.setDensity(0.2f);
     def.setRestitution(1.0f);
-
+    def.setFriction(0.005f);
     brickPhysics.setFixtureDef(def);
 
     brick.addComponent(brickPhysics);

@@ -2,6 +2,7 @@ package com.cc3002.breakout.logic.level;
 
 import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.brick.IBrick;
+import com.cc3002.breakout.logic.brick.MetalBrick;
 import com.cc3002.breakout.logic.brick.SoftBrick;
 import com.cc3002.breakout.logic.brick.StoneBrick;
 
@@ -70,7 +71,11 @@ public class RealLevel extends GameLevel {
         newlevel.add(new SoftBrick(flyweight));
       } else {
         requiredPoints += 50;
-        newlevel.add(new StoneBrick(flyweight));
+        if (rand.nextFloat() > 0.95) {
+          newlevel.add(new MetalBrick(flyweight));
+        } else {
+          newlevel.add(new StoneBrick(flyweight));
+        }
       }
     }
     return newlevel;

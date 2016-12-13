@@ -28,10 +28,7 @@ package com.cc3002.breakout.gui.control;
 
 import com.almasb.ents.AbstractControl;
 import com.almasb.ents.Entity;
-import com.almasb.fxgl.app.FXGL;
-import com.almasb.fxgl.entity.component.BoundingBoxComponent;
 import com.almasb.fxgl.physics.PhysicsComponent;
-import com.cc3002.breakout.gui.event.DeathEvent;
 
 /**
  * @author Almas Baimagambetov (AlmasB) (almaslvl@gmail.com)
@@ -39,11 +36,9 @@ import com.cc3002.breakout.gui.event.DeathEvent;
 public class BallControl extends AbstractControl {
 
   private PhysicsComponent ball;
-  private BoundingBoxComponent bbox;
 
   @Override
   public void onAdded(Entity entity) {
-    bbox = entity.getComponentUnsafe(BoundingBoxComponent.class);
     ball = entity.getComponentUnsafe(PhysicsComponent.class);
   }
 
@@ -51,10 +46,6 @@ public class BallControl extends AbstractControl {
   public void onUpdate(Entity entity, double tpf) {
     //System.out.println("LIMITED");
     limitVelocity();
-    if (bbox.getMaxYWorld() > FXGL.getSettings().getHeight()) {
-      System.out.println("Event fired!");
-      FXGL.getEventBus().fireEvent(new DeathEvent(DeathEvent.ANY));
-    }
   }
 
   
@@ -65,9 +56,9 @@ public class BallControl extends AbstractControl {
                 ball.getLinearVelocity().getY());
     }
     
-    if (Math.abs(ball.getLinearVelocity().getX()) < 30 ) {
+    if (Math.abs(ball.getLinearVelocity().getX()) < 15 ) {
       //System.out.println("LIMITEDX");
-      ball.setLinearVelocity(Math.signum(ball.getLinearVelocity().getX()) * 30,
+      ball.setLinearVelocity(Math.signum(ball.getLinearVelocity().getX()) * 15,
                 ball.getLinearVelocity().getY());
     }
     

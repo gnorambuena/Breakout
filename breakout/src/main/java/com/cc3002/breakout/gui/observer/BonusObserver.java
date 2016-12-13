@@ -40,29 +40,38 @@ public class BonusObserver implements Observer {
     this.curScore = breakout.getFacade().getFlyweight().getCurScore();
     this.player = breakout.getFacade().getPlayer();
     this.breakout = breakout;
-    System.out.println("Observer initialized");
+    //System.out.println("Observer initialized");
     tabla = new Hashtable<String,String>();
     tabla.put("SD", "3 Score discount!");
     tabla.put("ES", "5 Extra Score!");
     tabla.put("HD", "1 Heart discount!");
     tabla.put("EH", "1 Extra Heart!");
+    tabla.put("RB", "Extra large bat!");
+    tabla.put("AB", "Extra ball!");
   }
 
   /**
    * Metodo que muestra el mensaje.
    */
   public void update(Observable object, Object arg) {
-    System.out.println("ASDASDASD");
+    //System.out.println(arg);
     String value = tabla.get(arg);
     if (value != null) {
-      uioverlay.showMessageFlash(value, 0.7);
+      uioverlay.showMessageFlash(value, 0.7, 25, 45);
       life.set(player.getNumberOfHearts());
       score.set((int)curScore.getPoints());
       IBonus curBonus = (IBonus)object;
       if (curBonus.isDiscount()) {
         new AudioController().playSound(breakout.getSound("discount"),0.7);
+        if (curBonus.isAddBall()) {
+          breakout.spawnSecondBall();
+        }
       } else {
         new AudioController().playSound(breakout.getSound("bonus"),0.7);
+        if (curBonus.isBatResize()) {
+          //System.out.println("bonus observer bat resize");
+          breakout.batResize();
+        }
       }
       if (player.getNumberOfHearts() <= 0) {
         uioverlay.showMessage("Game Over!");

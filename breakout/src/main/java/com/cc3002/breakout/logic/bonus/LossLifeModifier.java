@@ -43,4 +43,14 @@ public class LossLifeModifier extends Observable implements IBonus {
   public boolean isDiscount() {
     return true;
   }
+
+  @Override
+  public boolean isBatResize() {
+    return false;
+  }
+  
+  @Override
+  public boolean isAddBall() {
+    return false;
+  }
 }

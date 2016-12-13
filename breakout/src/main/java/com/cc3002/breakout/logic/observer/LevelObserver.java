@@ -32,7 +32,8 @@ public class LevelObserver implements Observer {
     tabla.add("EH");
     tabla.add("SOB");
     tabla.add("STB");
-
+    tabla.add("RB");
+    tabla.add("AB");
   }
   
 

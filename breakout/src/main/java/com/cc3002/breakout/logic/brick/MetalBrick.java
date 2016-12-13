@@ -1,20 +1,13 @@
 package com.cc3002.breakout.logic.brick;
 
-import com.cc3002.breakout.facade.Flyweight;
-import com.cc3002.breakout.logic.level.Printer;
-
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- * Representa un SoftBrick del juego,
- * tiene solo un hitpoint.
- * @author gabriel
- *
- */
+import com.cc3002.breakout.facade.Flyweight;
+import com.cc3002.breakout.logic.level.Printer;
 
-public class  SoftBrick extends Observable implements IBrick {
-  int hitpoints;
+
+public class MetalBrick extends Observable implements IBrick {
   Flyweight flyweight;
   
   /**
@@ -22,53 +15,46 @@ public class  SoftBrick extends Observable implements IBrick {
    * y la lista de Observers del Juego.
    * @param newFlyweight objeto Flyweight del juego.
    */
-  public SoftBrick(Flyweight newFlyweight) {
-    hitpoints = 1;
+  public MetalBrick(Flyweight newFlyweight) {
     flyweight = newFlyweight;
     for (Observer observer: flyweight.getObservers()) {
       addObserver(observer);
     }
   }
-  
+  @Override
   public boolean isSoftBrick() {
-    return true;
-  }
-
-  public boolean isStoneBrick() {
+    // TODO Auto-generated method stub
     return false;
   }
-  
-  public int remainingHits() {
-    return hitpoints;
+
+  @Override
+  public boolean isStoneBrick() {
+    // TODO Auto-generated method stub
+    return false;
   }
 
-  public String print(Printer printer) {
-    return printer.printSoftBrick();
-  }
-  
-  /**
-   * Le quita uno a los hitpoints
-   * del IBrick.
-   */
-  
+  @Override
   public void hit() {
-    if (hitpoints > 0) {
-      hitpoints--;
-      setChanged();
-      notifyObservers("SOB");
-      clearChanged();
-      flyweight.getBonusHandler().reached();
-      flyweight.getCurScore().add(10);
-    }
+    // TODO Auto-generated method stub
   }
 
+  @Override
+  public int remainingHits() {
+    return 10000000;
+  }
+
+  @Override
+  public String print(Printer printer) {
+    return null;
+  }
+
+  @Override
   public boolean isDestroyed() {
-    return hitpoints == 0;
+    return false;
   }
 
   @Override
   public boolean isMetalBrick() {
-    return false;
+    return true;
   }
-
 }

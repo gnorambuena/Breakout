@@ -45,7 +45,6 @@ public class Score extends Observable {
    */
   public void add(long pt) {
     points += pt;
-    System.out.println("Current score:" + points);
 
     if (points > flyweight.getRequiredPoints()) {
       setChanged();
@@ -55,7 +54,6 @@ public class Score extends Observable {
   }
   
   public void addNextLevel(long pt) {
-    System.out.println("Current score: (next level)" + points);
     points += pt;
   }
   

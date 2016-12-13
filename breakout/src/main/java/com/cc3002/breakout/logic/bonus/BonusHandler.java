@@ -60,14 +60,21 @@ public class BonusHandler {
       Flyweight newFlyweight) {
     List<IBonus> ans = new ArrayList<IBonus>();
     Random rand = new Random();
+    ans.add(new AddBatSizeModifier(newFlyweight));
     int numberOfBonuses = (int)(number * probability);
-    for (int i = 0 ; i < numberOfBonuses ; i++) {
+    
+    for (int i = 1 ; i < numberOfBonuses ; i++) {
       float chance = rand.nextFloat();
       if (chance < 0.5) {
         ans.add(new AddLifeModifier(newFlyweight));
       } else {
         ans.add(new AddScoreModifier(newFlyweight));
       }
+    }
+    float auxchance = rand.nextFloat();
+    if (auxchance < 0.1) {
+      ans.add(new AddBallModifier(newFlyweight));
+      numberOfBonuses++;
     }
     for (int i = numberOfBonuses ; i < number ; i++) {
       float chance = rand.nextFloat();

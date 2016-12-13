@@ -1,52 +1,43 @@
 package com.cc3002.breakout.logic.bonus;
 
-import com.cc3002.breakout.facade.Flyweight;
-import com.cc3002.breakout.logic.level.Score;
-
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- * Modificador que agrega 5 en Score.
- * @author gabriel
- *
- */
-public class AddScoreModifier extends Observable implements IBonus {
-  
-  Score curScore;
+import com.cc3002.breakout.facade.Flyweight;
+
+public class AddBatSizeModifier extends Observable implements IBonus {
 
   /**
-   * Constructor de un modificador que agrega puntaje.
+   * Constructor de un modificador que le hace resize al bat.
    * @param flyweight flyweight del juego.
    */
-  public AddScoreModifier(Flyweight flyweight) {
-    curScore = flyweight.getCurScore();
+  public AddBatSizeModifier(Flyweight flyweight) {
     for (Observer observer: flyweight.getObservers()) {
       addObserver(observer);
     }
+    
   }
   
-  /**
-   * Metodo que ejecuta el modificador.
-   */
+  @Override
   public void reached() {
-    curScore.add(5);
     setChanged();
-    notifyObservers("ES");
+    notifyObservers("RB");
     clearChanged();
   }
 
+  @Override
   public boolean isExtraBonus() {
-    return true;
+    return false;
   }
 
+  @Override
   public boolean isDiscount() {
     return false;
   }
 
   @Override
   public boolean isBatResize() {
-    return false;
+    return true;
   }
   
   @Override

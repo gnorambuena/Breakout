@@ -52,9 +52,11 @@ public class BreakoutApp extends GameApplication {
   private BatControl playerBat;
   private GameEntity bat;
   private GameEntity ball;
+  private GameEntity ball2;
   private Overlay uioverlay;
   private Hashtable<String,Sound> gameSounds;
   boolean canPassNextLevel = false;
+  boolean canRestartGame = false;
   //private Sound levelDone;
   //private Sound gamefinished;
   
@@ -65,6 +67,7 @@ public class BreakoutApp extends GameApplication {
     input.addInputMapping(new InputMapping("Left", KeyCode.A));
     input.addInputMapping(new InputMapping("Right", KeyCode.D));
     input.addInputMapping(new InputMapping("Pass", KeyCode.T));
+    input.addInputMapping(new InputMapping("Restart", KeyCode.R));
   }
   
   @Override
@@ -77,6 +80,7 @@ public class BreakoutApp extends GameApplication {
     gameSounds.put("ballFalling", getAssetLoader().loadSound("ballfalling.wav"));
     gameSounds.put("bonus", getAssetLoader().loadSound("bonus.wav"));
     gameSounds.put("discount", getAssetLoader().loadSound("discount.wav"));
+    gameSounds.put("ballMetalBrickHit", getAssetLoader().loadSound("metalbrickhit.wav"));
     //levelDone = getAssetLoader().loadSound("leveldone.wav");
     //gamefinished = getAssetLoader().loadSound("gamefinished.wav");
   }
@@ -84,7 +88,7 @@ public class BreakoutApp extends GameApplication {
   @Override
   protected void initGame() {
     scorePlayer = new SimpleIntegerProperty(0);
-    lifesPlayer = new SimpleIntegerProperty(30);
+    lifesPlayer = new SimpleIntegerProperty(3);
     initBackground();
     initPlayerBat();
     initBall();
@@ -133,7 +137,7 @@ public class BreakoutApp extends GameApplication {
   }
   
   private void initPlayerBat() {
-    Entity bat = EntityFactory.newBat(getWidth() / 2, 9 * getHeight() / 11);
+    Entity bat = EntityFactory.newBat(getWidth() / 2, 9 * getHeight() / 11, 80, 15);
     getGameWorld().addEntity(bat);
     this.bat = (GameEntity)bat;
     playerBat = bat.getControlUnsafe(BatControl.class);
@@ -191,38 +195,59 @@ public class BreakoutApp extends GameApplication {
    */
   @OnUserAction(name = "Pass", type = ActionType.ON_ACTION)
   public void playNextLevel() {
+    
     if (canPassNextLevel) {
       canPassNextLevel = false;
+      
       if (curLevel + 1 == levels.size()) {
         pause();
         //new AudioController().playSound(gamefinished);
         uioverlay.showMessage("You win!");
+        setFlagCanRestartGame();
+        
       } else {
         removeLevel();
-        game.autoSwitchToNextLevel();
-        curLevel++;
-        ILevel curILevel = levels.get(curLevel);
-        initBricks(curILevel);
-        game.registerBonuses(bonusesperlevel.get(curLevel));
-        //new AudioController().playSound(levelDone);
-        game.autoSwitchToNextLevel();
-        if (curLevel < 4) {
-          game.setNextLevel(levels.get(curLevel + 1));
-        }
-        setBall((GameEntity)EntityFactory.newBall(getWidth() / 2, 5 * getHeight() / 7 - 5));
-        getGameWorld().removeEntities(bat);
-        initPlayerBat();
-        uioverlay.showMessageFlash("Playing " + curILevel.getLevelName(), 2);
+        initNextLevel();
         scorePlayer.set((int)game.getFlyweight().getCurScore().getPoints());
       }
     }
   }
   
   private void removeLevel() {
-    List<Entity> bricks = getGameWorld().getEntitiesByType(EntityType.BRICK);
+    System.out.println("Removing elements from level...");
+    getGameWorld().getEntitiesByType(
+        EntityType.BALL, EntityType.BRICK, EntityType.PLAYER_BAT)
+        .forEach(Entity::removeFromWorld);
+    System.out.println("Elements removed! from level...");
+    /*List<Entity> bricks = getGameWorld().getEntitiesByType(EntityType.BRICK);
     for (Entity brick : bricks) {
       getGameWorld().removeEntity(brick);
     }
+    getGameWorld().removeEntities(bat);
+    List<Entity> balls = getGameWorld().getEntitiesByType(EntityType.BALL);
+    for (Entity ent : balls) {
+      getGameWorld().removeEntity(ent);
+    }*/
+  }
+  
+  private void initNextLevel() {
+    game.autoSwitchToNextLevel();
+    
+    curLevel++;
+    ILevel curILevel = levels.get(curLevel);
+    initBricks(curILevel);
+    game.registerBonuses(bonusesperlevel.get(curLevel));
+    
+    //new AudioController().playSound(levelDone);
+    game.autoSwitchToNextLevel();
+    
+    if (curLevel < 4) {
+      game.setNextLevel(levels.get(curLevel + 1));
+    }
+    
+    setBall(ball,(GameEntity)EntityFactory.newBall(getWidth() / 2, 5 * getHeight() / 7 - 5));
+    initPlayerBat();
+    uioverlay.showMessageFlash("Playing " + curILevel.getLevelName(), 2, 0, 0);
   }
   
   private void initBackground() {
@@ -236,7 +261,7 @@ public class BreakoutApp extends GameApplication {
     game.getFlyweight().addObserver(new BonusObserver(this));
     bonusesperlevel = new ArrayList<List<IBonus>>();
     for (ILevel level : levels) {
-      List<IBonus> curBonus = game.newBonuses((int)(level.getNumberOfBricks() * 0.4),0.8);
+      List<IBonus> curBonus = game.newBonuses((int)(level.getNumberOfBricks() * 0.4),0.7);
       bonusesperlevel.add(curBonus);
     }
     game.registerBonuses(bonusesperlevel.get(0));
@@ -276,27 +301,53 @@ public class BreakoutApp extends GameApplication {
     return gameSounds.get(soundName);
   }
   
+  public void spawnSecondBall() {
+    ball2 = (GameEntity) EntityFactory.newBall(bat.getX() + 40 , bat.getY() - 5);
+    getGameWorld().addEntities(ball2);
+  }
+  
   /**
    * Metodo que se encarga de spawnear una nueva pelota.
    * @param newball La pelota ya creada.
    */
-  public void setBall(GameEntity newball) {
-    getGameWorld().removeEntities(ball);
-    ball = newball;
-    getGameWorld().addEntities(ball); 
+  public void setBall(GameEntity oldball ,GameEntity newball) {
+    getGameWorld().removeEntities(oldball);
+    oldball = newball;
+    getGameWorld().addEntities(oldball); 
   }
   
   public void setFlagPassNextLevel() {
     canPassNextLevel = true;
-    uioverlay.showMessageFlash("Press <T> to play next!", 1);
+    uioverlay.showMessageFlash("Press <T> to play next Level!", 1, -50, 90);
+  }
+  
+  public void setFlagCanRestartGame() {
+    //canRestartGame = true;
+    //uioverlay.showMessageFlash("Press <R> to play again!", 1, -10, 90);
+  }
+  
+  public void batResize() {
+    Entity newbat = EntityFactory.newBat(this.bat.getX(), 9 * getHeight() / 11, 120, 15);
+    getGameWorld().addEntity(newbat);
+    playerBat = newbat.getControlUnsafe(BatControl.class);
+    getGameWorld().removeEntity(bat);
+    bat = (GameEntity)newbat;
   }
   
   public void pause() {
     super.pause();
   }
   
+  @OnUserAction(name = "Restart", type = ActionType.ON_ACTION)
+  public void restartGame() {
+    if (canRestartGame) {
+      canRestartGame = false;
+      startNewGame();
+    }
+  }
+  
   @OnUserAction(name = "Left", type = ActionType.ON_ACTION)
-  public void up() {
+  public void left() {
     playerBat.left();
   }
 

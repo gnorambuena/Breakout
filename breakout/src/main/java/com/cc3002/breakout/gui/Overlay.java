@@ -98,10 +98,10 @@ public class Overlay extends Parent {
    * que este se muestra rapidamente.
    * @param message Mensaje a mostrar.
    */
-  public void showMessageFlash(String message, double duration) {
+  public void showMessageFlash(String message, double duration, int offsetx, int offsety) {
     Text text = new Text(message);
-    text.setTranslateX(width / 2 - text.getLayoutBounds().getWidth() / 2 - 100);
-    text.setTranslateY(height / 2);
+    text.setTranslateX(width / 2 - text.getLayoutBounds().getWidth() / 2 - 100 + offsetx);
+    text.setTranslateY(height / 2 + offsety);
     text.setFill(Color.AZURE);
     text.setFont(FXGL.getUIFactory().newFont(40));
     text.setOpacity(0);

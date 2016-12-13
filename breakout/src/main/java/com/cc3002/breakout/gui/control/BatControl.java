@@ -16,7 +16,7 @@ public class BatControl extends AbstractControl {
   protected PositionComponent position;
   protected PhysicsComponent bat;
   protected BoundingBoxComponent bbox;
-
+  
   @Override
   public void onAdded(Entity entity) {
     bat = entity.getComponentUnsafe(PhysicsComponent.class);
@@ -31,7 +31,12 @@ public class BatControl extends AbstractControl {
    */
   public void left() {
     if (position.getX() >= 5) {
-      bat.setLinearVelocity(-5 * 90, 0);
+      try {
+        bat.setLinearVelocity(-5 * 90, 0);
+      } catch (Exception exception) {
+        System.out.println("Catch exception!");
+        //Filler comment.
+      }
     } else {
       stop();
     }
@@ -42,7 +47,12 @@ public class BatControl extends AbstractControl {
    */
   public void right() {
     if (bbox.getMaxXWorld() <= 600 - 5) {
-      bat.setLinearVelocity(5 * 90, 0);
+      try { 
+        bat.setLinearVelocity(5 * 90, 0);
+      } catch (Exception exception) {
+        //Filler comment
+        System.out.println("Catch exception!");
+      }
     } else {
       stop();
     }

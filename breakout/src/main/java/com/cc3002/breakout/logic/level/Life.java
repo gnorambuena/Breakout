@@ -18,11 +18,9 @@ public class Life {
   
   public void lessHearts() {
     hearts--;
-    System.out.println("Current hearts:" + hearts);
   }
   
   public void addHearts() {
     hearts++;
-    System.out.println("Current hearts:" + hearts);
   }
 }

@@ -12,4 +12,7 @@ public interface IBonus {
   
   boolean isDiscount();
 
+  boolean isBatResize();
+  
+  boolean isAddBall();
 }

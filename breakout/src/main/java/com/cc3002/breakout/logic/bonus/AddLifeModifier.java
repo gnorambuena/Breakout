@@ -43,4 +43,14 @@ public class AddLifeModifier extends Observable implements IBonus {
   public boolean isDiscount() {
     return false;
   }
+  
+  @Override
+  public boolean isBatResize() {
+    return false;
+  }
+  
+  @Override
+  public boolean isAddBall() {
+    return false;
+  }
 }

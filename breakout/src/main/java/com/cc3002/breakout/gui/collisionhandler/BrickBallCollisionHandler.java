@@ -51,17 +51,20 @@ public class BrickBallCollisionHandler extends CollisionHandler {
     if (brick.getRefBrick().isStoneBrick()) {
       new AudioController().playSound(breakout.getSound("ballStoneBrickHit"),0.6);
     }
+    if (brick.getRefBrick().isMetalBrick()) {
+      new AudioController().playSound(breakout.getSound("ballMetalBrickHit"));
+    }
     brick.getRefBrick().hit();
     if (brick.getRefBrick().isDestroyed()) {
       gameworld.removeEntity(firstEntity);
       scorePlayer.set((int)curScore.getPoints());
       if (breakout.getFacade().getFlyweight().isLevelCompleted()) {
-        breakout.setFlagPassNextLevel();;
+        breakout.setFlagPassNextLevel();
       }
     } else if (brick.getRefBrick().remainingHits() == 2) {
       brick.getMainViewComponent()
         .setView(new EntityView(new Rectangle(35, 10, Color.DARKGOLDENROD)));
-    } else {
+    } else if (brick.getRefBrick().remainingHits() == 1) {
       brick.getMainViewComponent()
         .setView(new EntityView(new Rectangle(35 , 10 , Color.BISQUE)));
     }

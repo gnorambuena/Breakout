@@ -15,6 +15,8 @@ public interface IBrick {
   boolean isSoftBrick();
 
   boolean isStoneBrick();
+  
+  boolean isMetalBrick();
 
   void hit();
   
