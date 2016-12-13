@@ -1,6 +1,7 @@
 package com.cc3002.breakout.gui.collisionhandler;
 
 import com.almasb.ents.Entity;
+import com.almasb.fxgl.app.FXGL;
 import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.physics.HitBox;
 import com.cc3002.breakout.gui.AudioController;
@@ -16,9 +17,9 @@ public class BatBallCollisionHandler extends CollisionHandler {
   
   BreakoutApp breakout;
   
-  public BatBallCollisionHandler(BreakoutApp breakout) {
+  public BatBallCollisionHandler() {
     super(EntityType.PLAYER_BAT, EntityType.BALL);
-    this.breakout = breakout;
+    breakout = (BreakoutApp)FXGL.getApp();
   }
   
   @Override

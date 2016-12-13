@@ -1,6 +1,7 @@
 package com.cc3002.breakout.gui.collisionhandler;
 
 import com.almasb.ents.Entity;
+import com.almasb.fxgl.app.FXGL;
 import com.almasb.fxgl.entity.EntityView;
 import com.almasb.fxgl.gameplay.GameWorld;
 import com.almasb.fxgl.physics.CollisionHandler;
@@ -9,6 +10,7 @@ import com.cc3002.breakout.gui.AudioController;
 import com.cc3002.breakout.gui.BreakoutApp;
 import com.cc3002.breakout.gui.BrickEntity;
 import com.cc3002.breakout.gui.EntityType;
+import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.level.Score;
 
 import javafx.beans.property.IntegerProperty;
@@ -30,14 +32,14 @@ public class BrickBallCollisionHandler extends CollisionHandler {
   
   /**
    * Constructor para el handler de la colision entre un brick y la pelota.
-   * @param breakout Referencia a la app.
    */
-  public BrickBallCollisionHandler(BreakoutApp breakout) {
+  public BrickBallCollisionHandler() {
     super(EntityType.BRICK, EntityType.BALL);
+    
+    breakout = (BreakoutApp) FXGL.getApp();
     gameworld = breakout.getGameWorld();
     scorePlayer = breakout.getScorePlayer();
     curScore = breakout.getFacade().getFlyweight().getCurScore();
-    this.breakout = breakout;
   }
   
   @Override
@@ -45,28 +47,48 @@ public class BrickBallCollisionHandler extends CollisionHandler {
       HitBox boxA, HitBox boxB) {
     //System.out.println(boxB.getName() + " hitted by "+ boxA.getName());
     BrickEntity brick = (BrickEntity)firstEntity;
-    if (brick.getRefBrick().isSoftBrick()) {
-      new AudioController().playSound(breakout.getSound("ballSoftBrickHit"),0.7);
-    }
-    if (brick.getRefBrick().isStoneBrick()) {
-      new AudioController().playSound(breakout.getSound("ballStoneBrickHit"),0.6);
-    }
-    if (brick.getRefBrick().isMetalBrick()) {
-      new AudioController().playSound(breakout.getSound("ballMetalBrickHit"));
-    }
-    brick.getRefBrick().hit();
-    if (brick.getRefBrick().isDestroyed()) {
+    IBrick refBrick = brick.getRefBrick();
+    playBrickSound(refBrick);
+    refBrick.hit();
+    if (refBrick.isDestroyed()) {
+      if (refBrick.isPoisonBrick() ) {
+        breakout.loseGame();
+      }
       gameworld.removeEntity(firstEntity);
       scorePlayer.set((int)curScore.getPoints());
-      if (breakout.getFacade().getFlyweight().isLevelCompleted()) {
+      if (breakout.getFacade()
+                  .getFlyweight()
+                  .isLevelCompleted()) {
+        
         breakout.setFlagPassNextLevel();
       }
-    } else if (brick.getRefBrick().remainingHits() == 2) {
+      
+    } else if (refBrick.remainingHits() == 2) {
+      //cambio de color para stone brick
       brick.getMainViewComponent()
-        .setView(new EntityView(new Rectangle(35, 10, Color.DARKGOLDENROD)));
-    } else if (brick.getRefBrick().remainingHits() == 1) {
+           .setView(new EntityView(new Rectangle(35, 10, Color.DARKGOLDENROD)));
+    } else if (refBrick.remainingHits() == 1) {
       brick.getMainViewComponent()
-        .setView(new EntityView(new Rectangle(35 , 10 , Color.BISQUE)));
+           .setView(
+           new EntityView(
+           new Rectangle(35 , 10 , 
+           refBrick.isPoisonBrick() ? Color.BLUEVIOLET : Color.BISQUE)));
+    }
+  }
+  
+  private void playBrickSound(IBrick brick) {
+    AudioController soundController = new AudioController();
+    if (brick.isSoftBrick()) {
+      soundController.playSound(breakout.getSound("ballSoftBrickHit"),0.7);
+    }
+    if (brick.isStoneBrick()) {
+      soundController.playSound(breakout.getSound("ballStoneBrickHit"),0.6);
+    }
+    if (brick.isMetalBrick()) {
+      soundController.playSound(breakout.getSound("ballMetalBrickHit"));
+    }
+    if (brick.isPoisonBrick()) {
+      soundController.playSound(breakout.getSound("ballPoisonBrickHit"));
     }
   }
 }

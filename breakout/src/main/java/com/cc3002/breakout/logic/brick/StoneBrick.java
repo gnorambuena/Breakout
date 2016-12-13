@@ -74,6 +74,10 @@ public class StoneBrick extends Observable implements IBrick {
   public boolean isMetalBrick() {
     return false;
   }
-
+  
+  @Override
+  public boolean isPoisonBrick() {
+    return false;
+  }
 }
 

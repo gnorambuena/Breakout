@@ -60,6 +60,60 @@ public class BreakoutApp extends GameApplication {
   //private Sound levelDone;
   //private Sound gamefinished;
   
+  /**
+   * Metodo que se encarga de hacer pasar al siguiente nivel del juego en la gui.
+   */
+  @OnUserAction(name = "Pass", type = ActionType.ON_ACTION)
+  public void playNextLevel() {
+    
+    if (canPassNextLevel) {
+      canPassNextLevel = false;
+      
+      if (curLevel + 1 == levels.size()) {
+        pause();
+        //new AudioController().playSound(gamefinished);
+        uioverlay.showMessage("You win!");
+        setFlagCanRestartGame();
+        
+      } else {
+        removeLevel();
+        initNextLevel();
+        scorePlayer.set((int)game.getFlyweight().getCurScore().getPoints());
+      }
+    }
+  }
+  
+  /**
+   * Accion para reinicar el juego.
+   */
+  @OnUserAction(name = "Restart", type = ActionType.ON_ACTION)
+  public void restartGame() {
+    if (canRestartGame) {
+      canRestartGame = false;
+      startNewGame();
+    }
+  }
+  
+  @OnUserAction(name = "Left", type = ActionType.ON_ACTION)
+  public void left() {
+    playerBat.left();
+  }
+
+  @OnUserAction(name = "Right", type = ActionType.ON_ACTION)
+  public void right() {
+    playerBat.right();
+  }
+
+  @OnUserAction(name = "Left", type = ActionType.ON_ACTION_END)
+  public void stopBat() {
+    playerBat.stop();
+  }
+
+  @OnUserAction(name = "Right", type = ActionType.ON_ACTION_END)
+  public void stopBat2() {
+    playerBat.stop();
+  }
+  
   @Override
   protected void initInput() {
     
@@ -81,6 +135,7 @@ public class BreakoutApp extends GameApplication {
     gameSounds.put("bonus", getAssetLoader().loadSound("bonus.wav"));
     gameSounds.put("discount", getAssetLoader().loadSound("discount.wav"));
     gameSounds.put("ballMetalBrickHit", getAssetLoader().loadSound("metalbrickhit.wav"));
+    gameSounds.put("ballPoisonBrickHit", getAssetLoader().loadSound("poisonbrickhit.wav"));
     //levelDone = getAssetLoader().loadSound("leveldone.wav");
     //gamefinished = getAssetLoader().loadSound("gamefinished.wav");
   }
@@ -101,9 +156,9 @@ public class BreakoutApp extends GameApplication {
   @Override
   protected void initPhysics() {
     getPhysicsWorld().setGravity(0, 0);
-    getPhysicsWorld().addCollisionHandler(new BallWallCollisionHandler(this));
-    getPhysicsWorld().addCollisionHandler(new BatBallCollisionHandler(this));
-    getPhysicsWorld().addCollisionHandler(new BrickBallCollisionHandler(this));
+    getPhysicsWorld().addCollisionHandler(new BallWallCollisionHandler());
+    getPhysicsWorld().addCollisionHandler(new BatBallCollisionHandler());
+    getPhysicsWorld().addCollisionHandler(new BrickBallCollisionHandler());
   }
 
   @Override
@@ -190,44 +245,12 @@ public class BreakoutApp extends GameApplication {
     }
   }
   
-  /**
-   * Metodo que se encarga de hacer pasar al siguiente nivel del juego en la gui.
-   */
-  @OnUserAction(name = "Pass", type = ActionType.ON_ACTION)
-  public void playNextLevel() {
-    
-    if (canPassNextLevel) {
-      canPassNextLevel = false;
-      
-      if (curLevel + 1 == levels.size()) {
-        pause();
-        //new AudioController().playSound(gamefinished);
-        uioverlay.showMessage("You win!");
-        setFlagCanRestartGame();
-        
-      } else {
-        removeLevel();
-        initNextLevel();
-        scorePlayer.set((int)game.getFlyweight().getCurScore().getPoints());
-      }
-    }
-  }
-  
   private void removeLevel() {
     System.out.println("Removing elements from level...");
     getGameWorld().getEntitiesByType(
         EntityType.BALL, EntityType.BRICK, EntityType.PLAYER_BAT)
         .forEach(Entity::removeFromWorld);
     System.out.println("Elements removed! from level...");
-    /*List<Entity> bricks = getGameWorld().getEntitiesByType(EntityType.BRICK);
-    for (Entity brick : bricks) {
-      getGameWorld().removeEntity(brick);
-    }
-    getGameWorld().removeEntities(bat);
-    List<Entity> balls = getGameWorld().getEntitiesByType(EntityType.BALL);
-    for (Entity ent : balls) {
-      getGameWorld().removeEntity(ent);
-    }*/
   }
   
   private void initNextLevel() {
@@ -245,7 +268,8 @@ public class BreakoutApp extends GameApplication {
       game.setNextLevel(levels.get(curLevel + 1));
     }
     
-    setBall(ball,(GameEntity)EntityFactory.newBall(getWidth() / 2, 5 * getHeight() / 7 - 5));
+    //setBall(ball,(GameEntity)EntityFactory.newBall(getWidth() / 2, 5 * getHeight() / 7 - 5));
+    initBall();
     initPlayerBat();
     uioverlay.showMessageFlash("Playing " + curILevel.getLevelName(), 2, 0, 0);
   }
@@ -258,7 +282,7 @@ public class BreakoutApp extends GameApplication {
   }
   
   protected void initBonus() {
-    game.getFlyweight().addObserver(new BonusObserver(this));
+    game.getFlyweight().addObserver(new BonusObserver());
     bonusesperlevel = new ArrayList<List<IBonus>>();
     for (ILevel level : levels) {
       List<IBonus> curBonus = game.newBonuses((int)(level.getNumberOfBricks() * 0.4),0.7);
@@ -268,10 +292,7 @@ public class BreakoutApp extends GameApplication {
   }
   
   @Override
-  protected void initAchievements() {
-    //Achievement a = new Achievement("Game Finished", "Finishing the game, Congratulations.");
-    //getAchievementManager().registerAchievement(a);
-  }
+  protected void initAchievements() {}
   
   public IntegerProperty getScorePlayer() {
     return scorePlayer;
@@ -311,7 +332,7 @@ public class BreakoutApp extends GameApplication {
    * @param newball La pelota ya creada.
    */
   public void setBall(GameEntity oldball ,GameEntity newball) {
-    getGameWorld().removeEntities(oldball);
+    getGameWorld().removeEntity(oldball);
     oldball = newball;
     getGameWorld().addEntities(oldball); 
   }
@@ -326,6 +347,9 @@ public class BreakoutApp extends GameApplication {
     //uioverlay.showMessageFlash("Press <R> to play again!", 1, -10, 90);
   }
   
+  /**
+   * Metodo para hacer resize del bat.
+   */
   public void batResize() {
     Entity newbat = EntityFactory.newBat(this.bat.getX(), 9 * getHeight() / 11, 120, 15);
     getGameWorld().addEntity(newbat);
@@ -338,36 +362,18 @@ public class BreakoutApp extends GameApplication {
     super.pause();
   }
   
-  @OnUserAction(name = "Restart", type = ActionType.ON_ACTION)
-  public void restartGame() {
-    if (canRestartGame) {
-      canRestartGame = false;
-      startNewGame();
-    }
-  }
-  
-  @OnUserAction(name = "Left", type = ActionType.ON_ACTION)
-  public void left() {
-    playerBat.left();
-  }
-
-  @OnUserAction(name = "Right", type = ActionType.ON_ACTION)
-  public void right() {
-    playerBat.right();
-  }
-
-  @OnUserAction(name = "Left", type = ActionType.ON_ACTION_END)
-  public void stopBat() {
-    playerBat.stop();
-  }
-
-  @OnUserAction(name = "Right", type = ActionType.ON_ACTION_END)
-  public void stopBat2() {
-    playerBat.stop();
-  }
-  
   public static void main(String[] args) {
     launch(args);
+  }
+
+  /**
+   * Metodo que se usa para perder el juego.
+   */
+  public void loseGame() {
+    uioverlay.showMessage("Game Over!");
+    lifesPlayer.set(0);
+    setFlagCanRestartGame();
+    pause();
   }
 
 }

@@ -1,0 +1,127 @@
+13 dic 2016, 18:41:27.346 [   INFO] [   FXGL.SystemLogger] [JavaFX Application Thread] System Logger is initialized
+13 dic 2016, 18:41:27.381 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] Logging System Info
+13 dic 2016, 18:41:27.383 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] CPU cores: 4
+13 dic 2016, 18:41:27.389 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] Free Memory: 109MB
+13 dic 2016, 18:41:27.389 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] Max Memory: 1821MB
+13 dic 2016, 18:41:27.390 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] Total Memory: 123MB
+13 dic 2016, 18:41:27.391 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] System Properties:
+13 dic 2016, 18:41:27.393 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] sun.cpu.isalist=
+13 dic 2016, 18:41:27.394 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] ftp.nonProxyHosts=local|*.local|169.254/16|*.169.254/16
+13 dic 2016, 18:41:27.395 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] socksNonProxyHosts=local|*.local|169.254/16|*.169.254/16
+13 dic 2016, 18:41:27.395 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] sun.io.unicode.encoding=UnicodeBig
+13 dic 2016, 18:41:27.396 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] sun.cpu.endian=little
+13 dic 2016, 18:41:27.396 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.vendor.url.bug=http://bugreport.sun.com/bugreport/
+13 dic 2016, 18:41:27.397 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] file.separator=/
+13 dic 2016, 18:41:27.397 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.vendor=Oracle Corporation
+13 dic 2016, 18:41:27.398 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] sun.boot.class.path=/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/classes
+13 dic 2016, 18:41:27.398 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.ext.dirs=/Users/gabriel/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java
+13 dic 2016, 18:41:27.399 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.version=1.8.0_66
+13 dic 2016, 18:41:27.399 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.vm.info=mixed mode
+13 dic 2016, 18:41:27.400 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] awt.toolkit=sun.lwawt.macosx.LWCToolkit
+13 dic 2016, 18:41:27.400 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] user.language=es
+13 dic 2016, 18:41:27.401 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.specification.vendor=Oracle Corporation
+13 dic 2016, 18:41:27.401 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] sun.java.command=com.cc3002.breakout.gui.BreakoutApp
+13 dic 2016, 18:41:27.402 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.home=/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre
+13 dic 2016, 18:41:27.402 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] sun.arch.data.model=64
+13 dic 2016, 18:41:27.403 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.vm.specification.version=1.8
+13 dic 2016, 18:41:27.403 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.class.path=/Users/gabriel/.p2/pool/plugins/org.junit_4.12.0.v201504281640/junit.jar:/Users/gabriel/.p2/pool/plugins/org.hamcrest.core_1.3.0.v201303031735.jar:/Users/gabriel/git/breakout/breakout/target/classes:/Users/gabriel/.m2/repository/com/github/AlmasB/FXGL/0.2.8/FXGL-0.2.8.jar:/Users/gabriel/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib/1.0.3/kotlin-stdlib-1.0.3.jar:/Users/gabriel/.m2/repository/org/jetbrains/kotlin/kotlin-runtime/1.0.3/kotlin-runtime-1.0.3.jar:/Users/gabriel/.m2/repository/com/google/inject/guice/4.0/guice-4.0.jar:/Users/gabriel/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar:/Users/gabriel/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar:/Users/gabriel/.m2/repository/com/google/guava/guava/16.0.1/guava-16.0.1.jar:/Users/gabriel/.m2/repository/org/jfxtras/jfxtras-window/8.0-r4/jfxtras-window-8.0-r4.jar:/Users/gabriel/.m2/repository/org/jfxtras/jfxtras-common/8.0-r4/jfxtras-common-8.0-r4.jar:/Users/gabriel/.m2/repository/org/controlsfx/controlsfx/8.40.10/controlsfx-8.40.10.jar:/Users/gabriel/.m2/repository/com/github/AlmasB/FXEventBus/1.0/FXEventBus-1.0.jar:/Users/gabriel/.m2/repository/com/github/AlmasB/Ents/1.1.1/Ents-1.1.1.jar:/Users/gabriel/.m2/repository/com/github/AlmasB/GameUtils/0.0.3/GameUtils-0.0.3.jar:/Users/gabriel/.m2/repository/com/github/AlmasB/jbox2d/2.3.2-fxgl/jbox2d-2.3.2-fxgl.jar:/Users/gabriel/.m2/repository/com/github/AlmasB/AStar/1.0/AStar-1.0.jar:/Users/gabriel/.m2/repository/com/github/AlmasB/EasyIO/0.1.6/EasyIO-0.1.6.jar:/Users/gabriel/.m2/repository/org/apache/logging/log4j/log4j-api/2.5/log4j-api-2.5.jar:/Users/gabriel/.m2/repository/org/apache/logging/log4j/log4j-core/2.5/log4j-core-2.5.jar:/Users/gabriel/.m2/repository/com/github/AlmasB/gdx-ai/1.8.2-fxgl/gdx-ai-1.8.2-fxgl.jar
+13 dic 2016, 18:41:27.404 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] user.name=gabriel
+13 dic 2016, 18:41:27.404 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] file.encoding=UTF-8
+13 dic 2016, 18:41:27.405 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.specification.version=1.8
+13 dic 2016, 18:41:27.405 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.awt.printerjob=sun.lwawt.macosx.CPrinterJob
+13 dic 2016, 18:41:27.406 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] user.timezone=America/Argentina/Cordoba
+13 dic 2016, 18:41:27.407 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] user.home=/Users/gabriel
+13 dic 2016, 18:41:27.408 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] http.nonProxyHosts=local|*.local|169.254/16|*.169.254/16
+13 dic 2016, 18:41:27.408 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] os.version=10.12.1
+13 dic 2016, 18:41:27.409 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] sun.management.compiler=HotSpot 64-Bit Tiered Compilers
+13 dic 2016, 18:41:27.409 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.specification.name=Java Platform API Specification
+13 dic 2016, 18:41:27.410 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.class.version=52.0
+13 dic 2016, 18:41:27.410 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.library.path=/Users/gabriel/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+13 dic 2016, 18:41:27.411 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] sun.jnu.encoding=UTF-8
+13 dic 2016, 18:41:27.411 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] os.name=Mac OS X
+13 dic 2016, 18:41:27.411 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.vm.specification.vendor=Oracle Corporation
+13 dic 2016, 18:41:27.412 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.io.tmpdir=/var/folders/6c/6nglzj_13rq4r1sllbwpbn3h0000gr/T/
+13 dic 2016, 18:41:27.412 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] line.separator=
+
+13 dic 2016, 18:41:27.413 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.endorsed.dirs=/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/endorsed
+13 dic 2016, 18:41:27.413 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] os.arch=x86_64
+13 dic 2016, 18:41:27.413 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] javafx.runtime.version=8.0.66-b17
+13 dic 2016, 18:41:27.414 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.awt.graphicsenv=sun.awt.CGraphicsEnvironment
+13 dic 2016, 18:41:27.414 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.runtime.version=1.8.0_66-b17
+13 dic 2016, 18:41:27.414 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.vm.specification.name=Java Virtual Machine Specification
+13 dic 2016, 18:41:27.415 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] user.dir=/Users/gabriel/git/breakout/breakout
+13 dic 2016, 18:41:27.415 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] user.country=ES
+13 dic 2016, 18:41:27.415 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] sun.java.launcher=SUN_STANDARD
+13 dic 2016, 18:41:27.416 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] sun.os.patch.level=unknown
+13 dic 2016, 18:41:27.416 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.vm.name=Java HotSpot(TM) 64-Bit Server VM
+13 dic 2016, 18:41:27.417 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] file.encoding.pkg=sun.io
+13 dic 2016, 18:41:27.417 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] path.separator=:
+13 dic 2016, 18:41:27.417 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.vm.vendor=Oracle Corporation
+13 dic 2016, 18:41:27.418 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.vendor.url=http://java.oracle.com/
+13 dic 2016, 18:41:27.418 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] gopherProxySet=false
+13 dic 2016, 18:41:27.418 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] user.country.format=CL
+13 dic 2016, 18:41:27.419 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] sun.boot.library.path=/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib
+13 dic 2016, 18:41:27.419 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.vm.version=25.66-b17
+13 dic 2016, 18:41:27.419 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] java.runtime.name=Java(TM) SE Runtime Environment
+13 dic 2016, 18:41:27.420 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] javafx.version=8.0.66
+13 dic 2016, 18:41:27.426 [   INFO] [   FXGL.SystemLogger] [JavaFX Application Thread] FXGL-0.2.8
+13 dic 2016, 18:41:27.427 [   INFO] [   FXGL.SystemLogger] [JavaFX Application Thread] Source code and latest versions at: https://github.com/AlmasB/FXGL
+13 dic 2016, 18:41:27.428 [   INFO] [   FXGL.SystemLogger] [JavaFX Application Thread]              Join the FXGL chat at: https://gitter.im/AlmasB/FXGL
+13 dic 2016, 18:41:27.583 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] Starting JavaFX
+13 dic 2016, 18:41:27.651 [  FINER] [   FXGL.SystemLogger] [          JavaFX-Launcher] Initializing FXGL
+13 dic 2016, 18:41:27.682 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] Starting FXGL
+13 dic 2016, 18:41:28.475 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] Configuring FXGL
+13 dic 2016, 18:41:28.476 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] Initializing system properties
+13 dic 2016, 18:41:28.523 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] sound.notification = system/notification.wav
+13 dic 2016, 18:41:28.523 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] url.storage = https://raw.githubusercontent.com/AlmasB/git-server/master/storage/
+13 dic 2016, 18:41:28.524 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] asset.cache.size = 35
+13 dic 2016, 18:41:28.524 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] fs.profiledir = profiles/
+13 dic 2016, 18:41:28.525 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] url.pom = https://raw.githubusercontent.com/AlmasB/FXGL/master/pom.xml
+13 dic 2016, 18:41:28.526 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] fs.datafile.ext = .dat
+13 dic 2016, 18:41:28.526 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] sound.menu.back = menu/back.wav
+13 dic 2016, 18:41:28.527 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] sound.menu.select = menu/select.wav
+13 dic 2016, 18:41:28.528 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] url.github = https://github.com/AlmasB/FXGL
+13 dic 2016, 18:41:28.528 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] physics.ppm = 50.0
+13 dic 2016, 18:41:28.529 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] ui.css = fxgl.css
+13 dic 2016, 18:41:28.529 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] version.check.days = 7
+13 dic 2016, 18:41:28.530 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] fs.savefile.ext = .sav
+13 dic 2016, 18:41:28.530 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] pooling.initialSize = 128
+13 dic 2016, 18:41:28.530 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] ui.font = Copperplate_Gothic_Light_Regular.ttf
+13 dic 2016, 18:41:28.531 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] fs.savedir = saves/
+13 dic 2016, 18:41:28.531 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] fs.profilename = user.profile
+13 dic 2016, 18:41:28.532 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] ui.icon.name = fxgl_icon.png
+13 dic 2016, 18:41:28.532 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] sound.menu.press = menu/press.wav
+13 dic 2016, 18:41:28.532 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] Initializing user properties
+13 dic 2016, 18:41:28.538 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] ui.font = swerve.ttf
+13 dic 2016, 18:41:28.538 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] Initializing app settings
+13 dic 2016, 18:41:28.553 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] Logging settings
+Title: Breakout App
+Version: 0.1
+Width: 600
+Height: 600
+Fullscreen: false
+Intro: false
+Menus: true
+Profiling: false
+App Mode: DEVELOPER
+Menu Style: FXGL_DEFAULT
+Menu Key: ESCAPE
+Services: []
+13 dic 2016, 18:41:29.598 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] FXGL configuration complete
+13 dic 2016, 18:41:29.599 [   INFO] [   FXGL.SystemLogger] [     FXGL Launcher Thread] FXGL configuration took:  1,123 sec
+13 dic 2016, 18:41:29.601 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] Running task: UpdaterTask
+13 dic 2016, 18:41:29.607 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] Running task: PreInitTask
+13 dic 2016, 18:41:29.720 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] Running task: InitScenesTask
+13 dic 2016, 18:41:30.054 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] Running task: InitEventHandlersTask
+13 dic 2016, 18:41:30.185 [  FINER] [   FXGL.SystemLogger] [     FXGL Launcher Thread] Running task: InitProfilerTask
+13 dic 2016, 18:41:30.267 [   INFO] [   FXGL.SystemLogger] [     FXGL Launcher Thread] Game configuration took:  0,661 sec
+13 dic 2016, 18:41:33.518 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] Pausing main loop
+13 dic 2016, 18:41:33.520 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] Resetting FXGL application
+13 dic 2016, 18:41:33.855 [   INFO] [   FXGL.SystemLogger] [ FXGL Background Thread 1] Game initialization took: 0,258 sec
+13 dic 2016, 18:41:33.857 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] Resuming main loop
+13 dic 2016, 18:42:19.358 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] Pausing main loop
+13 dic 2016, 18:42:24.613 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] Pausing main loop
+13 dic 2016, 18:42:25.899 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] Resuming main loop
+13 dic 2016, 18:42:25.900 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] Exiting Normally
+13 dic 2016, 18:42:25.916 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] Exiting FXGL
+13 dic 2016, 18:42:25.916 [  FINER] [   FXGL.SystemLogger] [JavaFX Application Thread] Logger is closing

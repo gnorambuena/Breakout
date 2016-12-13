@@ -3,6 +3,7 @@ package com.cc3002.breakout.logic.level;
 import com.cc3002.breakout.facade.Flyweight;
 import com.cc3002.breakout.logic.brick.IBrick;
 import com.cc3002.breakout.logic.brick.MetalBrick;
+import com.cc3002.breakout.logic.brick.PoisonBrick;
 import com.cc3002.breakout.logic.brick.SoftBrick;
 import com.cc3002.breakout.logic.brick.StoneBrick;
 
@@ -61,8 +62,8 @@ public class RealLevel extends GameLevel {
     requiredPoints = 0;
     List<IBrick> newlevel = new ArrayList<IBrick>();
     Random rand = new Random();
-    
-    for (int i = 0 ; i < numberOfBricks ; i++) {
+    newlevel.add(new PoisonBrick(flyweight));
+    for (int i = 1 ; i < numberOfBricks ; i++) {
     
       float chance = rand.nextFloat();
       
@@ -86,7 +87,7 @@ public class RealLevel extends GameLevel {
     for (int i = 0 ; i < level.size() ; i++) {
       if (level.get(i).isSoftBrick()) {
         points += 10; 
-      } else {
+      } else if (level.get(i).isStoneBrick()) {
         points += 50;
       }
     }

@@ -1,6 +1,7 @@
 package com.cc3002.breakout.gui.collisionhandler;
 
 import com.almasb.ents.Entity;
+import com.almasb.fxgl.app.FXGL;
 import com.almasb.fxgl.effect.ParticleControl;
 import com.almasb.fxgl.effect.ParticleEmitter;
 import com.almasb.fxgl.effect.ParticleEmitters;
@@ -38,15 +39,14 @@ public class BallWallCollisionHandler extends CollisionHandler {
   
   /**
    * Constructor para el Handler de la colision entre la pelota y la muralla.
-   * @param breakout Referencia a la app.
    */
-  public BallWallCollisionHandler(BreakoutApp breakout) {
+  public BallWallCollisionHandler() {
     super(EntityType.BALL, EntityType.WALL);
+    breakout = (BreakoutApp)FXGL.getApp();
     gameworld = breakout.getGameWorld();
     game = breakout.getFacade();
     lifesPlayer = breakout.getLifesPlayer();
     uioverlay = breakout.getOverlay();
-    this.breakout = breakout;
   }
   
   @Override
@@ -59,9 +59,7 @@ public class BallWallCollisionHandler extends CollisionHandler {
       //System.out.println("Event fired!");
       int totalLifes = game.lossOfHeart();
       if (totalLifes < 0) {
-        uioverlay.showMessage("Game Over!");
-        breakout.setFlagCanRestartGame();
-        breakout.pause();
+        breakout.loseGame();
       } else {
         lifesPlayer.set(totalLifes);
         Point2D pos = bat.getPosition();

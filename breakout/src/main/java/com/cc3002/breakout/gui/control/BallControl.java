@@ -30,9 +30,6 @@ import com.almasb.ents.AbstractControl;
 import com.almasb.ents.Entity;
 import com.almasb.fxgl.physics.PhysicsComponent;
 
-/**
- * @author Almas Baimagambetov (AlmasB) (almaslvl@gmail.com)
- */
 public class BallControl extends AbstractControl {
 
   private PhysicsComponent ball;
@@ -56,9 +53,9 @@ public class BallControl extends AbstractControl {
                 ball.getLinearVelocity().getY());
     }
     
-    if (Math.abs(ball.getLinearVelocity().getX()) < 15 ) {
+    if (Math.abs(ball.getLinearVelocity().getX()) < 25 ) {
       //System.out.println("LIMITEDX");
-      ball.setLinearVelocity(Math.signum(ball.getLinearVelocity().getX()) * 15,
+      ball.setLinearVelocity(Math.signum(ball.getLinearVelocity().getX()) * 25,
                 ball.getLinearVelocity().getY());
     }
     

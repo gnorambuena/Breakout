@@ -1,6 +1,6 @@
 package com.cc3002.breakout.gui.observer;
 
-import com.cc3002.breakout.facade.Flyweight;
+import com.almasb.fxgl.app.FXGL;
 import com.cc3002.breakout.gui.AudioController;
 import com.cc3002.breakout.gui.BreakoutApp;
 import com.cc3002.breakout.gui.Overlay;
@@ -31,16 +31,17 @@ public class BonusObserver implements Observer {
   
   /**
    * Observer del juego, se encarga de mostrar los mensajes de los eventos.
-   * @param uioverlay Overlay del juego para mostrar los mensajes.
    */
-  public BonusObserver(BreakoutApp breakout) {
-    this.uioverlay = breakout.getOverlay();
-    this.score = breakout.getScorePlayer();
-    this.life = breakout.getLifesPlayer();
-    this.curScore = breakout.getFacade().getFlyweight().getCurScore();
-    this.player = breakout.getFacade().getPlayer();
-    this.breakout = breakout;
-    //System.out.println("Observer initialized");
+  public BonusObserver() {
+    breakout = (BreakoutApp)FXGL.getApp();
+    uioverlay = breakout.getOverlay();
+    score = breakout.getScorePlayer();
+    life = breakout.getLifesPlayer();
+    curScore = breakout.getFacade()
+                       .getFlyweight()
+                       .getCurScore();
+    player = breakout.getFacade().getPlayer();
+
     tabla = new Hashtable<String,String>();
     tabla.put("SD", "3 Score discount!");
     tabla.put("ES", "5 Extra Score!");
@@ -59,7 +60,6 @@ public class BonusObserver implements Observer {
     if (value != null) {
       uioverlay.showMessageFlash(value, 0.7, 25, 45);
       life.set(player.getNumberOfHearts());
-      score.set((int)curScore.getPoints());
       IBonus curBonus = (IBonus)object;
       if (curBonus.isDiscount()) {
         new AudioController().playSound(breakout.getSound("discount"),0.7);
@@ -73,9 +73,11 @@ public class BonusObserver implements Observer {
           breakout.batResize();
         }
       }
-      if (player.getNumberOfHearts() <= 0) {
+      if (player.getNumberOfHearts() < 0) {
         uioverlay.showMessage("Game Over!");
         breakout.pause();
+      } else {
+        score.set((int)curScore.getPoints());
       }
     }
   }

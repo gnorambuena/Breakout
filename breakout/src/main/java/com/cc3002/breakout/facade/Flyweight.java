@@ -64,7 +64,7 @@ public class Flyweight {
     observers.add(new LevelObserver(this));
   }
   
-  public void addObserver(Observer aobserver){
+  public void addObserver(Observer aobserver) {
     observers.add(aobserver);
   }
   

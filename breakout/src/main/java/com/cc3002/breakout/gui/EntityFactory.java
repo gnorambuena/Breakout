@@ -106,7 +106,8 @@ public class EntityFactory {
     brick.getMainViewComponent()
         .setView(new EntityView(
           new Rectangle(35, 10, refBrick.isSoftBrick() ? Color.BISQUE :
-            refBrick.isStoneBrick() ? Color.BROWN : Color.DARKGREY)), true);
+            refBrick.isStoneBrick() ? Color.BROWN :
+              refBrick.isMetalBrick() ? Color.DARKGREY : Color.DARKMAGENTA)), true);
 
     PhysicsComponent brickPhysics = new PhysicsComponent();
     brickPhysics.setBodyType(BodyType.STATIC);

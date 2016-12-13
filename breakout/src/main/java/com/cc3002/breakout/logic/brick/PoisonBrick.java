@@ -7,7 +7,9 @@ import com.cc3002.breakout.logic.level.Printer;
 import java.util.Observable;
 import java.util.Observer;
 
-public class MetalBrick extends Observable implements IBrick {
+public class PoisonBrick extends Observable implements IBrick {
+  
+  int hitpoints;
   Flyweight flyweight;
   
   /**
@@ -15,7 +17,8 @@ public class MetalBrick extends Observable implements IBrick {
    * y la lista de Observers del Juego.
    * @param newFlyweight objeto Flyweight del juego.
    */
-  public MetalBrick(Flyweight newFlyweight) {
+  public PoisonBrick(Flyweight newFlyweight) {
+    hitpoints = 2;
     flyweight = newFlyweight;
     for (Observer observer: flyweight.getObservers()) {
       addObserver(observer);
@@ -33,13 +36,20 @@ public class MetalBrick extends Observable implements IBrick {
   }
 
   @Override
+  public boolean isMetalBrick() {
+    return false;
+  }
+
+  @Override
   public void hit() {
-    // TODO Auto-generated method stub
+    if (hitpoints > 0) {
+      hitpoints--;
+    }
   }
 
   @Override
   public int remainingHits() {
-    return 10000000;
+    return hitpoints;
   }
 
   @Override
@@ -49,16 +59,11 @@ public class MetalBrick extends Observable implements IBrick {
 
   @Override
   public boolean isDestroyed() {
-    return false;
-  }
-
-  @Override
-  public boolean isMetalBrick() {
-    return true;
+    return hitpoints == 0;
   }
 
   @Override
   public boolean isPoisonBrick() {
-    return false;
+    return true;
   }
 }

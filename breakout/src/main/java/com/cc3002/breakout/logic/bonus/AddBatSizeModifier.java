@@ -1,9 +1,11 @@
 package com.cc3002.breakout.logic.bonus;
 
+
+import com.cc3002.breakout.facade.Flyweight;
+
 import java.util.Observable;
 import java.util.Observer;
 
-import com.cc3002.breakout.facade.Flyweight;
 
 public class AddBatSizeModifier extends Observable implements IBonus {
 
