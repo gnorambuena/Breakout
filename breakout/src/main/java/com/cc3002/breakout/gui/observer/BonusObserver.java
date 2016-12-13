@@ -60,9 +60,9 @@ public class BonusObserver implements Observer {
       score.set((int)curScore.getPoints());
       IBonus curBonus = (IBonus)object;
       if (curBonus.isDiscount()) {
-        new AudioController().playSound(breakout.getDiscountSound(),0.7);
+        new AudioController().playSound(breakout.getSound("discount"),0.7);
       } else {
-        new AudioController().playSound(breakout.getBonusSound(),0.7);
+        new AudioController().playSound(breakout.getSound("bonus"),0.7);
       }
       if (player.getNumberOfHearts() <= 0) {
         uioverlay.showMessage("Game Over!");

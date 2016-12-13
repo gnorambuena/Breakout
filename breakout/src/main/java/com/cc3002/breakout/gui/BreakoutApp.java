@@ -31,6 +31,7 @@ import javafx.scene.shape.Rectangle;
 import org.jbox2d.dynamics.FixtureDef;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 /**
@@ -52,13 +53,7 @@ public class BreakoutApp extends GameApplication {
   private GameEntity bat;
   private GameEntity ball;
   private Overlay uioverlay;
-  private Sound ballSoftBrickHit;
-  private Sound ballStoneBrickHit;
-  private Sound ballWallHit;
-  private Sound batBallHit;
-  private Sound ballFalling;
-  private Sound bonus;
-  private Sound discount;
+  private Hashtable<String,Sound> gameSounds;
   boolean canPassNextLevel = false;
   //private Sound levelDone;
   //private Sound gamefinished;
@@ -74,13 +69,14 @@ public class BreakoutApp extends GameApplication {
   
   @Override
   protected void initAssets() {
-    ballSoftBrickHit = getAssetLoader().loadSound("softbrickhit.wav");
-    ballStoneBrickHit = getAssetLoader().loadSound("stonebrickhit.wav");
-    ballWallHit = getAssetLoader().loadSound("ballwall.wav");
-    batBallHit = getAssetLoader().loadSound("batball.wav");
-    ballFalling = getAssetLoader().loadSound("ballfalling.wav");
-    bonus = getAssetLoader().loadSound("bonus.wav");
-    discount = getAssetLoader().loadSound("discount.wav");
+    gameSounds = new Hashtable<String,Sound>();
+    gameSounds.put("ballSoftBrickHit", getAssetLoader().loadSound("softbrickhit.wav"));
+    gameSounds.put("ballStoneBrickHit", getAssetLoader().loadSound("stonebrickhit.wav"));
+    gameSounds.put("ballWallHit", getAssetLoader().loadSound("ballwall.wav"));
+    gameSounds.put("batBallHit", getAssetLoader().loadSound("batball.wav"));
+    gameSounds.put("ballFalling", getAssetLoader().loadSound("ballfalling.wav"));
+    gameSounds.put("bonus", getAssetLoader().loadSound("bonus.wav"));
+    gameSounds.put("discount", getAssetLoader().loadSound("discount.wav"));
     //levelDone = getAssetLoader().loadSound("leveldone.wav");
     //gamefinished = getAssetLoader().loadSound("gamefinished.wav");
   }
@@ -276,32 +272,8 @@ public class BreakoutApp extends GameApplication {
     return bat;
   }
   
-  public Sound getSoftBrickHitSound() {
-    return ballSoftBrickHit;
-  }
-  
-  public Sound getStoneBrickHitSound() {
-    return ballStoneBrickHit;
-  }
-  
-  public Sound getWallHitSound() {
-    return ballWallHit;
-  }
-  
-  public Sound getBatHitSound() {
-    return batBallHit;
-  }
-  
-  public Sound getBallFallingSound() {
-    return ballFalling;
-  }
-  
-  public Sound getBonusSound() {
-    return bonus;
-  }
-  
-  public Sound getDiscountSound() {
-    return discount;
+  public Sound getSound(String soundName) {
+    return gameSounds.get(soundName);
   }
   
   /**
@@ -316,7 +288,7 @@ public class BreakoutApp extends GameApplication {
   
   public void setFlagPassNextLevel() {
     canPassNextLevel = true;
-    uioverlay.showMessageFlash("Press <T> to play next!", 3);
+    uioverlay.showMessageFlash("Press <T> to play next!", 1);
   }
   
   public void pause() {

@@ -46,10 +46,10 @@ public class BrickBallCollisionHandler extends CollisionHandler {
     //System.out.println(boxB.getName() + " hitted by "+ boxA.getName());
     BrickEntity brick = (BrickEntity)firstEntity;
     if (brick.getRefBrick().isSoftBrick()) {
-      new AudioController().playSound(breakout.getSoftBrickHitSound(),0.7);
+      new AudioController().playSound(breakout.getSound("ballSoftBrickHit"),0.7);
     }
     if (brick.getRefBrick().isStoneBrick()) {
-      new AudioController().playSound(breakout.getStoneBrickHitSound(),0.6);
+      new AudioController().playSound(breakout.getSound("ballStoneBrickHit"),0.6);
     }
     brick.getRefBrick().hit();
     if (brick.getRefBrick().isDestroyed()) {

@@ -25,6 +25,6 @@ public class BatBallCollisionHandler extends CollisionHandler {
   protected void onHitBoxTrigger(Entity firstEntity, Entity secondEntity,
       HitBox boxA, HitBox boxB) {
     //System.out.println(boxB.getName() + " hitted by "+ boxA.getName());
-    new AudioController().playSound(breakout.getBatHitSound(),1.5);
+    new AudioController().playSound(breakout.getSound("batBallHit"),1.5);
   }
 }

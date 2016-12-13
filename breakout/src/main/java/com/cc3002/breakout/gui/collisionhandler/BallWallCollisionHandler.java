@@ -54,7 +54,7 @@ public class BallWallCollisionHandler extends CollisionHandler {
       HitBox boxA, HitBox boxB) {
     //System.out.println(boxB.getName() + " hitted by " + boxA.getName());
     if (boxB.getName().equals("TOP")) {
-      new AudioController().playSound(breakout.getBallFallingSound());
+      new AudioController().playSound(breakout.getSound("ballFalling"));
       bat = breakout.getBat();
       //System.out.println("Event fired!");
       int totalLifes = game.lossOfHeart();
@@ -78,7 +78,7 @@ public class BallWallCollisionHandler extends CollisionHandler {
               .with(new ExpireCleanControl(Duration.seconds(1)))
               .buildAndAttach(gameworld);
     } else {
-      new AudioController().playSound(breakout.getWallHitSound(),0.35);
+      new AudioController().playSound(breakout.getSound("ballWallHit"),0.35);
     }
   }
 }
