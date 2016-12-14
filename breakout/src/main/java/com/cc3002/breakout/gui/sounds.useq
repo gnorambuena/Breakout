@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.1.11" icons="true">  
+  <object id="1" language="java" name="com.cc3002.breakout.gui.collisionhandler.BrickBallCollisionHandler" 
+    project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/gui/collisionhandler/BrickBallCollisionHandler.java" 
+    binary="false" label="brickBallCollisionHandler" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="396" y="0"/>    
+    <execution id="2">      
+      <position height="189" width="198" x="5" y="229"/>    
+    </execution>    
+    <execution id="5">      
+      <position height="21" width="7" x="101" y="313"/>    
+    </execution>  
+  </object>  
+  <object id="6" language="java" name="com.cc3002.breakout.gui.BreakoutApp" project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/gui/BreakoutApp.java" binary="false" label="breakoutApp" 
+    type="class" autoSize="true">    
+    <position height="-1" width="-1" x="379" y="0"/>    
+    <execution id="4">      
+      <position height="147" width="124" x="207" y="250"/>    
+    </execution>    
+    <execution id="9">      
+      <position height="63" width="7" x="266" y="292"/>    
+    </execution>  
+  </object>  
+  <object id="11" language="java" name="java.util.Hashtable" project="breakout" 
+    file="/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/rt.jar" binary="true" 
+    label="gameSounds" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="8">      
+      <position height="105" width="0" x="0" y="271"/>    
+    </execution>  
+  </object>  
+  <message id="3" operation="getSound(java.lang.String):com.almasb.fxgl.audio.Sound" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="7" operation="get(java.lang.Object):V" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="10" asynchronous="false">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="5"/>  
+  </message>  
+  <message id="12" asynchronous="false">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="9"/>  
+  </message>
+</sequence-diagram>

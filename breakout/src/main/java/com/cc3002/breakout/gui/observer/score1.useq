@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.1.11" icons="true">  
+  <object id="1" language="java" name="com.cc3002.breakout.gui.collisionhandler.BrickBallCollisionHandler" 
+    project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/gui/collisionhandler/BrickBallCollisionHandler.java" 
+    binary="false" label="brickBallCollisionHandler" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="142" y="0"/>    
+    <execution id="2">      
+      <position height="281" width="198" x="5" y="183"/>    
+    </execution>    
+    <execution id="11">      
+      <position height="21" width="7" x="101" y="245"/>    
+    </execution>    
+    <execution id="12">      
+      <position height="21" width="7" x="101" y="340"/>    
+    </execution>    
+    <execution id="13">      
+      <position height="21" width="7" x="101" y="401"/>    
+    </execution>  
+  </object>  
+  <object id="14" language="java" name="com.cc3002.breakout.logic.brick.IBrick" project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/logic/brick/IBrick.java" binary="false" label="iBrick" 
+    type="interface" autoSize="true">    
+    <position height="-1" width="-1" x="311" y="0"/>    
+    <execution id="4">      
+      <position height="21" width="155" x="207" y="204"/>    
+    </execution>    
+    <execution id="6">      
+      <position height="63" width="7" x="281" y="224"/>    
+    </execution>  
+  </object>  
+  <object id="16" language="java" name="com.cc3002.breakout.logic.level.Score" project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/logic/level/Score.java" binary="false" label="score" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="456" y="0"/>    
+    <execution id="8">      
+      <position height="73" width="155" x="366" y="309"/>    
+    </execution>  
+  </object>  
+  <object id="18" language="java" name="javafx.beans.property.IntegerProperty" project="breakout" 
+    file="/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/ext/jfxrt.jar" binary="true" 
+    label="integerProperty" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="-208" y="0"/>    
+    <execution id="10">      
+      <position height="63" width="129" x="525" y="380"/>    
+    </execution>  
+  </object>  
+  <message id="3" operation="hit():void" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="5" operation="isDestroyed():boolean" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </message>  
+  <message id="7" operation="getPoints():long" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="9" operation="set(int):void" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="10"/>  
+  </message>  
+  <message id="15" asynchronous="false">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="11"/>  
+  </message>  
+  <message id="17" asynchronous="false">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="12"/>  
+  </message>  
+  <message id="19" asynchronous="false">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="13"/>  
+  </message>
+</sequence-diagram>

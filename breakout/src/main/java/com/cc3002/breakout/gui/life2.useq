@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.1.11" icons="true">  
+  <object id="1" language="java" name="com.cc3002.breakout.logic.brick.SoftBrick" project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/logic/brick/SoftBrick.java" binary="false" label="softBrick" 
+    type="class" autoSize="true">    
+    <position height="-1" width="-1" x="164" y="0"/>    
+    <execution id="2">      
+      <position height="494" width="155" x="5" y="139"/>    
+    </execution>    
+    <execution id="7">      
+      <position height="21" width="7" x="79" y="181"/>    
+    </execution>  
+  </object>  
+  <object id="8" language="java" name="com.cc3002.breakout.facade.Flyweight" project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/facade/Flyweight.java" binary="false" label="flyweight" 
+    type="class" autoSize="true">    
+    <position height="-1" width="-1" x="237" y="0"/>    
+    <execution id="4">      
+      <position height="63" width="142" x="164" y="160"/>    
+    </execution>  
+  </object>  
+  <object id="10" language="java" name="com.cc3002.breakout.logic.bonus.BonusHandler" project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/logic/bonus/BonusHandler.java" binary="false" label="bonusHandler" 
+    type="class" autoSize="true">    
+    <position height="-1" width="-1" x="427" y="0"/>    
+    <execution id="6">      
+      <position height="392" width="163" x="310" y="220"/>    
+    </execution>    
+    <execution id="15">      
+      <position height="21" width="7" x="388" y="262"/>    
+    </execution>  
+  </object>  
+  <object id="16" language="java" name="java.util.ArrayList" project="breakout" 
+    file="/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/rt.jar" binary="true" 
+    label="arrayList" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="-201" y="0"/>    
+    <execution id="12">      
+      <position height="63" width="110" x="477" y="241"/>    
+    </execution>  
+  </object>  
+  <object id="18" language="java" name="com.cc3002.breakout.logic.bonus.LossLifeModifier" project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/logic/bonus/LossLifeModifier.java" binary="false" 
+    label="lossLifeModifier" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="598" y="0"/>    
+    <execution id="14">      
+      <position height="276" width="163" x="591" y="315"/>    
+    </execution>  
+  </object>  
+  <object id="21" language="java" name="com.cc3002.breakout.gui.observer.BonusObserver" project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/gui/observer/BonusObserver.java" binary="false" 
+    label="bonusObserver" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="876" y="0"/>    
+    <execution id="20">      
+      <position height="234" width="167" x="758" y="336"/>    
+    </execution>    
+    <execution id="28">      
+      <position height="21" width="7" x="838" y="384"/>    
+    </execution>    
+    <execution id="29">      
+      <position height="21" width="7" x="838" y="457"/>    
+    </execution>    
+    <execution id="30">      
+      <position height="21" width="7" x="838" y="507"/>    
+    </execution>  
+  </object>  
+  <object id="31" language="java" name="com.cc3002.breakout.logic.level.Player" project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/logic/level/Player.java" binary="false" label="player" 
+    type="class" autoSize="true">    
+    <position height="-1" width="-1" x="1009" y="0"/>    
+    <execution id="23">      
+      <position height="69" width="155" x="929" y="357"/>    
+    </execution>  
+  </object>  
+  <object id="33" language="java" name="javafx.beans.property.IntegerProperty" project="breakout" 
+    file="/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/ext/jfxrt.jar" binary="true" 
+    label="integerProperty" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="278" y="0"/>    
+    <execution id="25">      
+      <position height="63" width="129" x="1088" y="436"/>    
+    </execution>  
+  </object>  
+  <object id="35" language="java" name="com.cc3002.breakout.gui.Overlay" project="breakout" 
+    file="/breakout/src/main/java/com/cc3002/breakout/gui/Overlay.java" binary="false" label="overlay" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="956" y="0"/>    
+    <execution id="27">      
+      <position height="86" width="124" x="1221" y="463"/>    
+    </execution>  
+  </object>  
+  <message id="3" operation="getBonusHandler():com.cc3002.breakout.logic.bonus.BonusHandler" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="5" operation="reached():void" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </message>  
+  <message id="9" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="7"/>  
+  </message>  
+  <message id="11" operation="get(int):E" asynchronous="false">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="12"/>  
+  </message>  
+  <message id="13" operation="reached():void" asynchronous="false">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="14"/>  
+  </message>  
+  <message id="17" asynchronous="false">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="15"/>  
+  </message>  
+  <message id="19" operation="update(java.util.Observable,java.lang.Object):void" asynchronous="false">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="20"/>  
+  </message>  
+  <message id="22" operation="getNumberOfHearts():int" asynchronous="false">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="23"/>  
+  </message>  
+  <message id="24" operation="set(int):void" asynchronous="false">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="25"/>  
+  </message>  
+  <message id="26" operation="showMessageFlash(java.lang.String,double,int,int):void" asynchronous="false">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="27"/>  
+  </message>  
+  <message id="32" asynchronous="false">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="28"/>  
+  </message>  
+  <message id="34" asynchronous="false">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="29"/>  
+  </message>  
+  <message id="36" asynchronous="false">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="30"/>  
+  </message>
+</sequence-diagram>
