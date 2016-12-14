@@ -7,6 +7,11 @@ import java.util.Observable;
 import java.util.Observer;
 
 
+/**
+ * Modificador especial que ocasiona que el bate crezca.
+ * @author gabriel
+ *
+ */
 public class AddBatSizeModifier extends Observable implements IBonus {
 
   /**

@@ -125,7 +125,11 @@ public class Flyweight {
   }
 
   public ILevel newLevelWithSoftAndStoneBricks(String levelName, int number, double probability) {
-    return new RealLevel(levelName, number, probability,this);
+    return new RealLevel(levelName, number, probability,this,false);
+  }
+  
+  public ILevel newLevelWithSpecialBricks(String levelName, int number, double probability) {
+    return new RealLevel(levelName, number, probability,this,true);
   }
   
   public long getNumberOfBricks() {

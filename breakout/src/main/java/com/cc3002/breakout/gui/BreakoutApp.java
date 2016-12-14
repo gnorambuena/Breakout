@@ -68,7 +68,7 @@ public class BreakoutApp extends GameApplication {
     
     if (canPassNextLevel) {
       canPassNextLevel = false;
-      
+      new AudioController().playSound(gameSounds.get("nextlevel"));
       if (curLevel + 1 == levels.size()) {
         pause();
         //new AudioController().playSound(gamefinished);
@@ -136,6 +136,8 @@ public class BreakoutApp extends GameApplication {
     gameSounds.put("discount", getAssetLoader().loadSound("discount.wav"));
     gameSounds.put("ballMetalBrickHit", getAssetLoader().loadSound("metalbrickhit.wav"));
     gameSounds.put("ballPoisonBrickHit", getAssetLoader().loadSound("poisonbrickhit.wav"));
+    gameSounds.put("losegame", getAssetLoader().loadSound("losegame.wav"));
+    gameSounds.put("nextlevel", getAssetLoader().loadSound("nextlevel.wav"));
     //levelDone = getAssetLoader().loadSound("leveldone.wav");
     //gamefinished = getAssetLoader().loadSound("gamefinished.wav");
   }
@@ -192,7 +194,7 @@ public class BreakoutApp extends GameApplication {
   }
   
   private void initPlayerBat() {
-    Entity bat = EntityFactory.newBat(getWidth() / 2, 9 * getHeight() / 11, 80, 15);
+    Entity bat = EntityFactory.newBat(getWidth() / 2 - 30, 9 * getHeight() / 11, 80, 15);
     getGameWorld().addEntity(bat);
     this.bat = (GameEntity)bat;
     playerBat = bat.getControlUnsafe(BatControl.class);
@@ -220,13 +222,13 @@ public class BreakoutApp extends GameApplication {
   private void initLevels() {
     levels = new ArrayList<ILevel>();
     int numbricks = 15;
-    ILevel levelOne = game.newLevelWithSoftAndStoneBricks("Level One", numbricks, 0.6f);
+    ILevel levelOne = game.newLevelWithSpecialBricks("Level One", numbricks, 0.6f);
     game.setCurrentLevel(levelOne);
-    ILevel levelTwo = game.newLevelWithSoftAndStoneBricks("Level Two", numbricks, 0.5f);
+    ILevel levelTwo = game.newLevelWithSpecialBricks("Level Two", numbricks, 0.5f);
     game.setNextLevel(levelTwo);
-    ILevel levelThree = game.newLevelWithSoftAndStoneBricks("Level Three", numbricks + 15, 0.5f);
-    ILevel levelFour = game.newLevelWithSoftAndStoneBricks("Level Four", numbricks + 15, 0.4f);
-    ILevel levelFive = game.newLevelWithSoftAndStoneBricks("Level Five", numbricks + 30, 0.4f);
+    ILevel levelThree = game.newLevelWithSpecialBricks("Level Three", numbricks + 15, 0.5f);
+    ILevel levelFour = game.newLevelWithSpecialBricks("Level Four", numbricks + 15, 0.4f);
+    ILevel levelFive = game.newLevelWithSpecialBricks("Level Five", numbricks + 30, 0.4f);
     levels.add(levelOne);
     levels.add(levelTwo);
     levels.add(levelThree);
@@ -371,6 +373,7 @@ public class BreakoutApp extends GameApplication {
    */
   public void loseGame() {
     uioverlay.showMessage("Game Over!");
+    new AudioController().playSound(gameSounds.get("losegame"),1.5);
     lifesPlayer.set(0);
     setFlagCanRestartGame();
     pause();

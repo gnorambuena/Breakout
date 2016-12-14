@@ -44,10 +44,12 @@ public class RealLevel extends GameLevel {
    * @param probability Probabilidad de ocurrencia de un SoftBrick.
    * @param number Numero de Bricks del nivel.
    */
-  public RealLevel(String levelName, int number, double probability,Flyweight newFlyweight) {
+  public RealLevel(String levelName, int number,
+      double probability,Flyweight newFlyweight, boolean special) {
     name = levelName;
     flyweight = newFlyweight;
-    level = genNewLevel(probability,number);
+    level = special
+        ? genNewLevelWithSpecialBricks(probability, number) : genNewLevel(probability,number);
     requiredPoints = genRequiredPoints();
   }
 
@@ -62,8 +64,7 @@ public class RealLevel extends GameLevel {
     requiredPoints = 0;
     List<IBrick> newlevel = new ArrayList<IBrick>();
     Random rand = new Random();
-    newlevel.add(new PoisonBrick(flyweight));
-    for (int i = 1 ; i < numberOfBricks ; i++) {
+    for (int i = 0 ; i < numberOfBricks ; i++) {
     
       float chance = rand.nextFloat();
       
@@ -72,9 +73,39 @@ public class RealLevel extends GameLevel {
         newlevel.add(new SoftBrick(flyweight));
       } else {
         requiredPoints += 50;
-        if (rand.nextFloat() > 0.95) {
+        newlevel.add(new StoneBrick(flyweight));
+      }
+    }
+    return newlevel;
+  }
+  
+  /**
+   * Metodo privado que se encarga de generar un level random con MetalBricks y PoisonBricks.
+   * @param probability Probabilidad de ocurrencia de un SoftBrick.
+   * @param numberOfBricks Numero de Bricks del nivel.
+   * @return La lista de IBricks con los bricks generados.
+   */
+  private List<IBrick> genNewLevelWithSpecialBricks(double probability, int numberOfBricks) {
+    requiredPoints = 0;
+    int index = 0;
+    List<IBrick> newlevel = new ArrayList<IBrick>();
+    Random rand = new Random();
+    if (rand.nextFloat() < 0.05) {
+      newlevel.add(new PoisonBrick(flyweight));
+      index++;
+    }
+    for (; index < numberOfBricks ; index++) {
+    
+      float chance = rand.nextFloat();
+      
+      if (chance < probability) {
+        requiredPoints += 10;
+        newlevel.add(new SoftBrick(flyweight));
+      } else {
+        if (rand.nextFloat() < 0.1) {
           newlevel.add(new MetalBrick(flyweight));
         } else {
+          requiredPoints += 50;
           newlevel.add(new StoneBrick(flyweight));
         }
       }

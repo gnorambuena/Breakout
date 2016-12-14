@@ -7,6 +7,12 @@ import com.cc3002.breakout.logic.level.Printer;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Brick especial que es invencible, el jugador no puede destruirlo
+ * este brick no tiene puntaje ni hitpoints.
+ * @author gabriel
+ *
+ */
 public class MetalBrick extends Observable implements IBrick {
   Flyweight flyweight;
   

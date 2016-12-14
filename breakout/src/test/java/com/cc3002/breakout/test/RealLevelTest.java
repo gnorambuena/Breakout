@@ -37,7 +37,7 @@ public class RealLevelTest {
   @Before
   public void setUp() throws Exception {
     flyweight = new Flyweight();
-    lv1 = new RealLevel("Level one",16,0.5f,flyweight);
+    lv1 = new RealLevel("Level one",16,0.5f,flyweight,false);
     aux = new ArrayList<IBrick>();
 
     points = 0;
@@ -59,14 +59,14 @@ public class RealLevelTest {
   public void testILevelStringListOfIBrick() {
     assertSame(lv2,lv2);
     assertNotSame(lv1,lv2);
-    assertNotSame(lv2,new RealLevel("Testing Level",24,0.3,flyweight));
+    assertNotSame(lv2,new RealLevel("Testing Level",24,0.3,flyweight,false));
   }
 
   @Test
   public void testILevelStringIntDouble() {
     assertSame(lv1,lv1);
     assertNotSame(lv1,lv2);
-    assertNotSame(lv1,new RealLevel("Testing Level",24,0.3f,flyweight));
+    assertNotSame(lv1,new RealLevel("Testing Level",24,0.3f,flyweight,true));
   }
 
   @Test

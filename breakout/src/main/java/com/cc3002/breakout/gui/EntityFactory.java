@@ -46,7 +46,7 @@ public class EntityFactory {
     batPhysics.setBodyType(BodyType.KINEMATIC);
 
     FixtureDef def = new FixtureDef();
-    def.setFriction(0.0f);
+    //def.setFriction(0.0f);
     def.setDensity(0.5f);
     def.setRestitution(1.0f);
 

@@ -81,6 +81,10 @@ public class HomeworkTwoFacade {
     return flyweight.newLevelWithSoftAndStoneBricks(levelName,number,probability);
   }
 
+  public ILevel newLevelWithSpecialBricks(String levelName, int number, double probability) {
+    return flyweight.newLevelWithSpecialBricks(levelName,number,probability);
+  }
+  
   public long numberOfBricks() {
     return flyweight.getNumberOfBricks();
   }

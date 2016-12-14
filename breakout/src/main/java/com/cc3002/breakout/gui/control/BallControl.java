@@ -30,6 +30,12 @@ import com.almasb.ents.AbstractControl;
 import com.almasb.ents.Entity;
 import com.almasb.fxgl.physics.PhysicsComponent;
 
+/**
+ * Controlador de la pelota, tiene metodos para acotar la velocidad de la pelota
+ * para que esta no se quede en un loop infinito.
+ * @author gabriel
+ *
+ */
 public class BallControl extends AbstractControl {
 
   private PhysicsComponent ball;
@@ -53,9 +59,9 @@ public class BallControl extends AbstractControl {
                 ball.getLinearVelocity().getY());
     }
     
-    if (Math.abs(ball.getLinearVelocity().getX()) < 25 ) {
+    if (Math.abs(ball.getLinearVelocity().getX()) < 40 ) {
       //System.out.println("LIMITEDX");
-      ball.setLinearVelocity(Math.signum(ball.getLinearVelocity().getX()) * 25,
+      ball.setLinearVelocity(Math.signum(ball.getLinearVelocity().getX()) * 40,
                 ball.getLinearVelocity().getY());
     }
     

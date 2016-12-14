@@ -7,6 +7,12 @@ import com.cc3002.breakout.logic.level.Printer;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Brick especial que causa que al tocarlo dos veces se pierda el
+ * juego.
+ * @author gabriel
+ *
+ */
 public class PoisonBrick extends Observable implements IBrick {
   
   int hitpoints;

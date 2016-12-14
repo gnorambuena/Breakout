@@ -8,6 +8,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
+/**
+ * Controlador de la UI, se usa para mostrar los 4 label de score y vidas.
+ * @author gabriel
+ *
+ */
 public class AppController implements UIController {
 
   @FXML
